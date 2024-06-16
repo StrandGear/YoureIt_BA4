@@ -856,6 +856,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 65802835748466064, guid: 788bf2b2b96572f4da161aa978d360c4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1381,6 +1385,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4943870592999408, guid: d0129a27e457ca34daa588bd4c0ccdfe, type: 3}
   m_PrefabInstance: {fileID: 876842410}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &1047751048 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23278779413106426, guid: d5fae7c479eabe146be13de323446680, type: 3}
+  m_PrefabInstance: {fileID: 1564570659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1095456365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1505,6 +1514,89 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4943870592999408, guid: d0129a27e457ca34daa588bd4c0ccdfe, type: 3}
   m_PrefabInstance: {fileID: 1115553384}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &1116602517
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TransparentMat (Instance) (Instance) (Instance)
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ALPHAPREMULTIPLY_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 10
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Metallic: 0
+    - _Mode: 3
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1001 &1172291176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1599,6 +1691,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba68f84f73d71dc41981390273828222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transparency: 1
+  meshRenderers:
+  - {fileID: 1177225991}
+  transparentCollision: 0
+  semiTransparentCollision: 0
 --- !u!65 &1177225990
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1640,7 +1737,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c1051634d5c35764bab783545fbdf6f7, type: 2}
+  - {fileID: 1116602517}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2362,6 +2459,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23969413833412602, guid: d5fae7c479eabe146be13de323446680, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64935708416619804, guid: d5fae7c479eabe146be13de323446680, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64935708416619804, guid: d5fae7c479eabe146be13de323446680, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2417,6 +2526,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba68f84f73d71dc41981390273828222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transparency: 1
+  meshRenderers:
+  - {fileID: 1564570665}
+  - {fileID: 1047751048}
+  transparentCollision: 0
+  semiTransparentCollision: 0
+--- !u!23 &1564570665 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23969413833412602, guid: d5fae7c479eabe146be13de323446680, type: 3}
+  m_PrefabInstance: {fileID: 1564570659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1622328063
 PrefabInstance:
   m_ObjectHideFlags: 0

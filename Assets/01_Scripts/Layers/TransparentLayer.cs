@@ -20,7 +20,7 @@ public class TransparentLayer : MonoBehaviour, ITransparency
         }
     }
     
-    [SerializeField][HideInInspector] private MeshRenderer _renderer;
+    [SerializeField][HideInInspector] private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
 
     [Header("Collision values")]
     [Tooltip("Has Collision if transparent")]
@@ -35,22 +35,29 @@ public class TransparentLayer : MonoBehaviour, ITransparency
 
     private CollisionState collisionState = CollisionState.IsCollidable;
 
-    private Collider _collider;
+    private List<Collider> colliders = new List<Collider>();
 
 
     private void Awake()
     {
-        if (_renderer == null)
-            TryGetComponent<MeshRenderer>(out _renderer);
-        if (_collider == null)
-            TryGetComponent<Collider>(out _collider);
+        /*        if (_renderer == null)
+                    TryGetComponent<MeshRenderer>(out _renderer);
+                if (_collider == null)
+                    TryGetComponent<Collider>(out _collider);*/
+
+        meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
+        colliders = FillListWithComponentsInChildren<Collider>();
+
     }
     private void OnValidate() //to see changes from the inspector
     {
-        if (_renderer == null)
-            TryGetComponent<MeshRenderer>(out _renderer);
-        if (_collider == null)
-            TryGetComponent<Collider>(out _collider);
+        /*        if (_renderer == null)
+                    TryGetComponent<MeshRenderer>(out _renderer);
+                if (_collider == null)
+                    TryGetComponent<Collider>(out _collider);*/
+
+        meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
+        colliders = FillListWithComponentsInChildren<Collider>();
 
         Transparency = _transparency; //to upd value in inspector
         UpdateTransparency();
@@ -58,30 +65,33 @@ public class TransparentLayer : MonoBehaviour, ITransparency
 
     private void UpdateTransparency()
     {
-        if (_renderer != null)
-        {
-            var color = _renderer.sharedMaterial.color;
-            color.a = _transparency;
-            _renderer.sharedMaterial.color = color;
-        }
+        bool rendererEnabled = true;
 
         //double check value & assign collision state
         if (_transparency <= 0f)
         {
             _transparency = 0f;
-            _renderer.enabled = false;
+            rendererEnabled = false;
             collisionState = transparentCollision ? CollisionState.IsCollidable : CollisionState.NonCollidable;
         }
         else if (_transparency == 0.5f)
         {
-            _renderer.enabled = true;
+            rendererEnabled = true;
             collisionState = semiTransparentCollision ? CollisionState.IsCollidable : CollisionState.NonCollidable;
         }
         else if (_transparency >= 1f)
         {
-            _renderer.enabled = true;
+            rendererEnabled = true;
             _transparency = 1f;
             collisionState = CollisionState.IsCollidable;
+        }
+
+        foreach (MeshRenderer elem in meshRenderers)
+        {
+            var color = elem.sharedMaterial.color;
+            color.a = _transparency;
+            elem.sharedMaterial.color = color;
+            elem.enabled = rendererEnabled;
         }
 
         UpdateCollisionStatus(collisionState);
@@ -91,12 +101,14 @@ public class TransparentLayer : MonoBehaviour, ITransparency
     {
         if (state == CollisionState.IsCollidable)
         {
-            _collider.isTrigger = false;
+            foreach (Collider elem in colliders)
+                elem.isTrigger = false;
             return;
         }
         else if (state == CollisionState.NonCollidable)
         {
-            _collider.isTrigger = true;
+            foreach (Collider elem in colliders)
+                elem.isTrigger = true;
             return;
         }    
     }
@@ -117,5 +129,22 @@ public class TransparentLayer : MonoBehaviour, ITransparency
             }
         }
         return closest;
+    }
+
+    private List<T> FillListWithComponentsInChildren<T>()
+    {
+        List<T> tempList = new();
+
+        tempList.Add(gameObject.GetComponent<T>());
+
+        if (transform.childCount > 0)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                tempList.Add(transform.GetChild(i).transform.GetComponent<T>());
+            }
+        }
+
+        return tempList;
     }
 }
