@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         float zCoInput = inputHandler.MoveInput.y;  
 
         Vector3 move = new Vector3(xCoInput, 0, zCoInput);
+        
         controller.Move(move * (Time.deltaTime * playerSpeed));
 
         if (move != Vector3.zero)
