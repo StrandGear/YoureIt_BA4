@@ -12,17 +12,18 @@ public class LayerManager : MonoBehaviour
     [SerializeField] private Button layerBtnUP;
     [SerializeField] private Button layerBtnDown;
     [SerializeField] private Transform uiParent;
+    private ToggleButton activeLayer;
 
     [SerializeField] private float zOffset = 0.1f; // Distance between layers
 
     [SerializeField] private List<LayerData> layers = new List<LayerData>();
 
-    private LayerData currentlySelectedLayer;
+    private LayerData currentlySelectedLayerData;
 
-    public LayerData CurrentlySelectedLayer
+    public LayerData CurrentlySelectedLayerData
     {
-        get { print(currentlySelectedLayer); return currentlySelectedLayer; }
-        set { currentlySelectedLayer = value; }
+        get { print(currentlySelectedLayerData); return currentlySelectedLayerData; }
+        set { currentlySelectedLayerData = value; }
     }
 
     [System.Serializable]
@@ -30,6 +31,7 @@ public class LayerManager : MonoBehaviour
     {
         public GameObject layerGameObject;
         public RectTransform uiElement;
+        public ToggleButton toggleButton;
         //public int depth;
     }
 
@@ -40,8 +42,8 @@ public class LayerManager : MonoBehaviour
             AddLayer(obj);
         }
 
-        layerBtnDown.onClick.AddListener(() => MoveLayerDown(CurrentlySelectedLayer));
-        layerBtnUP.onClick.AddListener(() => MoveLayerUp(CurrentlySelectedLayer));
+        layerBtnDown.onClick.AddListener(() => MoveLayerDown(CurrentlySelectedLayerData));
+        layerBtnUP.onClick.AddListener(() => MoveLayerUp(CurrentlySelectedLayerData));
     }
 
     public void AddLayer(ILayerObject obj)
@@ -51,7 +53,7 @@ public class LayerManager : MonoBehaviour
         {
             layerGameObject = obj.LayerGameObject,
             uiElement = uiElement.GetComponent<RectTransform>(),
-            //depth = 
+            toggleButton = uiElement.GetComponent<ToggleButton>()
         };
         layers.Add(layerData);
 
@@ -60,20 +62,49 @@ public class LayerManager : MonoBehaviour
         print("Added layer obj " + " " + layerData.layerGameObject.name);
 
         uiElement.GetComponentInChildren<TMP_Text>().text = name;
+        //uiElement.GetComponentInChildren<Button>().onClick.AddListener(() => LayerSelect(layerData));
 
-        uiElement.GetComponentInChildren<Button>().onClick.AddListener(() => LayerSelect(layerData));
+        /*        EventTrigger trigger = uiElement.GetComponent<EventTrigger>();
+                EventTrigger.Entry entry = new EventTrigger.Entry();
+                entry.eventID = EventTriggerType.Deselect;
+                entry.callback.AddListener((data) => { OnDeselectDelegate((PointerEventData)data); });
+                trigger.triggers.Add(entry);*/
+    }
 
-/*        EventTrigger trigger = uiElement.GetComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.Deselect;
-        entry.callback.AddListener((data) => { OnDeselectDelegate((PointerEventData)data); });
-        trigger.triggers.Add(entry);*/
+    public void SetActiveLayer(ToggleButton newActiveLayer)
+    {
+        if (activeLayer != null && activeLayer != newActiveLayer)
+        {
+            activeLayer.Deselect();
+            ClearActiveLayer();
+        }
+
+        activeLayer = newActiveLayer;
+        activeLayer.Highlight(true);
+
+        CurrentlySelectedLayerData = layers.Find(layer => layer.toggleButton == activeLayer);
+    }
+
+    public void ClearActiveLayer()
+    {
+        if (activeLayer != null)
+        {
+            activeLayer.Highlight(false);
+            activeLayer = null;
+            CurrentlySelectedLayerData = null;
+        }
+        
+    }
+
+    public ToggleButton GetActiveLayer()
+    {
+        return activeLayer;
     }
 
     private void LayerSelect(LayerData layerData)
     {
-        if (CurrentlySelectedLayer != layerData)
-            CurrentlySelectedLayer = layerData;
+        if (CurrentlySelectedLayerData != layerData)
+            CurrentlySelectedLayerData = layerData;
         print(layers.IndexOf(layerData));
         //currentlySelectedLayer = layerData;
 
@@ -82,7 +113,7 @@ public class LayerManager : MonoBehaviour
 
     public void OnDeselectDelegate(PointerEventData data)
     {
-        CurrentlySelectedLayer = null;
+        CurrentlySelectedLayerData = null;
         print("Layer deselect");
     }
 
