@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Renderer))]
 public class TransparentLayer : MonoBehaviour, ITransparency
 {
     [Header("Transparency values")]
@@ -19,8 +20,11 @@ public class TransparentLayer : MonoBehaviour, ITransparency
             UpdateTransparency();
         }
     }
-    
+
     [SerializeField][HideInInspector] private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
+
+    private List<Material> originalMaterials = new List<Material>();
+    private List<Material> instanceMaterials = new List<Material>();
 
     [Header("Collision values")]
     [Tooltip("Has Collision if transparent")]
@@ -40,27 +44,54 @@ public class TransparentLayer : MonoBehaviour, ITransparency
 
     private void Awake()
     {
-        /*        if (_renderer == null)
-                    TryGetComponent<MeshRenderer>(out _renderer);
-                if (_collider == null)
-                    TryGetComponent<Collider>(out _collider);*/
 
-        meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
-        colliders = FillListWithComponentsInChildren<Collider>();
+        //meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
+
+        //colliders = FillListWithComponentsInChildren<Collider>();
+
 
     }
     private void OnValidate() //to see changes from the inspector
     {
-        /*        if (_renderer == null)
-                    TryGetComponent<MeshRenderer>(out _renderer);
-                if (_collider == null)
-                    TryGetComponent<Collider>(out _collider);*/
 
         meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
+
         colliders = FillListWithComponentsInChildren<Collider>();
 
-        Transparency = _transparency; //to upd value in inspector
+
+        for (int i = 0; i < meshRenderers.Count; i++)
+        {
+            var materials = meshRenderers[i].sharedMaterials;
+            for (int j = 0; j < materials.Length; j++)
+            {
+                Material originalMaterial = materials[j];
+                originalMaterials.Add(originalMaterial);
+
+                // Create a new instance of the material
+                Material newMat = new Material(originalMaterial);
+                // Set the rendering mode to transparent
+                SetMaterialTransparent(newMat);
+
+                instanceMaterials.Add(newMat);
+                materials[j] = newMat;  // Apply the new material to the renderer
+            }
+            meshRenderers[i].sharedMaterials = materials;
+        }
+
+            Transparency = _transparency; //to upd value in inspector
         UpdateTransparency();
+    }
+
+    private void SetMaterialTransparent(Material material)
+    {
+        material.SetFloat("_Mode", 3); // Set to Transparent
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        material.SetInt("_ZWrite", 0);
+        material.DisableKeyword("_ALPHATEST_ON");
+        material.EnableKeyword("_ALPHABLEND_ON");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
     }
 
     private void UpdateTransparency()
@@ -86,14 +117,18 @@ public class TransparentLayer : MonoBehaviour, ITransparency
             collisionState = CollisionState.IsCollidable;
         }
 
-        foreach (MeshRenderer elem in meshRenderers)
+        for (int i = 0; i < instanceMaterials.Count; i++)
         {
-            
-            var color = elem.sharedMaterial.color;
+            Color color = instanceMaterials[i].color;
             color.a = _transparency;
-            elem.sharedMaterial.color = color;
-            elem.enabled = rendererEnabled;
+            instanceMaterials[i].color = color;
+            //instanceMaterials[i].enabled = rendererEnabled;
         }
+
+/*        foreach (MeshRenderer elem in meshRenderers)
+        {
+            elem.enabled = rendererEnabled;
+        }*/
 
         UpdateCollisionStatus(collisionState);
     }
