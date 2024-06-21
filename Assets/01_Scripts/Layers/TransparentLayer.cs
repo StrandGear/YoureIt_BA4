@@ -88,6 +88,7 @@ public class TransparentLayer : MonoBehaviour, ITransparency
 
         foreach (MeshRenderer elem in meshRenderers)
         {
+            
             var color = elem.sharedMaterial.color;
             color.a = _transparency;
             elem.sharedMaterial.color = color;

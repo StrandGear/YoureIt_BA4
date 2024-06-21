@@ -9,7 +9,9 @@ public class LayerInterfaces : MonoBehaviour
 
 public interface ILayerObject 
 {
-    bool IsVisible { get; set; }
+    GameObject LayerGameObject { get; }
+
+    string Name { get; set; }
 }
 
 public interface ITransparency
