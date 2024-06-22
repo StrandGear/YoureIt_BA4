@@ -8,13 +8,16 @@ using TMPro;
 
 public class LayerManager : MonoBehaviour
 {
+    [Tooltip("Prefab to show each layer button")]
     [SerializeField]private GameObject layerUIPrefab;
     [SerializeField] private Button layerBtnUP;
     [SerializeField] private Button layerBtnDown;
     [SerializeField] private Transform uiParent;
+    [Tooltip("Displayed for objects with Transparent Layer")]
+    [SerializeField] private Slider transparencySlider;
     private ToggleButton activeLayer;
 
-    [SerializeField] private float zOffset = 0.1f; // Distance between layers
+    //[SerializeField] private float zOffset = 0.1f; // Distance between layers
 
     [SerializeField] private List<LayerData> layers = new List<LayerData>();
 
@@ -44,6 +47,8 @@ public class LayerManager : MonoBehaviour
 
         layerBtnDown.onClick.AddListener(() => MoveLayerDown(CurrentlySelectedLayerData));
         layerBtnUP.onClick.AddListener(() => MoveLayerUp(CurrentlySelectedLayerData));
+
+        HideTransparencySlider();
     }
 
     public void AddLayer(ILayerObject obj)
@@ -83,6 +88,8 @@ public class LayerManager : MonoBehaviour
         activeLayer.Highlight(true);
 
         CurrentlySelectedLayerData = layers.Find(layer => layer.toggleButton == activeLayer);
+
+        ShowTransparencySlider();
     }
 
     public void ClearActiveLayer()
@@ -92,6 +99,7 @@ public class LayerManager : MonoBehaviour
             activeLayer.Highlight(false);
             activeLayer = null;
             CurrentlySelectedLayerData = null;
+            HideTransparencySlider();
         }
         
     }
@@ -101,7 +109,27 @@ public class LayerManager : MonoBehaviour
         return activeLayer;
     }
 
-    private void LayerSelect(LayerData layerData)
+    private void ShowTransparencySlider()
+    {
+        CurrentlySelectedLayerData.layerGameObject.TryGetComponent(out TransparentLayer tempGameObj);
+        if (tempGameObj != null)
+        {
+            transparencySlider.gameObject.SetActive(true);
+
+            transparencySlider.value = tempGameObj.Transparency;
+
+            transparencySlider.onValueChanged.AddListener((value) => tempGameObj.Transparency = value);
+        }
+        else return;
+    }
+
+    private void HideTransparencySlider()
+    {
+        transparencySlider.onValueChanged.RemoveAllListeners();
+        transparencySlider.gameObject.SetActive(false);
+    }
+
+/*    private void LayerSelect(LayerData layerData)
     {
         if (CurrentlySelectedLayerData != layerData)
             CurrentlySelectedLayerData = layerData;
@@ -115,7 +143,7 @@ public class LayerManager : MonoBehaviour
     {
         CurrentlySelectedLayerData = null;
         print("Layer deselect");
-    }
+    }*/
 
     private void MoveLayerDown(LayerData layerData)
     {
@@ -149,9 +177,6 @@ public class LayerManager : MonoBehaviour
 
     private void UpdateLayerPositions(int selectedLayerIndex, int swappedLayerIndex)
     {
-        /*        Vector3 newPosition = selectedLayer.gameObject.transform.position;
-                selectedLayer.gameObject.transform.position = swappedLayer.gameObject.transform.position;
-                swappedLayer.gameObject.transform.position = newPosition;*/
         Vector3 newPosition = layers[selectedLayerIndex].layerGameObject.transform.position;
         layers[selectedLayerIndex].layerGameObject.transform.position = layers[swappedLayerIndex].layerGameObject.transform.position;
         layers[swappedLayerIndex].layerGameObject.transform.position = newPosition;
