@@ -6,7 +6,7 @@ using UnityEngine;
 public class LockingLayer : MonoBehaviour, ILockable
 {
     [SerializeField] private bool layerLocked = false;
-    public bool isLocked { get => layerLocked; set {
+    public bool IsLocked { get => layerLocked; set {
             layerLocked = value;
             UpdateLayerLocking();
         } }
