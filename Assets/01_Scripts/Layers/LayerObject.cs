@@ -5,7 +5,7 @@ using UnityEngine;
 public class LayerObject : MonoBehaviour, ILayerObject
 {
     [SerializeField]
-    private string objectName;
+    private string objectName = "";
     public string Name { get => objectName; set => objectName = value; }
 
     public GameObject LayerGameObject => gameObject;
