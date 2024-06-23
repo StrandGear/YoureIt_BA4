@@ -56,11 +56,13 @@ public class PlayerMovement : MonoBehaviour
         {
             currentSpeed *= speedBoostMultiplier; // Apply speed boost multiplier
         }
+        
+        
 
         controller.Move(move * Time.deltaTime * currentSpeed);
 
         // Changes the height position of the player..
-        if (jumpControl.action.triggered && groundedPlayer)
+        if (jumpControl.action.IsPressed() && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
