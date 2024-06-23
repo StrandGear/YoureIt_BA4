@@ -1,25 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private InputActionReference movementControl;
+    [SerializeField] private InputActionReference jumpControl;
+    [SerializeField] private InputActionReference speedBoostControl; // Added speed boost control
+    [SerializeField] private float playerSpeed = 2.0f;
+    [SerializeField] private float speedBoostMultiplier = 2.0f; // Added speed boost multiplier
+    [SerializeField] private float jumpHeight = 1.0f;
+    [SerializeField] private float gravityValue = -9.81f;
+    [SerializeField] private float rotationSpeed = 4f;
+    
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
-    [SerializeField] private float playerSpeed = 2.0f;
-    [SerializeField] private float jumpHeight = 1.0f;
-    [SerializeField] private float gravityValue = -9.81f;
-    
-    private PlayerInputHandler inputHandler;
+    private Transform cameraMainTransform;
 
-    private void Awake()
+    private void OnEnable()
     {
-        controller = GetComponent<CharacterController>();
-        inputHandler = GetComponent<PlayerInputHandler>();
+        movementControl.action.Enable();
+        jumpControl.action.Enable();
+        speedBoostControl.action.Enable(); // Enable speed boost control
+    }
+    
+    private void OnDisable()
+    {
+        movementControl.action.Disable();
+        jumpControl.action.Disable();
+        speedBoostControl.action.Disable(); // Disable speed boost control
     }
 
-    private void Update()
+    private void Start()
+    {
+        controller = gameObject.GetComponent<CharacterController>();
+        cameraMainTransform = Camera.main.transform;
+    }
+
+    void Update()
     {
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
@@ -27,24 +46,35 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        float xCoInput = inputHandler.MoveInput.x;
-        float zCoInput = inputHandler.MoveInput.y;  
+        Vector2 movement = movementControl.action.ReadValue<Vector2>();
+        Vector3 move = new Vector3(movement.x, 0, movement.y);
+        move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
+        move.y = 0;
 
-        Vector3 move = new Vector3(xCoInput, 0, zCoInput);
-        
-        controller.Move(move * (Time.deltaTime * playerSpeed));
-
-        if (move != Vector3.zero)
+        float currentSpeed = playerSpeed;
+        if (speedBoostControl.action.IsPressed()) // Check if speed boost button is pressed
         {
-            gameObject.transform.forward = move;
+            currentSpeed *= speedBoostMultiplier; // Apply speed boost multiplier
         }
+        
+        
 
-        if (inputHandler.JumpInput && groundedPlayer)
+        controller.Move(move * Time.deltaTime * currentSpeed);
+
+        // Changes the height position of the player..
+        if (jumpControl.action.IsPressed() && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (movement != Vector2.zero)
+        {
+            float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
+            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+        }
     }
 }
