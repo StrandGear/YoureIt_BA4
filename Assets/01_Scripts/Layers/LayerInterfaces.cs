@@ -7,6 +7,13 @@ public class LayerInterfaces : MonoBehaviour
     //
 }
 
+public interface ILayerObject 
+{
+    GameObject LayerGameObject { get; }
+
+    string Name { get; set; }
+}
+
 public interface ITransparency
 {
     float Transparency { get; set; }
@@ -14,7 +21,7 @@ public interface ITransparency
 
 public interface ILockable
 {
-    bool isLocked { get; set; }
+    bool IsLocked { get; set; }
 }
 
 public interface ILayerOrder
@@ -24,5 +31,5 @@ public interface ILayerOrder
 
 public interface ILinkable
 {
-    bool isLinkable { get; set; }
+    bool IsLinkable { get; set; }
 }
