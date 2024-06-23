@@ -6,9 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputActionReference movementControl;
     [SerializeField] private InputActionReference jumpControl;
-    [SerializeField] private InputActionReference speedBoostControl; // Added speed boost control
+    [SerializeField] private InputActionReference speedBoostControl; 
     [SerializeField] private float playerSpeed = 2.0f;
-    [SerializeField] private float speedBoostMultiplier = 2.0f; // Added speed boost multiplier
+    [SerializeField] private float speedBoostMultiplier = 2.0f; 
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float rotationSpeed = 4f;
@@ -16,20 +16,21 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
+    private bool isClimbing;
     private Transform cameraMainTransform;
 
     private void OnEnable()
     {
         movementControl.action.Enable();
         jumpControl.action.Enable();
-        speedBoostControl.action.Enable(); // Enable speed boost control
+        speedBoostControl.action.Enable(); 
     }
     
     private void OnDisable()
     {
         movementControl.action.Disable();
         jumpControl.action.Disable();
-        speedBoostControl.action.Disable(); // Disable speed boost control
+        speedBoostControl.action.Disable(); 
     }
 
     private void Start()
@@ -52,23 +53,49 @@ public class PlayerMovement : MonoBehaviour
         move.y = 0;
 
         float currentSpeed = playerSpeed;
-        if (speedBoostControl.action.IsPressed()) // Check if speed boost button is pressed
+        if (speedBoostControl.action.IsPressed()) 
         {
-            currentSpeed *= speedBoostMultiplier; // Apply speed boost multiplier
-        }
-        
-        
-
-        controller.Move(move * Time.deltaTime * currentSpeed);
-
-        // Changes the height position of the player..
-        if (jumpControl.action.IsPressed() && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            currentSpeed *= speedBoostMultiplier; 
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        float avoidFloorDistance = 0.1f;
+        float ladderGrabDistance = 0.4f;
+        Vector3 raycastStart = transform.position + Vector3.up * avoidFloorDistance;
+        if (Physics.Raycast(raycastStart, move, out RaycastHit raycastHit, ladderGrabDistance))
+        {
+            if (raycastHit.transform.TryGetComponent(out Ladder ladder))
+            {
+                isClimbing = true;
+                move.x = 0f;
+                move.z = 0f;
+                move.y = movement.y; // Use the y-axis for climbing
+                groundedPlayer = true; // Ensure grounded for climbing
+                playerVelocity.y = 0f; // Reset vertical velocity
+            }
+        }
+        else
+        {
+            isClimbing = false; // No ladder detected, reset climbing state
+        }
+
+        if (isClimbing)
+        {
+            // Move the player along the ladder
+            controller.Move(move * Time.deltaTime * currentSpeed);
+        }
+        else
+        {
+            controller.Move(move * Time.deltaTime * currentSpeed);
+
+            // Changes the height position of the player..
+            if (jumpControl.action.IsPressed() && groundedPlayer)
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            }
+
+            playerVelocity.y += gravityValue * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
 
         if (movement != Vector2.zero)
         {
