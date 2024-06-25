@@ -171,13 +171,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6811592737022840324, guid: 299f901fde727364996b42fd0748d724, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6811592737022840324, guid: 299f901fde727364996b42fd0748d724, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5711052370896006010, guid: 299f901fde727364996b42fd0748d724, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -3230359877503427227, guid: 299f901fde727364996b42fd0748d724, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ec6ab06570acd6b41a939508008a76ed, type: 2}
+    - target: {fileID: -1418180401007980863, guid: 299f901fde727364996b42fd0748d724, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -1418180401007980863, guid: 299f901fde727364996b42fd0748d724, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -185,6 +197,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 299f901fde727364996b42fd0748d724, type: 3}
       propertyPath: m_Name
       value: blockout_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 299f901fde727364996b42fd0748d724, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2524834956251178917, guid: 299f901fde727364996b42fd0748d724, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2524834956251178917, guid: 299f901fde727364996b42fd0748d724, type: 3}
       propertyPath: m_IsActive
@@ -332,7 +352,7 @@ GameObject:
   - component: {fileID: 1930260525}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ladder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,7 +474,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.28, y: 0.99999994, z: 1.22}
+  m_Size: {x: 2.02, y: 0.99999994, z: 1.86}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1949992367
 GameObject:
@@ -637,6 +657,14 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 5895402861849949888}
+    - target: {fileID: 4840658796569269284, guid: 12bf736a783aa244da7498c348610e57, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4840658796569269284, guid: 12bf736a783aa244da7498c348610e57, type: 3}
+      propertyPath: m_UpdateMethod
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7164893715044300434, guid: 12bf736a783aa244da7498c348610e57, type: 3}
       propertyPath: m_LocalPosition.x
       value: -23.403
@@ -690,6 +718,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 230761317537750786, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f9c9b9c78168e844791c55ab5092b933, type: 2}
     - target: {fileID: 3683352965419715424, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
       propertyPath: playerSpeed
       value: 4
@@ -697,6 +729,14 @@ PrefabInstance:
     - target: {fileID: 3683352965419715424, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
       propertyPath: rotationSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683352965419715424, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
+      propertyPath: interactControl
+      value: 
+      objectReference: {fileID: 562261188112217769, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
+    - target: {fileID: 3683352965419715424, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 6184560382498096504, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -741,6 +781,22 @@ PrefabInstance:
     - target: {fileID: 6816242334459535298, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
       propertyPath: m_Name
       value: Banana Man
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414998141772021450, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5992149
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414998141772021450, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.031197717
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414998141772021450, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7581075
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414998141772021450, guid: baab282477c945c4398ae86956cb4fa5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.2554238
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
