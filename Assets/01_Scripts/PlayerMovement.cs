@@ -36,94 +36,100 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
+        UpdateGroundedStatus();
+        HandleMovement();
+        HandleClimbingTransition();
+        print("Test");
+    }
+
+    private void UpdateGroundedStatus()
+    {
+        //print(transform.position.y);
         var ray = new Ray(transform.position, Vector3.down);
+        groundedPlayer = Physics.Raycast(ray, 0.1f, groundLayer);
 
-        groundedPlayer = Physics.Raycast(ray, 1f, groundLayer);
+        
+    }
 
+    private void HandleMovement()
+    {
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
         move.y = 0;
 
         float currentSpeed = playerSpeed;
-        if (speedBoostControl.action.IsPressed()) 
+        if (speedBoostControl.action.IsPressed())
         {
-            currentSpeed *= speedBoostMultiplier; 
+            currentSpeed *= speedBoostMultiplier;
         }
 
-        float avoidFloorDistance = 0.1f;
-        float ladderGrabDistance = 1f;
-        Vector3 raycastStart = transform.position + Vector3.up * avoidFloorDistance;
-
-        if (interactControl.action.triggered && !isClimbing)
-        {
-            if (Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance))
-            {
-                if (raycastHit.transform.CompareTag("Ladder")) 
-                {
-                    isClimbing = true;
-                    groundedPlayer = true;
-                    isStartingToClimb = true;// Ensure grounded for climbing
-                    climbingTimer = 2f;
-                    playerVelocity.y = 0f; // Reset vertical velocity
-                    //animator.SetBool("Climbing", true);
-                    
-                }
-            }
-        }
-        
         if (isClimbing)
         {
-            // Move the player along the ladder
-            move.x = 0f;
-            move.z = 0f;
-            move.y = movement.y; // Use the y-axis for climbing
-            controller.Move(move * Time.deltaTime * currentSpeed);
-            Debug.Log("Climbing");
-            
-            // Exit climbing if no vertical input or interact control is released
-            if (!Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance) ||
-                !raycastHit.transform.CompareTag("Ladder"))
-            {
-                isClimbing = false;
-                
-                //animator.SetBool("Climbing", false);
-            }
-
-            if (groundedPlayer &&!isStartingToClimb)
-            {
-                isClimbing = false;
-            }
+            HandleClimbing(movement, currentSpeed);
         }
         else
         {
-            var baseMove = move * Time.deltaTime * currentSpeed;
-
-            if (jumpControl.action.triggered && groundedPlayer)
-            {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-                Debug.Log("Player Jumped");
-            }
-            
-
-            playerVelocity.y += gravityValue * Time.deltaTime;
-            
-            if (groundedPlayer && playerVelocity.y < 0)
-            {
-                playerVelocity.y = 0f;
-            }
-            controller.Move(baseMove + playerVelocity * Time.deltaTime);
+            HandleWalkingAndJumping(move, currentSpeed);
         }
 
         if (movement != Vector2.zero && !isClimbing)
         {
-            float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
-            print("Rotate");
+            RotatePlayer(movement);
         }
 
+        UpdateClimbingTimer();
+    }
+
+    private void HandleClimbing(Vector2 movement, float currentSpeed)
+    {
+        Vector3 move = new Vector3(0, movement.y, 0);
+        controller.Move(move * Time.deltaTime * currentSpeed);
+        Debug.Log("Climbing");
+
+        float ladderGrabDistance = 1f;
+        Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
+
+        if (!Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance) ||
+            !raycastHit.transform.CompareTag("Ladder") || (groundedPlayer && !isStartingToClimb))
+        {
+            isClimbing = false;
+            //animator.SetBool("Climbing", false);
+        }
+    }
+
+    private void HandleWalkingAndJumping(Vector3 move, float currentSpeed)
+    {
+        var baseMove = move * Time.deltaTime * currentSpeed;
+
+        if (jumpControl.action.triggered && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            Debug.Log("Player Jumped");
+        }
+        
+        
+        if (groundedPlayer && playerVelocity.y <= 0)
+        {
+            playerVelocity.y = 0f;
+        }
+        else
+        {
+            playerVelocity.y += gravityValue * Time.deltaTime;
+        }
+        controller.Move(baseMove + playerVelocity * Time.deltaTime);
+        print("Gravity");
+    }
+
+    private void RotatePlayer(Vector2 movement)
+    {
+        float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
+        Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+    }
+
+    private void UpdateClimbingTimer()
+    {
         if (isStartingToClimb)
         {
             climbingTimer -= Time.deltaTime;
@@ -132,12 +138,31 @@ public class PlayerMovement : MonoBehaviour
                 isStartingToClimb = false;
             }
         }
-        
-        float speed = move.magnitude;
-        //animator.SetFloat("Speed", speed);
-        
     }
-    
+
+    private void HandleClimbingTransition()
+    {
+        if (interactControl.action.triggered && !isClimbing)
+        {
+            Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
+            float ladderGrabDistance = 1f;
+
+            if (Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance))
+            {
+                if (raycastHit.transform.CompareTag("Ladder"))
+                {
+                    isClimbing = true;
+                    groundedPlayer = true;
+                    isStartingToClimb = true;
+                    climbingTimer = 2f;
+                    playerVelocity.y = 0f;
+                    print("Start Climbing");
+                    //animator.SetBool("Climbing", true);
+                }
+            }
+        }
+    }
+
     private void OnEnable()
     {
         movementControl.action.Enable();
