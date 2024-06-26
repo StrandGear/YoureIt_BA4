@@ -10,16 +10,12 @@ public class LockingLayer : MonoBehaviour, ILockable
             layerLocked = value;
             UpdateLayerLocking();
         } }
-    private ObjectMovement objectMovement;
 
     private void Start()
     {
-        TryGetComponent(out objectMovement);
     }
 
     private void UpdateLayerLocking()
     {
-        //if (layerLocked)
-            //objectMovement
     }
 }
