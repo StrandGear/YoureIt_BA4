@@ -8,16 +8,18 @@ using TMPro;
 
 public class LayerManager : MonoBehaviour
 {
+    //[SerializeField] private LayerObjectsVisibilityRadius radiusOfVisibility;
+
     [Tooltip("Prefab to show each layer button")]
     [SerializeField]private GameObject layerUIPrefab;
     [SerializeField] private Button layerBtnUP;
     [SerializeField] private Button layerBtnDown;
     [SerializeField] private Transform uiParent;
+
     [Tooltip("Displayed for objects with Transparent Layer")]
     [SerializeField] private Slider transparencySlider;
     private ToggleButton activeLayer;
-
-    //[SerializeField] private float zOffset = 0.1f; // Distance between layers
+    private bool layerLocked = false;
 
     [SerializeField] private List<LayerData> layers = new List<LayerData>();
 
@@ -32,18 +34,49 @@ public class LayerManager : MonoBehaviour
     [System.Serializable]
     public class LayerData
     {
+        public int id;
         public GameObject layerGameObject;
         public RectTransform uiElement;
         public ToggleButton toggleButton;
+        public string name;
         //public int depth;
+    }
+
+    private static LayerManager instance = null;
+    public static LayerManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<LayerManager>();
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("LayerManager");
+                    instance = go.AddComponent<LayerManager>();
+                }
+                }
+            
+            return instance;
+        }
     }
 
     private void Awake()
     {
-        foreach (ILayerObject obj in FindObjectsOfType<MonoBehaviour>().OfType<ILayerObject>())
+        if (instance == null)
         {
-            AddLayer(obj);
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        /*        foreach (ILayerObject obj in FindObjectsOfType<MonoBehaviour>().OfType<ILayerObject>())
+                {
+                    AddLayer(obj);
+                }*/
 
         layerBtnDown.onClick.AddListener(() => MoveLayerDown(CurrentlySelectedLayerData));
         layerBtnUP.onClick.AddListener(() => MoveLayerUp(CurrentlySelectedLayerData));
@@ -53,27 +86,79 @@ public class LayerManager : MonoBehaviour
 
     public void AddLayer(ILayerObject obj)
     {
-        GameObject uiElement = Instantiate(layerUIPrefab, uiParent);
+        foreach (LayerData elem in layers)
+        {
+            if (elem.id == obj.ID || obj.IsUsed)
+            {
+                return;
+            }
+        }
+        //GameObject uiElement = Instantiate(layerUIPrefab, uiParent);
+
         LayerData layerData = new LayerData
         {
+            id = obj.ID,
             layerGameObject = obj.LayerGameObject,
-            uiElement = uiElement.GetComponent<RectTransform>(),
-            toggleButton = uiElement.GetComponent<ToggleButton>()
+            //uiElement = uiElement.GetComponent<RectTransform>(),
+            //toggleButton = uiElement.GetComponentInChildren<ToggleButton>(),
+            name = obj.Name
         };
         layers.Add(layerData);
 
-        string name = obj.Name;
+        //uiElement.GetComponentInChildren<TMP_Text>().text = layerData.name;
 
-        print("Added layer obj " + " " + layerData.layerGameObject.name);
+        UpdateUI();
+    }
 
-        uiElement.GetComponentInChildren<TMP_Text>().text = name;
-        //uiElement.GetComponentInChildren<Button>().onClick.AddListener(() => LayerSelect(layerData));
+    private void UpdateUI()
+    {
+        foreach (Transform child in uiParent)
+        {
+            Destroy(child.gameObject);
+        }
 
-        /*        EventTrigger trigger = uiElement.GetComponent<EventTrigger>();
-                EventTrigger.Entry entry = new EventTrigger.Entry();
-                entry.eventID = EventTriggerType.Deselect;
-                entry.callback.AddListener((data) => { OnDeselectDelegate((PointerEventData)data); });
-                trigger.triggers.Add(entry);*/
+        foreach (LayerData layer in layers)
+        {
+            GameObject uiElement = Instantiate(layerUIPrefab, uiParent);
+            layer.uiElement = uiElement.GetComponent<RectTransform>();
+            layer.toggleButton = uiElement.GetComponentInChildren<ToggleButton>();
+            uiElement.GetComponentInChildren<TMP_Text>().text = layer.name;
+
+            // Set up the toggle button's onClick listener to handle layer selection
+            layer.toggleButton.onClick.AddListener(() => SetActiveLayer(layer.toggleButton));
+        }
+    }
+
+    public void RemoveLayer(ILayerObject obj)
+    {
+        if (layers.Count == 0)
+            return;
+        for (int i = layers.Count - 1; i >= 0; i--)
+        {
+            if (layers[i].id == obj.ID)
+            {
+                Destroy(layers[i].uiElement.gameObject);
+                layers.RemoveAt(i);
+            }
+        }
+    }
+
+    public void ClearLayerList()
+    {
+        if (layers.Count > 0)
+            layers.Clear();
+
+        //UpdateUI();
+    }
+
+    public void SetAllObjectsAsUsed()
+    {
+        if (layers.Count > 0)
+            foreach (LayerData elem in layers)
+            {
+                elem.layerGameObject.GetComponent<LayerObject>().IsUsed = true;
+            }
+        //UpdateUI();
     }
 
     public void SetActiveLayer(ToggleButton newActiveLayer)
@@ -90,6 +175,8 @@ public class LayerManager : MonoBehaviour
         CurrentlySelectedLayerData = layers.Find(layer => layer.toggleButton == activeLayer);
 
         ShowTransparencySlider();
+
+        ShowLockToggle();
     }
 
     public void ClearActiveLayer()
@@ -109,9 +196,19 @@ public class LayerManager : MonoBehaviour
         return activeLayer;
     }
 
+    public void UpdateLockToggleValue(bool value)
+    {
+        layerLocked = value;
+        print("layer locked " + value);
+        currentlySelectedLayerData.layerGameObject.TryGetComponent(out MoveObject moveObject);
+        if (moveObject != null)
+            moveObject.ToggleFreeze();
+    }
+
     private void ShowTransparencySlider()
     {
         CurrentlySelectedLayerData.layerGameObject.TryGetComponent(out TransparentLayer tempGameObj);
+
         if (tempGameObj != null)
         {
             transparencySlider.gameObject.SetActive(true);
@@ -123,27 +220,16 @@ public class LayerManager : MonoBehaviour
         else return;
     }
 
+    private void ShowLockToggle()
+    {
+        CurrentlySelectedLayerData.uiElement.Find("LockToggle");
+    }
+
     private void HideTransparencySlider()
     {
         transparencySlider.onValueChanged.RemoveAllListeners();
         transparencySlider.gameObject.SetActive(false);
     }
-
-/*    private void LayerSelect(LayerData layerData)
-    {
-        if (CurrentlySelectedLayerData != layerData)
-            CurrentlySelectedLayerData = layerData;
-        print(layers.IndexOf(layerData));
-        //currentlySelectedLayer = layerData;
-
-        //print("Layer select " + CurrentlySelectedLayer.layerGameObject.name);
-    }
-
-    public void OnDeselectDelegate(PointerEventData data)
-    {
-        CurrentlySelectedLayerData = null;
-        print("Layer deselect");
-    }*/
 
     private void MoveLayerDown(LayerData layerData)
     {

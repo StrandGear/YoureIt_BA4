@@ -13,7 +13,6 @@ public class ToggleButton : Button
     {
         base.Start();
         layerManager = FindObjectOfType<LayerManager>();
-        print(layerManager);
         onClick.AddListener(ToggleSelection);
     }
 
