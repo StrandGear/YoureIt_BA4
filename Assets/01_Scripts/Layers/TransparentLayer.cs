@@ -96,23 +96,19 @@ public class TransparentLayer : MonoBehaviour, ITransparency
 
     private void UpdateTransparency()
     {
-        bool rendererEnabled = true;
 
         //double check value & assign collision state
         if (_transparency <= 0f)
         {
             _transparency = 0f;
-            rendererEnabled = false;
             collisionState = transparentCollision ? CollisionState.IsCollidable : CollisionState.NonCollidable;
         }
         else if (_transparency == 0.5f)
         {
-            rendererEnabled = true;
             collisionState = semiTransparentCollision ? CollisionState.IsCollidable : CollisionState.NonCollidable;
         }
         else if (_transparency >= 1f)
         {
-            rendererEnabled = true;
             _transparency = 1f;
             collisionState = CollisionState.IsCollidable;
         }
@@ -122,13 +118,7 @@ public class TransparentLayer : MonoBehaviour, ITransparency
             Color color = instanceMaterials[i].color;
             color.a = _transparency;
             instanceMaterials[i].color = color;
-            //instanceMaterials[i].enabled = rendererEnabled;
         }
-
-/*        foreach (MeshRenderer elem in meshRenderers)
-        {
-            elem.enabled = rendererEnabled;
-        }*/
 
         UpdateCollisionStatus(collisionState);
     }

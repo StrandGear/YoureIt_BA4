@@ -11,7 +11,11 @@ public interface ILayerObject
 {
     GameObject LayerGameObject { get; }
 
+    int ID { get; }
+
     string Name { get; set; }
+
+    bool IsUsed { get; set; }
 }
 
 public interface ITransparency
