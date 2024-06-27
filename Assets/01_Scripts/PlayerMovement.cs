@@ -8,13 +8,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private InputActionReference speedBoostControl; 
     [SerializeField] private InputActionReference interactControl; 
-    [SerializeField] private LayerMask groundLayer; 
+    [SerializeField] private InputActionReference lookControl;
+    [SerializeField] private InputActionReference crouchControl;
+    [SerializeField] private LayerMask groundLayer;
+    
+    [SerializeField] private Transform cameraFollowTarget; 
+    [SerializeField] private float minCameraClamp; 
+    [SerializeField] private float maxCameraClamp; 
+    [SerializeField] private GameObject mainCam;
     
     [SerializeField] private float playerSpeed = 2.0f;
     [SerializeField] private float speedBoostMultiplier = 2.0f; 
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
-    [SerializeField] private float rotationSpeed = 4f;
+    [SerializeField] private float crouch;
+    
+    //[SerializeField] private float rotationSpeed = 4f;
+    
+    
 
     private float climbingTimer;
     
@@ -24,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isClimbing;
     private bool isStartingToClimb;
     private Transform cameraMainTransform;
+    private float xRotation;
+    private float yRotation;
     //private Animator animator;
     
 
@@ -31,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         //animator = GetComponent<Animator>();
-        cameraMainTransform = Camera.main.transform;
+        /*cameraMainTransform = Camera.main.transform;*/
     }
 
     void Update()
@@ -41,6 +54,12 @@ public class PlayerMovement : MonoBehaviour
         HandleClimbingTransition();
         print("Test");
     }
+
+    private void LateUpdate()
+    {
+        CameraRotation();
+    }
+
 
     private void UpdateGroundedStatus()
     {
@@ -53,9 +72,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
+        
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
         Vector3 move = new Vector3(movement.x, 0, movement.y);
-        move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
+        /*move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;*/
+        float targetRotation = 0;
         move.y = 0;
 
         float currentSpeed = playerSpeed;
@@ -73,11 +94,7 @@ public class PlayerMovement : MonoBehaviour
             HandleWalkingAndJumping(move, currentSpeed);
         }
 
-        if (movement != Vector2.zero && !isClimbing)
-        {
-            RotatePlayer(movement);
-        }
-
+        
         UpdateClimbingTimer();
     }
 
@@ -100,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleWalkingAndJumping(Vector3 move, float currentSpeed)
     {
-        var baseMove = move * Time.deltaTime * currentSpeed;
+        
 
         if (jumpControl.action.triggered && groundedPlayer)
         {
@@ -117,16 +134,44 @@ public class PlayerMovement : MonoBehaviour
         {
             playerVelocity.y += gravityValue * Time.deltaTime;
         }
-        controller.Move(baseMove + playerVelocity * Time.deltaTime);
+
+        float targetRotation;
+        
+        if (move != Vector3.zero && !isClimbing)
+        {
+            
+            targetRotation = Quaternion.LookRotation(move).eulerAngles.y + mainCam.transform.rotation.eulerAngles.y;
+            Quaternion rotation = Quaternion.Euler(0, targetRotation, 0);
+            move = rotation * move;
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 20 * Time.deltaTime);
+        }
+
+        var localMove = move * currentSpeed * Time.deltaTime;
+        controller.Move(localMove + playerVelocity * Time.deltaTime);
+        
+        //controller.Move(baseMove + playerVelocity * Time.deltaTime);
         print("Gravity");
     }
 
-    private void RotatePlayer(Vector2 movement)
+    /*private void RotatePlayer(Vector2 movement)
     {
-        float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + cameraMainTransform.eulerAngles.y;
+        float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg /*+ cameraMainTransform.eulerAngles.y#1#;
         Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+    }*/
+    
+
+    private void CameraRotation()
+    {
+        Vector2 lookAround = lookControl.action.ReadValue<Vector2>();
+        
+        xRotation -= lookAround.y;
+        yRotation += lookAround.x;
+        xRotation = Mathf.Clamp(xRotation, minCameraClamp, maxCameraClamp);
+        Quaternion camRotation = Quaternion.Euler(xRotation, yRotation, 0);
+        cameraFollowTarget.rotation = camRotation;
     }
+    
 
     private void UpdateClimbingTimer()
     {
@@ -169,6 +214,8 @@ public class PlayerMovement : MonoBehaviour
         jumpControl.action.Enable();
         speedBoostControl.action.Enable(); 
         interactControl.action.Enable(); 
+        lookControl.action.Enable(); 
+        crouchControl.action.Enable();
     }
     
     private void OnDisable()
@@ -177,5 +224,7 @@ public class PlayerMovement : MonoBehaviour
         jumpControl.action.Disable();
         speedBoostControl.action.Disable(); 
         interactControl.action.Disable(); 
+        lookControl.action.Disable(); 
+        crouchControl.action.Disable();
     }
 }

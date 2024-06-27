@@ -25,12 +25,12 @@
                 },
                 {
                     "name": "MouseLook",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "4ae8562c-e8f9-4d1f-b419-acd81ea312c9",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -45,6 +45,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "a61c6a24-67a8-423f-9b36-dd06e3e1de2e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "05b0c0c8-3c85-483b-896f-72a1783791af",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -187,7 +196,18 @@
                 {
                     "name": "",
                     "id": "de12e39f-0722-4662-a413-9fbb7a18b6dd",
-                    "path": "<Mouse>/delta",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e51f8f14-aeda-4c8b-9ad5-b4c8377fa01c",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -236,6 +256,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c4918fd-4d80-4406-9320-46cea75ad8c5",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0cd5a3ca-ff13-424d-a479-9e271e520afd",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
