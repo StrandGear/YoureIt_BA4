@@ -22,6 +22,7 @@ public class LayerManager : MonoBehaviour
     private bool layerLocked = false;
 
     [SerializeField] private List<LayerData> layers = new List<LayerData>();
+    public List<LayerData> Layers { get => layers; }
 
     private LayerData currentlySelectedLayerData;
 
@@ -143,12 +144,25 @@ public class LayerManager : MonoBehaviour
         }
     }
 
+/*    public void ClearAndUpdateUI()
+    {
+        if (layers.Count == 0)
+            return;
+
+        for (int i = layers.Count - 1; i > -1; i--)
+        {
+            Destroy(layers[i].uiElement.gameObject);
+            
+
+        }
+    }*/
+
     public void ClearLayerList()
     {
         if (layers.Count > 0)
             layers.Clear();
 
-        //UpdateUI();
+        UpdateUI();
     }
 
     public void SetAllObjectsAsUsed()
