@@ -166,6 +166,9 @@ public class PlayerMovement : MonoBehaviour
                 isCrouching = true;
                 jumpHeight = 0f;
                 controller.height = 0.5f;
+                controller.center = new Vector3(0f, 0.5f, 0f);
+                controller.radius = 0.5f;
+
             }
         }
     }
