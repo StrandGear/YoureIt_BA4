@@ -77,9 +77,20 @@ public class PlayerMovement : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
+
+        // Calculate the movement direction relative to the camera
         Vector3 move = new Vector3(movement.x, 0, movement.y);
-        move = cameraMainTransform.forward * move.z + cameraMainTransform.right * move.x;
-        move.y = 0;
+        Vector3 forward = cameraMainTransform.forward;
+        Vector3 right = cameraMainTransform.right;
+
+        // Normalize vectors to ensure consistent movement speed in all directions
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+        // Calculate final movement vector
+        Vector3 desiredMoveDirection = forward * move.z + right * move.x;
 
         float currentSpeed = playerSpeed;
         if (isCrouching)
@@ -97,9 +108,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            HandleWalkingAndJumping(move, currentSpeed);
+            HandleWalkingAndJumping(desiredMoveDirection, currentSpeed);
         }
-        
+
         UpdateClimbingTimer();
     }
 
@@ -136,12 +147,10 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity.y += gravityValue * Time.deltaTime;
         }
 
-        float targetRotation;
         if (move != Vector3.zero && !isClimbing)
         {
-            targetRotation = Quaternion.LookRotation(move).eulerAngles.y + mainCam.transform.rotation.eulerAngles.y;
+            float targetRotation = Quaternion.LookRotation(move).eulerAngles.y;
             Quaternion rotation = Quaternion.Euler(0, targetRotation, 0);
-            move = rotation * move;
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 20 * Time.deltaTime);
         }
 
