@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Scan"",
+                    ""type"": ""Button"",
+                    ""id"": ""182d5356-d0a5-4cbd-873e-e91c327f68d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -229,6 +238,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a16fc339-1e6c-4bf3-8aa7-b687d0776fde"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a4e9f8ef-eddd-4476-aab4-28670fbc984e"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb377aa6-f039-458a-b23e-8fb16b10522d"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -241,6 +283,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_MouseLook = m_Player.FindAction("MouseLook", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_Scan = m_Player.FindAction("Scan", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -306,6 +349,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_MouseLook;
     private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Scan;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -314,6 +358,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @MouseLook => m_Wrapper.m_Player_MouseLook;
         public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Scan => m_Wrapper.m_Player_Scan;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -335,6 +380,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Scan.started += instance.OnScan;
+            @Scan.performed += instance.OnScan;
+            @Scan.canceled += instance.OnScan;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -351,6 +399,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Scan.started -= instance.OnScan;
+            @Scan.performed -= instance.OnScan;
+            @Scan.canceled -= instance.OnScan;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -374,5 +425,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMouseLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnScan(InputAction.CallbackContext context);
     }
 }
