@@ -1,6 +1,7 @@
 using UnityEngine;
-
-public class MoveObject : MonoBehaviour
+/*
+[RequireComponent(typeof(LayerObject))]
+public class MoveObject : MonoBehaviour, ILockable
 {
     public enum MovementDirection
     {
@@ -12,10 +13,13 @@ public class MoveObject : MonoBehaviour
     public float distance = 5f; // How far the object moves
     public float speed = 2f; // How fast the object moves
 
-    private Vector3 startPosition;
+    public GameObject destinationTarget;
+
     private Vector3 endPosition;
     private bool movingToEnd = true;
    [SerializeField] private bool isFrozen = false; // Flag to control movement
+
+    public bool IsLocked { get => isFrozen; set => isFrozen = value; }
 
     void Start()
     {
@@ -29,6 +33,17 @@ public class MoveObject : MonoBehaviour
         {
             endPosition = startPosition + Vector3.forward * distance;
         }
+        else if (destinationTarget != null)
+        {
+            endPosition = destinationTarget.gameObject.transform.position;
+            endPosition.y = startPosition.y;
+        }
+    }
+
+    public void UpdateTargetEndPosition()
+    {
+        if (destinationTarget != null)
+            endPosition = destinationTarget.transform.position;
     }
 
     void Update()
@@ -64,3 +79,4 @@ public class MoveObject : MonoBehaviour
         isFrozen = !isFrozen;
     }
 }
+*/
