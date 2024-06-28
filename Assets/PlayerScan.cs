@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerScan : MonoBehaviour
 {
+
     private bool isScanning = false;
     public bool IsScanning { get => isScanning; }
 
