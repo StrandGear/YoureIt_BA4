@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8697685809696379528
+--- !u!114 &-3171827687652786126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +42,12 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Test Bank.bank
   Name: Test Bank
   StudioPath: bank:/Test Bank
-  lastModified: 638551837235484377
+  lastModified: 638551132622540785
   FileSizes:
   - Name: Desktop
     Value: 72192
   Exists: 1
---- !u!114 &-8464286123498974475
+--- !u!114 &3365818489829575618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,12 +62,12 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Ambieance .bank
   Name: 'Ambieance '
   StudioPath: 'bank:/Ambieance '
-  lastModified: 638551837235449155
+  lastModified: 638551132622520853
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
---- !u!114 &11400000
+--- !u!114 &6633806049346349978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,26 +76,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Test Bank 2.bank
   m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: 2472757209369245696}
-  - {fileID: -8464286123498974475}
-  - {fileID: 3552594478123994657}
-  - {fileID: 7613191847498147768}
-  - {fileID: -8697685809696379528}
-  EditorEvents:
-  - {fileID: 3156349902353618744}
-  - {fileID: 9015684443487780119}
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: 3552594478123994657}
-  StringsBanks:
-  - {fileID: 2472757209369245696}
-  cacheTime: 638551837235484377
-  cacheVersion: 131618
---- !u!114 &2472757209369245696
+  Path: You're It FMOD/You're It/Build/Desktop/Test Bank 2.bank
+  Name: Test Bank 2
+  StudioPath: bank:/Test Bank 2
+  lastModified: 638551132622530817
+  FileSizes:
+  - Name: Desktop
+    Value: 3424
+  Exists: 1
+--- !u!114 &6913385079284471765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,39 +102,12 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638551837235454295
+  lastModified: 638551132622530817
   FileSizes:
   - Name: Desktop
     Value: 952
   Exists: 1
---- !u!114 &3156349902353618744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Another Test
-  m_EditorClassIdentifier: 
-  Path: event:/Another Test
-  Guid:
-    Data1: 1418214071
-    Data2: 1159971854
-    Data3: 1701299109
-    Data4: 597294218
-  Banks:
-  - {fileID: 7613191847498147768}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1032
---- !u!114 &3552594478123994657
+--- !u!114 &7052247851893111656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,12 +122,12 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638551837235454295
+  lastModified: 638551132622520853
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
---- !u!114 &7613191847498147768
+--- !u!114 &8107016393860786454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,18 +159,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Ambieance .bank
   m_EditorClassIdentifier: 
-  Path: event:/Test Audio
+  Path: event:/Another Test
   Guid:
-    Data1: 1035569642
-    Data2: 1321057911
-    Data3: 278908313
-    Data4: 1169038980
+    Data1: 1418214071
+    Data2: 1159971854
+    Data3: 1701299109
+    Data4: 597294218
   Banks:
-  - {fileID: -8697685809696379528}
+  - {fileID: 6633806049346349978}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 6600
+  Length: 1032
