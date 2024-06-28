@@ -214,9 +214,9 @@ public class LayerManager : MonoBehaviour
     {
         layerLocked = value;
         print("layer locked " + value);
-        currentlySelectedLayerData.layerGameObject.TryGetComponent(out MoveObject moveObject);
+/*        currentlySelectedLayerData.layerGameObject.TryGetComponent(out LockingLayer moveObject);
         if (moveObject != null)
-            moveObject.ToggleFreeze();
+            moveObject.ToggleFreeze();*/
     }
 
     private void ShowTransparencySlider()
@@ -277,9 +277,17 @@ public class LayerManager : MonoBehaviour
 
     private void UpdateLayerPositions(int selectedLayerIndex, int swappedLayerIndex)
     {
-        Vector3 newPosition = layers[selectedLayerIndex].layerGameObject.transform.position;
-        layers[selectedLayerIndex].layerGameObject.transform.position = layers[swappedLayerIndex].layerGameObject.transform.position;
-        layers[swappedLayerIndex].layerGameObject.transform.position = newPosition;
+        //assigning new start position  
+        Vector3 StartPosition1 = layers[selectedLayerIndex].layerGameObject.GetComponent<LayerObject>().StartPosition;
+        Vector3 StartPosition2 = layers[swappedLayerIndex].layerGameObject.GetComponent<LayerObject>().StartPosition;
+
+        //assigning new object position
+        layers[selectedLayerIndex].layerGameObject.transform.position = layers[swappedLayerIndex].layerGameObject.transform.GetComponent<LayerObject>().StartPosition;
+        layers[swappedLayerIndex].layerGameObject.transform.position = StartPosition1;
+
+
+        layers[selectedLayerIndex].layerGameObject.transform.GetComponent<LayerObject>().StartPosition = StartPosition2;
+        layers[swappedLayerIndex].layerGameObject.transform.GetComponent<LayerObject>().StartPosition = StartPosition1;
 
         for (int i = 0; i < layers.Count; i++)
         {

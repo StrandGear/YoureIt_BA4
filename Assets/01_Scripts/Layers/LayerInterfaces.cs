@@ -11,11 +11,15 @@ public interface ILayerObject
 {
     GameObject LayerGameObject { get; }
 
+    Vector3 CurrentFixedPosition { get; set; }
+
     int ID { get; }
 
     string Name { get; set; }
 
     bool IsUsed { get; set; }
+
+    public void ResetPosition();
 }
 
 public interface ITransparency
@@ -26,6 +30,8 @@ public interface ITransparency
 public interface ILockable
 {
     bool IsLocked { get; set; }
+
+    public void LockLayer();
 }
 
 public interface ILayerOrder
@@ -36,4 +42,13 @@ public interface ILayerOrder
 public interface ILinkable
 {
     bool IsLinkable { get; set; }
+}
+
+public interface IHiding
+{
+    bool IsHidden { get; set; }
+
+    Renderer ObjectRenderer { get; set; }
+
+    public void UpdateHidingProperty();
 }
