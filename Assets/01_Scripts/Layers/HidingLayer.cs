@@ -15,23 +15,34 @@ public class HidingLayer : MonoBehaviour, IHiding
         }
     }
 
-    public Renderer ObjectRenderer
-    {
-        get;
-        set;
-    }
+    public Renderer ObjectRenderer {get; set;}
+
+    private Collider objectCollider;
 
     private void OnValidate()
     {
         ObjectRenderer = gameObject.GetComponent<Renderer>();
+        objectCollider = GetComponent<Collider>();
         UpdateHidingProperty();
+    }
+
+    private void Awake()
+    {
+        ObjectRenderer = gameObject.GetComponent<Renderer>();
+        objectCollider = GetComponent<Collider>();
     }
 
     public void UpdateHidingProperty()
     {
         if (isHidden)
+        {
             ObjectRenderer.enabled = false;
+            objectCollider.isTrigger = true;
+        }
         else
+        {
             ObjectRenderer.enabled = true;
+            objectCollider.isTrigger = false;
+        }
     }
 }

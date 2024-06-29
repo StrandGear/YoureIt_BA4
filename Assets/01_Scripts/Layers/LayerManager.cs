@@ -12,6 +12,7 @@ public class LayerManager : MonoBehaviour
 
     [Tooltip("Prefab to show each layer button")]
     [SerializeField]private GameObject layerUIPrefab;
+
     [SerializeField] private Button layerBtnUP;
     [SerializeField] private Button layerBtnDown;
     [SerializeField] private Transform uiParent;
@@ -40,7 +41,6 @@ public class LayerManager : MonoBehaviour
         public RectTransform uiElement;
         public ToggleButton toggleButton;
         public string name;
-        //public int depth;
     }
 
     private static LayerManager instance = null;
@@ -144,19 +144,6 @@ public class LayerManager : MonoBehaviour
         }
     }
 
-/*    public void ClearAndUpdateUI()
-    {
-        if (layers.Count == 0)
-            return;
-
-        for (int i = layers.Count - 1; i > -1; i--)
-        {
-            Destroy(layers[i].uiElement.gameObject);
-            
-
-        }
-    }*/
-
     public void ClearLayerList()
     {
         if (layers.Count > 0)
@@ -172,7 +159,7 @@ public class LayerManager : MonoBehaviour
             {
                 elem.layerGameObject.GetComponent<LayerObject>().IsUsed = true;
             }
-        //UpdateUI();
+        ClearLayerList();
     }
 
     public void SetActiveLayer(ToggleButton newActiveLayer)
