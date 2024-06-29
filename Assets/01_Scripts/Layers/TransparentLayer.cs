@@ -43,18 +43,8 @@ public class TransparentLayer : MonoBehaviour, ITransparency
     private List<Collider> colliders = new List<Collider>();
 
 
-    private void Awake()
+    private void Start()
     {
-
-        //meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
-
-        //colliders = FillListWithComponentsInChildren<Collider>();
-
-
-    }
-    private void OnValidate() //to see changes from the inspector
-    {
-
         meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
 
         colliders = FillListWithComponentsInChildren<Collider>();
@@ -78,10 +68,13 @@ public class TransparentLayer : MonoBehaviour, ITransparency
             }
             meshRenderers[i].sharedMaterials = materials;
         }
-
-            Transparency = _transparency; //to upd value in inspector
-        UpdateTransparency();
     }
+
+/*    private void OnValidate() //to see changes from the inspector
+    {
+        Transparency = _transparency; //to upd value in inspector
+        UpdateTransparency();
+    }*/
 
     private void SetMaterialTransparent(Material material)
     {

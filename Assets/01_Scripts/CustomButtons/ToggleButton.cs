@@ -7,12 +7,11 @@ using UnityEngine.EventSystems;
 public class ToggleButton : Button
 {
     private bool isSelected = false;
-    private LayerManager layerManager;
 
     protected override void Start()
     {
         base.Start();
-        layerManager = FindObjectOfType<LayerManager>();
+        
         onClick.AddListener(ToggleSelection);
     }
 
@@ -31,12 +30,12 @@ public class ToggleButton : Button
     public override void Select()
     {
         isSelected = true;
-        layerManager.SetActiveLayer(this);
+        //LayerManager.Instance.SetActiveLayer(this);
     }
 
     public void Deselect()
     {
-        layerManager.ClearActiveLayer();
+        LayerManager.Instance.ClearActiveLayer();
 
         isSelected = false;
     }
