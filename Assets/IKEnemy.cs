@@ -19,7 +19,7 @@ public class IKEnemy : MonoBehaviour
     [SerializeField] private float delta = 0.001f;
     
     [Range(0,1)]
-    [SerializeField] private float snapBackStrength = 1f;
+    //[SerializeField] private float snapBackStrength = 1f;
 
     protected float[] bonesLength;
     protected float completeLength;
