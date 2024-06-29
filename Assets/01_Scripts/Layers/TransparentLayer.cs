@@ -43,7 +43,7 @@ public class TransparentLayer : MonoBehaviour, ITransparency
     private List<Collider> colliders = new List<Collider>();
 
 
-    private void Awake()
+    private void Start()
     {
         meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
 

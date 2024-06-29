@@ -20,8 +20,6 @@ public interface ILayerObject
     Sprite ObjectSprite { get; set; }
 
     bool IsUsed { get; set; }
-
-    public void ResetPosition();
 }
 
 public interface ITransparency

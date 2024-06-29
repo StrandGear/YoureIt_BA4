@@ -309,16 +309,21 @@ public class LayerManager : MonoBehaviour
     private void UpdateLayerPositions(int selectedLayerIndex, int swappedLayerIndex)
     {
         //assigning new start position  
-        Vector3 StartPosition1 = layers[selectedLayerIndex].layerObject.StartPosition;
-        Vector3 StartPosition2 = layers[swappedLayerIndex].layerObject.StartPosition;
+        //Vector3 StartPosition1 = layers[selectedLayerIndex].layerObject.StartPosition;
+        //Vector3 StartPosition2 = layers[swappedLayerIndex].layerObject.StartPosition;
+
+        Vector3 newPosition1 = layers[selectedLayerIndex].layerObject.CurrentFixedPosition;
+        Vector3 newPosition2 = layers[swappedLayerIndex].layerObject.CurrentFixedPosition;
 
         //assigning new object position
-        layers[selectedLayerIndex].gameObject.transform.position = layers[swappedLayerIndex].layerObject.StartPosition;
-        layers[swappedLayerIndex].gameObject.transform.position = StartPosition1;
+        /*        layers[selectedLayerIndex].gameObject.transform.position = layers[swappedLayerIndex].layerObject.StartPosition;
+                layers[swappedLayerIndex].gameObject.transform.position = StartPosition1;*/
+        layers[selectedLayerIndex].layerObject.SetNewPosition(newPosition2);
+        layers[swappedLayerIndex].layerObject.SetNewPosition (newPosition1); 
 
 
-        layers[selectedLayerIndex].layerObject.StartPosition = StartPosition2;
-        layers[swappedLayerIndex].layerObject.StartPosition = StartPosition1;
+        //layers[selectedLayerIndex].layerObject.StartPosition = StartPosition2;
+        //layers[swappedLayerIndex].layerObject.StartPosition = StartPosition1;
 
         for (int i = 0; i < layers.Count; i++)
         {
