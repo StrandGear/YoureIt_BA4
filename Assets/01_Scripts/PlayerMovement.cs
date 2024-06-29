@@ -186,8 +186,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 lookAround = lookControl.action.ReadValue<Vector2>();
 
-        xRotation -= lookAround.y;
-        yRotation += lookAround.x;
+        xRotation -= lookAround.y * Time.deltaTime * 10;
+        yRotation += lookAround.x * Time.deltaTime * 10;
         xRotation = Mathf.Clamp(xRotation, minCameraClamp, maxCameraClamp);
         Quaternion camRotation = Quaternion.Euler(xRotation, yRotation, 0);
         cameraFollowTarget.rotation = camRotation;

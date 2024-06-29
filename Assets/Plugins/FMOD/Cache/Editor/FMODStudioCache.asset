@@ -1,6 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3171827687652786126
+--- !u!114 &-7860163997717335661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Another Test
+  m_EditorClassIdentifier: 
+  Path: event:/Another Test
+  Guid:
+    Data1: 1418214071
+    Data2: 1159971854
+    Data3: 1701299109
+    Data4: 597294218
+  Banks:
+  - {fileID: 8730635820942832039}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1032
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambieance .bank
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 8285454810298840543}
+  - {fileID: 4749901443792178517}
+  - {fileID: 6176910209015369158}
+  - {fileID: 8730635820942832039}
+  - {fileID: 8736760929558464378}
+  EditorEvents:
+  - {fileID: -7860163997717335661}
+  - {fileID: 4387949685102463365}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 6176910209015369158}
+  StringsBanks:
+  - {fileID: 8285454810298840543}
+  cacheTime: 638551790231203500
+  cacheVersion: 131618
+--- !u!114 &4387949685102463365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19,7 +74,7 @@ MonoBehaviour:
     Data3: 278908313
     Data4: 1169038980
   Banks:
-  - {fileID: -1883192401778704781}
+  - {fileID: 8736760929558464378}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -27,27 +82,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6600
---- !u!114 &-1883192401778704781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Test Bank.bank
-  m_EditorClassIdentifier: 
-  Path: You're It FMOD/You're It/Build/Desktop/Test Bank.bank
-  Name: Test Bank
-  StudioPath: bank:/Test Bank
-  lastModified: 638551132622540785
-  FileSizes:
-  - Name: Desktop
-    Value: 72192
-  Exists: 1
---- !u!114 &3365818489829575618
+--- !u!114 &4749901443792178517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,52 +97,12 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Ambieance .bank
   Name: 'Ambieance '
   StudioPath: 'bank:/Ambieance '
-  lastModified: 638551132622520853
+  lastModified: 638551790231013589
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
---- !u!114 &6633806049346349978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Test Bank 2.bank
-  m_EditorClassIdentifier: 
-  Path: You're It FMOD/You're It/Build/Desktop/Test Bank 2.bank
-  Name: Test Bank 2
-  StudioPath: bank:/Test Bank 2
-  lastModified: 638551132622530817
-  FileSizes:
-  - Name: Desktop
-    Value: 3424
-  Exists: 1
---- !u!114 &6913385079284471765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: You're It FMOD/You're It/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638551132622530817
-  FileSizes:
-  - Name: Desktop
-    Value: 952
-  Exists: 1
---- !u!114 &7052247851893111656
+--- !u!114 &6176910209015369158
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,12 +117,32 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638551132622520853
+  lastModified: 638551790231053569
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
---- !u!114 &8107016393860786454
+--- !u!114 &8285454810298840543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: You're It FMOD/You're It/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638551790231093568
+  FileSizes:
+  - Name: Desktop
+    Value: 952
+  Exists: 1
+--- !u!114 &8730635820942832039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,12 +157,12 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Test Bank 2.bank
   Name: Test Bank 2
   StudioPath: bank:/Test Bank 2
-  lastModified: 638551837235464415
+  lastModified: 638551790231143479
   FileSizes:
   - Name: Desktop
     Value: 3424
   Exists: 1
---- !u!114 &9015684443487780119
+--- !u!114 &8736760929558464378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,20 +172,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Ambieance .bank
+  m_Name: bank:/Test Bank.bank
   m_EditorClassIdentifier: 
-  Path: event:/Another Test
-  Guid:
-    Data1: 1418214071
-    Data2: 1159971854
-    Data3: 1701299109
-    Data4: 597294218
-  Banks:
-  - {fileID: 6633806049346349978}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1032
+  Path: You're It FMOD/You're It/Build/Desktop/Test Bank.bank
+  Name: Test Bank
+  StudioPath: bank:/Test Bank
+  lastModified: 638551790231203500
+  FileSizes:
+  - Name: Desktop
+    Value: 72192
+  Exists: 1
