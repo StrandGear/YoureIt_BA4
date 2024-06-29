@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputActionReference lookControl;
     [SerializeField] private InputActionReference crouchControl;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Animator animControl;
     
     [SerializeField] private Transform cameraFollowTarget; 
     [SerializeField] private float minCameraClamp; 
@@ -49,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         cameraMainTransform = Camera.main.transform;
-
+        animControl = gameObject.GetComponent<Animator>();
+        
         originalCenter = controller.center;
         originalHeight = controller.height;
         originalRadius = controller.radius;
@@ -61,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleCrouching(); // Call HandleCrouching in Update
         HandleClimbingTransition();
+        
     }
 
     private void LateUpdate()
@@ -88,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         right.y = 0;
         forward.Normalize();
         right.Normalize();
+        
+       
 
         // Calculate final movement vector
         Vector3 desiredMoveDirection = forward * move.z + right * move.x;
@@ -110,6 +115,14 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleWalkingAndJumping(desiredMoveDirection, currentSpeed);
         }
+        
+        // Calculate forwards and sideways speeds
+        float forwardSpeed = Vector3.Dot(desiredMoveDirection.normalized, forward);
+        float sidewaysSpeed = Vector3.Dot(desiredMoveDirection.normalized, right);
+
+        // Update animator parameters
+        animControl.SetFloat("ForwardsSpeed", forwardSpeed);
+        animControl.SetFloat("SidewaysSpeed", sidewaysSpeed);
 
         UpdateClimbingTimer();
     }
