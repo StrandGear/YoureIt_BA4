@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class LayerUIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject selectedLayerFrame;
+    //public GameObject SelectedLayerFrame { get => selectedLayerFrame; }
+
+    [SerializeField] private GameObject itemImageButton; //image itself is assigned dynamically
+    public GameObject ItemImageButton { get => itemImageButton; }
+
+    [SerializeField] private GameObject eyeToggle;
+    public GameObject EyeToggle { get => eyeToggle; }
+
+    [SerializeField] private GameObject lockToggle;
+    public GameObject LockToggle { get => lockToggle; }
+
+    [SerializeField] private GameObject linkToggle;
+    public GameObject LinkToggle { get => linkToggle; }
+
+    private void Awake()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowLayerFrame(bool show)
     {
-        
+        selectedLayerFrame.SetActive(show);
     }
 }

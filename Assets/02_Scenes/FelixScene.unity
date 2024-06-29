@@ -494,6 +494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: MovingCube
+  objectSprite: {fileID: 21300000, guid: 492b9988436bd45049a9a6bc52ac8fb0, type: 3}
 --- !u!1 &160546044
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,11 +1908,6 @@ Transform:
   - {fileID: 38368917}
   m_Father: {fileID: 1277141133}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &544816011 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 23278779413106426, guid: d5fae7c479eabe146be13de323446680, type: 3}
-  m_PrefabInstance: {fileID: 5139719626083566323}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &548202565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7480350975346207470, guid: f5d6abbd56624974486b7bf6e8a0cfbf, type: 3}
@@ -3679,11 +3675,6 @@ GameObject:
 --- !u!4 &1376092362 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4907682841567860, guid: d5fae7c479eabe146be13de323446680, type: 3}
-  m_PrefabInstance: {fileID: 5139719626083566323}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &1376092368 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 23969413833412602, guid: d5fae7c479eabe146be13de323446680, type: 3}
   m_PrefabInstance: {fileID: 5139719626083566323}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1385842692 stripped
@@ -5728,6 +5719,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7760399940099816527}
     - target: {fileID: 4928580558303715164, guid: 823a255c7eafd9c4ca4a15eacb2325d8, type: 3}
+      propertyPath: layerUIPrefab
+      value: 
+      objectReference: {fileID: 9124754071259274316, guid: 27db6bbe0847aa643b0a766f3a50bc3f, type: 3}
+    - target: {fileID: 4928580558303715164, guid: 823a255c7eafd9c4ca4a15eacb2325d8, type: 3}
       propertyPath: transparencySlider
       value: 
       objectReference: {fileID: 1006740955864515654}
@@ -5899,6 +5894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: Ball
+  objectSprite: {fileID: -1825931381, guid: 1201c14bb4ee74d8e99e56dc4f3f4fd1, type: 3}
 --- !u!114 &3789171105565005110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6254,7 +6250,7 @@ PrefabInstance:
       addedObject: {fileID: 9129313183063027999}
     - targetCorrespondingSourceObject: {fileID: 1678640796428652, guid: d5fae7c479eabe146be13de323446680, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5728672951941201950}
+      addedObject: {fileID: 9129313183063028003}
   m_SourcePrefab: {fileID: 100100000, guid: d5fae7c479eabe146be13de323446680, type: 3}
 --- !u!1001 &5156529809418583638
 PrefabInstance:
@@ -6555,9 +6551,17 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 1615528416}
+    - target: {fileID: 5756499386038206677, guid: 7e64003c8721c66468273e55716e6ad5, type: 3}
+      propertyPath: objectSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1a1da36a104725048b8d2388fb8d321d, type: 3}
     - target: {fileID: 8167385759980076891, guid: 7e64003c8721c66468273e55716e6ad5, type: 3}
       propertyPath: m_Name
       value: LayerObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076770562379684870, guid: 7e64003c8721c66468273e55716e6ad5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6650,24 +6654,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5728672951941201950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1376092361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba68f84f73d71dc41981390273828222, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transparency: 1
-  meshRenderers:
-  - {fileID: 1376092368}
-  - {fileID: 544816011}
-  transparentCollision: 0
-  semiTransparentCollision: 0
 --- !u!33 &5759661118240147337
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7363,6 +7349,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectName: WallboxLayer
+  objectSprite: {fileID: 21300000, guid: c4c548a339b4d41a590928c0c98934a7, type: 3}
+--- !u!114 &9129313183063028003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376092361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5934eca5b2928e845a0527ba91156f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHidden: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

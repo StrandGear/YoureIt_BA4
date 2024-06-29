@@ -17,6 +17,8 @@ public interface ILayerObject
 
     string Name { get; set; }
 
+    Sprite ObjectSprite { get; set; }
+
     bool IsUsed { get; set; }
 
     public void ResetPosition();
@@ -47,8 +49,6 @@ public interface ILinkable
 public interface IHiding
 {
     bool IsHidden { get; set; }
-
-    Renderer ObjectRenderer { get; set; }
 
     public void UpdateHidingProperty();
 }

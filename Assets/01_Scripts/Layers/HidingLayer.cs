@@ -15,34 +15,63 @@ public class HidingLayer : MonoBehaviour, IHiding
         }
     }
 
-    public Renderer ObjectRenderer {get; set;}
-
-    private Collider objectCollider;
+    private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
+    private List<Collider> colliders = new List<Collider>();
 
     private void OnValidate()
     {
-        ObjectRenderer = gameObject.GetComponent<Renderer>();
-        objectCollider = GetComponent<Collider>();
+        meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
+        colliders = FillListWithComponentsInChildren<Collider>();
+
         UpdateHidingProperty();
     }
 
     private void Awake()
     {
-        ObjectRenderer = gameObject.GetComponent<Renderer>();
-        objectCollider = GetComponent<Collider>();
+        meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
+        colliders = FillListWithComponentsInChildren<Collider>();
     }
 
     public void UpdateHidingProperty()
     {
         if (isHidden)
         {
-            ObjectRenderer.enabled = false;
-            objectCollider.isTrigger = true;
+            for (int i = 0; i < meshRenderers.Count; i++)
+            {
+                meshRenderers[i].enabled = false;
+            }
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                colliders[i].isTrigger = true;
+            }
         }
         else
         {
-            ObjectRenderer.enabled = true;
-            objectCollider.isTrigger = false;
+            for (int i = 0; i < meshRenderers.Count; i++)
+            {
+                meshRenderers[i].enabled = true;
+            }
+            for (int i = 0; i < colliders.Count; i++)
+            {
+                colliders[i].isTrigger = false;
+            }
         }
+    }
+
+    private List<T> FillListWithComponentsInChildren<T>()
+    {
+        List<T> tempList = new();
+
+        tempList.Add(gameObject.GetComponent<T>());
+
+        if (transform.childCount > 0)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                tempList.Add(transform.GetChild(i).transform.GetComponent<T>());
+            }
+        }
+
+        return tempList;
     }
 }

@@ -35,7 +35,8 @@ public class PlayerScan : MonoBehaviour
             if (PlayerInventory.Instance.NumberOfEyes > 0)
                 ScanArea();
         }
-        else
+        
+        if (scanControl.action.WasReleasedThisFrame())
             isScanning = false;
     }
 
