@@ -12,6 +12,7 @@ public class CollectableEye : MonoBehaviour
 
         if (playerInventory != null)
         {
+            print("collecting eye");
             playerInventory.EyeCollected();
             Destroy(gameObject);
         }
