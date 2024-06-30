@@ -12,6 +12,7 @@ public class LayerManager : MonoBehaviour
 
     [Tooltip("Prefab to show each layer button")]
     [SerializeField]private GameObject layerUIPrefab;
+
     [SerializeField] private Button layerBtnUP;
     [SerializeField] private Button layerBtnDown;
     [SerializeField] private Transform uiParent;
@@ -36,11 +37,11 @@ public class LayerManager : MonoBehaviour
     public class LayerData
     {
         public int id;
-        public GameObject layerGameObject;
+        public GameObject gameObject;
+        public LayerObject layerObject;
         public RectTransform uiElement;
-        public ToggleButton toggleButton;
+        public LayerUIManager layerUIManager;
         public string name;
-        //public int depth;
     }
 
     private static LayerManager instance = null;
@@ -94,14 +95,12 @@ public class LayerManager : MonoBehaviour
                 return;
             }
         }
-        //GameObject uiElement = Instantiate(layerUIPrefab, uiParent);
 
         LayerData layerData = new LayerData
         {
             id = obj.ID,
-            layerGameObject = obj.LayerGameObject,
-            //uiElement = uiElement.GetComponent<RectTransform>(),
-            //toggleButton = uiElement.GetComponentInChildren<ToggleButton>(),
+            gameObject = obj.LayerGameObject,
+            layerObject = (LayerObject)obj,
             name = obj.Name
         };
         layers.Add(layerData);
@@ -122,11 +121,20 @@ public class LayerManager : MonoBehaviour
         {
             GameObject uiElement = Instantiate(layerUIPrefab, uiParent);
             layer.uiElement = uiElement.GetComponent<RectTransform>();
-            layer.toggleButton = uiElement.GetComponentInChildren<ToggleButton>();
-            uiElement.GetComponentInChildren<TMP_Text>().text = layer.name;
+            //layer.toggleButton = uiElement.GetComponentInChildren<ToggleButton>();
+            layer.layerUIManager = uiElement.GetComponent<LayerUIManager>();
+            //uiElement.GetComponentInChildren<TMP_Text>().text = layer.name;
 
             // Set up the toggle button's onClick listener to handle layer selection
-            layer.toggleButton.onClick.AddListener(() => SetActiveLayer(layer.toggleButton));
+            //layer.toggleButton.onClick.AddListener(() => SetActiveLayer(layer.toggleButton));
+
+            layer.layerUIManager.ItemImageButton.GetComponent<Image>().sprite = layer.layerObject.ObjectSprite;
+
+            //Assigning Listeners
+            layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>().onClick.AddListener(() => SetActiveLayer(layer));
+            layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener( (value) => OnEyeToggleValueChange(value, layer) );
+            layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));
+            layer.layerUIManager.LinkToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLinkToggleValueChange(value, layer));
         }
     }
 
@@ -144,19 +152,6 @@ public class LayerManager : MonoBehaviour
         }
     }
 
-/*    public void ClearAndUpdateUI()
-    {
-        if (layers.Count == 0)
-            return;
-
-        for (int i = layers.Count - 1; i > -1; i--)
-        {
-            Destroy(layers[i].uiElement.gameObject);
-            
-
-        }
-    }*/
-
     public void ClearLayerList()
     {
         if (layers.Count > 0)
@@ -170,27 +165,45 @@ public class LayerManager : MonoBehaviour
         if (layers.Count > 0)
             foreach (LayerData elem in layers)
             {
-                elem.layerGameObject.GetComponent<LayerObject>().IsUsed = true;
+                elem.layerObject.IsUsed = true;
             }
-        //UpdateUI();
+        ClearLayerList();
     }
 
-    public void SetActiveLayer(ToggleButton newActiveLayer)
+    /*    public void SetActiveLayer(ToggleButton newActiveLayer)
+        {
+            if (activeLayer != null && activeLayer != newActiveLayer)
+            {
+                activeLayer.Deselect();
+                ClearActiveLayer();
+            }
+
+            activeLayer = newActiveLayer;
+            activeLayer.Highlight(true);
+
+            CurrentlySelectedLayerData = layers.Find(layer => layer.toggleButton == activeLayer);
+
+            ShowTransparencySlider();
+
+            ShowLockToggle();
+        }*/
+
+    public void SetActiveLayer(LayerData newActiveLayer)
     {
-        if (activeLayer != null && activeLayer != newActiveLayer)
+        ToggleButton activeLayerToggleButton = newActiveLayer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>();
+
+        if (activeLayer != null && activeLayer != activeLayerToggleButton)
         {
             activeLayer.Deselect();
             ClearActiveLayer();
         }
 
-        activeLayer = newActiveLayer;
+        activeLayer = activeLayerToggleButton;
         activeLayer.Highlight(true);
 
-        CurrentlySelectedLayerData = layers.Find(layer => layer.toggleButton == activeLayer);
+        CurrentlySelectedLayerData = layers.Find(layer => layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>() == activeLayer); //wtf
 
-        ShowTransparencySlider();
-
-        ShowLockToggle();
+        newActiveLayer.layerUIManager.ShowLayerFrame(true);
     }
 
     public void ClearActiveLayer()
@@ -198,9 +211,11 @@ public class LayerManager : MonoBehaviour
         if (activeLayer != null)
         {
             activeLayer.Highlight(false);
+            currentlySelectedLayerData.layerUIManager.ShowLayerFrame(false);
+
             activeLayer = null;
             CurrentlySelectedLayerData = null;
-            HideTransparencySlider();
+            //HideTransparencySlider();
         }
         
     }
@@ -208,6 +223,22 @@ public class LayerManager : MonoBehaviour
     public ToggleButton GetActiveLayer()
     {
         return activeLayer;
+    }
+
+    void OnEyeToggleValueChange(bool value, LayerData layerData)
+    {
+        if (layerData.gameObject.GetComponent<HidingLayer>() != null)
+            layerData.gameObject.GetComponent<HidingLayer>().IsHidden = value;
+    }
+    public void OnLockToggleValueChange(bool value, LayerData layerData)
+    {
+        if (layerData.gameObject.GetComponent<LockingLayer>() != null)
+            layerData.gameObject.GetComponent<LockingLayer>().IsLocked = value;
+    }
+    public void OnLinkToggleValueChange(bool value, LayerData layerData)
+    {
+        if (layerData.gameObject.GetComponent<HidingLayer>() == null)
+            return;
     }
 
     public void UpdateLockToggleValue(bool value)
@@ -221,7 +252,7 @@ public class LayerManager : MonoBehaviour
 
     private void ShowTransparencySlider()
     {
-        CurrentlySelectedLayerData.layerGameObject.TryGetComponent(out TransparentLayer tempGameObj);
+        CurrentlySelectedLayerData.gameObject.TryGetComponent(out TransparentLayer tempGameObj);
 
         if (tempGameObj != null)
         {
@@ -278,16 +309,21 @@ public class LayerManager : MonoBehaviour
     private void UpdateLayerPositions(int selectedLayerIndex, int swappedLayerIndex)
     {
         //assigning new start position  
-        Vector3 StartPosition1 = layers[selectedLayerIndex].layerGameObject.GetComponent<LayerObject>().StartPosition;
-        Vector3 StartPosition2 = layers[swappedLayerIndex].layerGameObject.GetComponent<LayerObject>().StartPosition;
+        //Vector3 StartPosition1 = layers[selectedLayerIndex].layerObject.StartPosition;
+        //Vector3 StartPosition2 = layers[swappedLayerIndex].layerObject.StartPosition;
+
+        Vector3 newPosition1 = layers[selectedLayerIndex].layerObject.CurrentFixedPosition;
+        Vector3 newPosition2 = layers[swappedLayerIndex].layerObject.CurrentFixedPosition;
 
         //assigning new object position
-        layers[selectedLayerIndex].layerGameObject.transform.position = layers[swappedLayerIndex].layerGameObject.transform.GetComponent<LayerObject>().StartPosition;
-        layers[swappedLayerIndex].layerGameObject.transform.position = StartPosition1;
+        /*        layers[selectedLayerIndex].gameObject.transform.position = layers[swappedLayerIndex].layerObject.StartPosition;
+                layers[swappedLayerIndex].gameObject.transform.position = StartPosition1;*/
+        layers[selectedLayerIndex].layerObject.SetNewPosition(newPosition2);
+        layers[swappedLayerIndex].layerObject.SetNewPosition (newPosition1); 
 
 
-        layers[selectedLayerIndex].layerGameObject.transform.GetComponent<LayerObject>().StartPosition = StartPosition2;
-        layers[swappedLayerIndex].layerGameObject.transform.GetComponent<LayerObject>().StartPosition = StartPosition1;
+        //layers[selectedLayerIndex].layerObject.StartPosition = StartPosition2;
+        //layers[swappedLayerIndex].layerObject.StartPosition = StartPosition1;
 
         for (int i = 0; i < layers.Count; i++)
         {

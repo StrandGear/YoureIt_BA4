@@ -6,7 +6,11 @@ using UnityEngine.Events;
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private int numberOfEyes;
-    public int NumberOfEyes { get => numberOfEyes; set { numberOfEyes = value; } }
+    public int NumberOfEyes { get => numberOfEyes; 
+        set {
+            value = value < 0 ? 0 : value;
+            numberOfEyes = value; 
+        } }
 
     public UnityEvent<PlayerInventory> OnEyeCollected;
     public UnityEvent<PlayerInventory> OnEyeUsed;

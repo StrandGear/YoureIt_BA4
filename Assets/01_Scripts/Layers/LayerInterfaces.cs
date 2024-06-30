@@ -17,9 +17,9 @@ public interface ILayerObject
 
     string Name { get; set; }
 
-    bool IsUsed { get; set; }
+    Sprite ObjectSprite { get; set; }
 
-    public void ResetPosition();
+    bool IsUsed { get; set; }
 }
 
 public interface ITransparency
@@ -47,8 +47,6 @@ public interface ILinkable
 public interface IHiding
 {
     bool IsHidden { get; set; }
-
-    Renderer ObjectRenderer { get; set; }
 
     public void UpdateHidingProperty();
 }
