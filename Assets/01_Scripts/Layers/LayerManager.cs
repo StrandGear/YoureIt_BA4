@@ -128,7 +128,8 @@ public class LayerManager : MonoBehaviour
             // Set up the toggle button's onClick listener to handle layer selection
             //layer.toggleButton.onClick.AddListener(() => SetActiveLayer(layer.toggleButton));
 
-            layer.layerUIManager.ItemImageButton.GetComponent<Image>().sprite = layer.layerObject.ObjectSprite;
+            if(layer.layerObject.ObjectSprite != null)
+                layer.layerUIManager.ItemImageButton.GetComponent<Image>().sprite = layer.layerObject?.ObjectSprite;
 
             //Assigning Listeners
             layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>().onClick.AddListener(() => SetActiveLayer(layer));
@@ -228,7 +229,7 @@ public class LayerManager : MonoBehaviour
     void OnEyeToggleValueChange(bool value, LayerData layerData)
     {
         if (layerData.gameObject.GetComponent<HidingLayer>() != null)
-            layerData.gameObject.GetComponent<HidingLayer>().IsHidden = value;
+            layerData.gameObject.GetComponent<HidingLayer>().IsHidden = !value; //fix later
     }
     public void OnLockToggleValueChange(bool value, LayerData layerData)
     {
@@ -312,15 +313,19 @@ public class LayerManager : MonoBehaviour
         //Vector3 StartPosition1 = layers[selectedLayerIndex].layerObject.StartPosition;
         //Vector3 StartPosition2 = layers[swappedLayerIndex].layerObject.StartPosition;
 
-        Vector3 newPosition1 = layers[selectedLayerIndex].layerObject.CurrentFixedPosition;
-        Vector3 newPosition2 = layers[swappedLayerIndex].layerObject.CurrentFixedPosition;
+        //Vector3 newPosition1 = layers[selectedLayerIndex].layerObject.CurrentFixedPosition;
+        //Vector3 newPosition2 = layers[swappedLayerIndex].layerObject.CurrentFixedPosition;
+        Vector3 newPosition1 = layers[selectedLayerIndex].gameObject.transform.position;
+        Vector3 newPosition2 = layers[swappedLayerIndex].gameObject.transform.position;
 
         //assigning new object position
         /*        layers[selectedLayerIndex].gameObject.transform.position = layers[swappedLayerIndex].layerObject.StartPosition;
                 layers[swappedLayerIndex].gameObject.transform.position = StartPosition1;*/
-        layers[selectedLayerIndex].layerObject.SetNewPosition(newPosition2);
-        layers[swappedLayerIndex].layerObject.SetNewPosition (newPosition1); 
+        //layers[selectedLayerIndex].layerObject.SetNewPosition(newPosition2);
+        //layers[swappedLayerIndex].layerObject.SetNewPosition (newPosition1); 
 
+        layers[selectedLayerIndex].gameObject.transform.position = new Vector3(newPosition2.x, newPosition1.y, newPosition2.z);
+        layers[swappedLayerIndex].gameObject.transform.position = new Vector3(newPosition1.x, newPosition2.y, newPosition1.z);
 
         //layers[selectedLayerIndex].layerObject.StartPosition = StartPosition2;
         //layers[swappedLayerIndex].layerObject.StartPosition = StartPosition1;
