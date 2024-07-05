@@ -5,17 +5,16 @@ using Cinemachine;
 
 public class CameraManager : Singleton
 {
-    private List<CinemachineFreeLook> cameras = new List<CinemachineFreeLook>();
+    private List<GameObject> cameras = new List<GameObject>();
 
-    public CinemachineFreeLook MainPlayingCam;
-    public CinemachineFreeLook LayerLookCam;
+    public GameObject MainPlayingCam;
+    public GameObject LayerLookCam;
 
-    public CinemachineFreeLook startCamera;
-    private CinemachineFreeLook currentCam;
+    private GameObject currentCam;
 
     private void Start()
     {
-        currentCam = startCamera;
+        currentCam = MainPlayingCam;
 
         cameras.Add(MainPlayingCam);
         cameras.Add(LayerLookCam);
@@ -24,28 +23,25 @@ public class CameraManager : Singleton
         {
             if (cameras[i] == currentCam)
             {
-                cameras[i].Priority = 20;
+                cameras[i].SetActive(true);
             }
             else
             {
-                cameras[i].Priority = 10;
+                cameras[i].SetActive(false);
             }
-
         }
     }
-    public void SwitchCamera(CinemachineFreeLook newCam)
+    public void SwitchCamera(GameObject newCam)
     {
-/*        print("++++++++++++++++++++");
-        print(currentCam);*/
         currentCam = newCam;
 
-        currentCam.Priority = 20;
+        currentCam.SetActive(true);
 
         for (int i = 0; i < cameras.Count; i++)
         {
             if (cameras[i] != currentCam)
             {
-                cameras[i].Priority = 10;
+                cameras[i].SetActive(false);
             }
             //print(cameras[i].Priority);
         }
