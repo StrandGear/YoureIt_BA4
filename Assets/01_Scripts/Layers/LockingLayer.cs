@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(LayerObject))]
+
 public class LockingLayer : MonoBehaviour, ILockable
 {
-    public bool IsLocked { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public bool IsLocked { get; set ; }
 
     public void LockLayer()
     {

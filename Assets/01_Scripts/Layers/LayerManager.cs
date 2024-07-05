@@ -42,6 +42,7 @@ public class LayerManager : MonoBehaviour
         public RectTransform uiElement;
         public LayerUIManager layerUIManager;
         public string name;
+        public Animator animator;
     }
 
     private static LayerManager instance = null;
@@ -121,15 +122,25 @@ public class LayerManager : MonoBehaviour
         {
             GameObject uiElement = Instantiate(layerUIPrefab, uiParent);
             layer.uiElement = uiElement.GetComponent<RectTransform>();
-            //layer.toggleButton = uiElement.GetComponentInChildren<ToggleButton>();
             layer.layerUIManager = uiElement.GetComponent<LayerUIManager>();
-            //uiElement.GetComponentInChildren<TMP_Text>().text = layer.name;
-
-            // Set up the toggle button's onClick listener to handle layer selection
-            //layer.toggleButton.onClick.AddListener(() => SetActiveLayer(layer.toggleButton));
 
             if(layer.layerObject.ObjectSprite != null)
                 layer.layerUIManager.ItemImageButton.GetComponent<Image>().sprite = layer.layerObject?.ObjectSprite;
+
+            layer.animator = layer.gameObject.GetComponent<Animator>();
+
+            // Setting default values
+            layer.layerObject.TryGetComponent(out HidingLayer hidingLayer);
+            if (hidingLayer != null)
+            {
+                layer.layerUIManager.EyeToggle.GetComponent<Toggle>().isOn = !hidingLayer.IsHidden;
+            }
+
+            layer.layerObject.TryGetComponent(out LockingLayer lockingLayer);
+            if (lockingLayer != null)
+            {
+                layer.layerUIManager.LockToggle.GetComponent<Toggle>().isOn = lockingLayer.IsLocked;
+            }
 
             //Assigning Listeners
             layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>().onClick.AddListener(() => SetActiveLayer(layer));
@@ -233,8 +244,22 @@ public class LayerManager : MonoBehaviour
     }
     public void OnLockToggleValueChange(bool value, LayerData layerData)
     {
+        if (layerData.animator != null)
+        {
+            if (value)
+            {
+                layerData.animator.speed = 0; // Pause the animation
+            }
+            else
+            {
+                layerData.animator.speed = 1; // Resume the animation
+            }
+        }
+
         if (layerData.gameObject.GetComponent<LockingLayer>() != null)
+        {
             layerData.gameObject.GetComponent<LockingLayer>().IsLocked = value;
+        }
     }
     public void OnLinkToggleValueChange(bool value, LayerData layerData)
     {
