@@ -5,28 +5,38 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Input References")]
     [SerializeField] private InputActionReference movementControl;
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private InputActionReference speedBoostControl; 
     [SerializeField] private InputActionReference interactControl; 
     [SerializeField] private InputActionReference lookControl;
     [SerializeField] private InputActionReference crouchControl;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Animator animControl;
     
+    
+    [Header("Camera Settings")]
     [SerializeField] private Transform cameraFollowTarget; 
     [SerializeField] private float minCameraClamp; 
     [SerializeField] private float maxCameraClamp; 
     [SerializeField] private GameObject mainCam;
     
-    
+    [Header("Player Settings")]
     [SerializeField] private float playerSpeed = 2.0f;
     [SerializeField] private float speedBoostMultiplier = 2.0f; 
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
     
+    [Header("Crouch Settings")]
     [SerializeField] private float crouchSpeed;
+    [SerializeField] private float crouchHeight = 0.5f;
+    [SerializeField] private Vector3 crouchCenter = new Vector3(0f, 0.5f, 0f);
+    [SerializeField] private float crouchRadius = 0.5f;
     
+    [Header("Ground Layer")]
+    [SerializeField] private LayerMask groundLayer;
+    
+    [Header("Animator")]
+    [SerializeField] private Animator animControl;
     
     private float climbingTimer;
     
@@ -187,9 +197,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 isCrouching = true;
                 jumpHeight = 0f;
-                controller.height = 0.5f;
-                controller.center = new Vector3(0f, 0.5f, 0f);
-                controller.radius = 0.5f;
+                controller.height = crouchHeight;
+                controller.center = crouchCenter;
+                controller.radius = crouchRadius;
 
             }
         }
