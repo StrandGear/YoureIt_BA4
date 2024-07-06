@@ -11,9 +11,13 @@ public interface ILayerObject
 {
     GameObject LayerGameObject { get; }
 
+    Vector3 CurrentFixedPosition { get; set; }
+
     int ID { get; }
 
     string Name { get; set; }
+
+    Sprite ObjectSprite { get; set; }
 
     bool IsUsed { get; set; }
 }
@@ -26,6 +30,8 @@ public interface ITransparency
 public interface ILockable
 {
     bool IsLocked { get; set; }
+
+    public void LockLayer();
 }
 
 public interface ILayerOrder
@@ -36,4 +42,11 @@ public interface ILayerOrder
 public interface ILinkable
 {
     bool IsLinkable { get; set; }
+}
+
+public interface IHiding
+{
+    bool IsHidden { get; set; }
+
+    public void UpdateHidingProperty();
 }

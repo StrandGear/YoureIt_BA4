@@ -3,19 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(LayerObject))]
+
 public class LockingLayer : MonoBehaviour, ILockable
 {
-    [SerializeField] private bool layerLocked = false;
-    public bool IsLocked { get => layerLocked; set {
-            layerLocked = value;
-            UpdateLayerLocking();
-        } }
+    public bool IsLocked { get; set ; }
 
-    private void Start()
+    public void LockLayer()
     {
-    }
-
-    private void UpdateLayerLocking()
-    {
+        throw new NotImplementedException();
     }
 }

@@ -8,6 +8,8 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour
 
     public List<LayerObject> VisibleObjects { get => visibleObjects; }
 
+    public bool removeItemsOutOfRadius = false;
+
     private void OnTriggerEnter(Collider other)
     {
         other.gameObject.TryGetComponent(out LayerObject layerObject);
@@ -19,9 +21,10 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        print("OnTriggerExit");
-        other.gameObject.TryGetComponent(out LayerObject layerObject);
+        if (!removeItemsOutOfRadius)
+            return;
 
+        other.gameObject.TryGetComponent(out LayerObject layerObject);
         if (layerObject != null)
         {
             visibleObjects.Remove(layerObject);
