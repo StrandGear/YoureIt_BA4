@@ -8,10 +8,29 @@ using UnityEngine;
 
 public class LockingLayer : MonoBehaviour, ILockable
 {
-    public bool IsLocked { get; set ; }
+    [SerializeField] private bool isLocked;
+    public bool IsLocked { 
+        get => isLocked; 
+        set
+        {
+            isLocked = value;
+            LockLayer();
+        } }
+
+    private void Awake()
+    {
+        IsLocked = IsLocked;
+    }
 
     public void LockLayer()
     {
-        throw new NotImplementedException();
+        if (IsLocked)
+        {
+            gameObject.GetComponent<Animator>().speed = 0; // Pause the animation
+        }
+        else
+        {
+            gameObject.GetComponent<Animator>().speed = 1; // Resume the animation
+        }
     }
 }
