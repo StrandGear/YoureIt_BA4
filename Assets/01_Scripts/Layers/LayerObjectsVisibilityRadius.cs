@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class LayerObjectsVisibilityRadius : MonoBehaviour
 {
-    private List<LayerObject> visibleObjects = new List<LayerObject>();
+   [SerializeField] private List<LayerObject> visibleObjects = new List<LayerObject>();
 
     public List<LayerObject> VisibleObjects { get => visibleObjects; }
-
-    public bool removeItemsOutOfRadius = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,8 +19,8 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!removeItemsOutOfRadius)
-            return;
+/*        if (!removeItemsOutOfRadius)
+            return;*/
 
         other.gameObject.TryGetComponent(out LayerObject layerObject);
         if (layerObject != null)
@@ -30,7 +28,7 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour
             visibleObjects.Remove(layerObject);
 
             //change later if we dont want to upd list of interactable when they out of FOW
-            LayerManager.Instance.RemoveLayer(layerObject);
+            //LayerManager.Instance.RemoveLayer(layerObject);
         }
     }
 }
