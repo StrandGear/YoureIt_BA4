@@ -42,7 +42,6 @@ public class LayerManager : MonoBehaviour
         public RectTransform uiElement;
         public LayerUIManager layerUIManager;
         public string name;
-        public Animator animator;
     }
 
     private static LayerManager instance = null;
@@ -127,7 +126,6 @@ public class LayerManager : MonoBehaviour
             if(layer.layerObject.ObjectSprite != null)
                 layer.layerUIManager.ItemImageButton.GetComponent<Image>().sprite = layer.layerObject?.ObjectSprite;
 
-            layer.animator = layer.gameObject.GetComponent<Animator>();
 
             // Setting default values
             layer.layerObject.TryGetComponent(out HidingLayer hidingLayer);
@@ -243,19 +241,7 @@ public class LayerManager : MonoBehaviour
             layerData.gameObject.GetComponent<HidingLayer>().IsHidden = !value; //fix later
     }
     public void OnLockToggleValueChange(bool value, LayerData layerData)
-    {
-        if (layerData.animator != null)
-        {
-            if (value)
-            {
-                layerData.animator.speed = 0; // Pause the animation
-            }
-            else
-            {
-                layerData.animator.speed = 1; // Resume the animation
-            }
-        }
-
+    {  
         if (layerData.gameObject.GetComponent<LockingLayer>() != null)
         {
             layerData.gameObject.GetComponent<LockingLayer>().IsLocked = value;
