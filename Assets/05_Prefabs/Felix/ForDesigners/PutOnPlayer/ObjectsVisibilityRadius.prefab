@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1601912383960605238}
   - component: {fileID: 2573216320883615667}
   - component: {fileID: 1145032278023569362}
-  - component: {fileID: 5151820238199306901}
   m_Layer: 0
   m_Name: ObjectsVisibilityRadius
   m_TagString: Untagged
@@ -120,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786fe3d7934d45648853647fef4e0bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  removeItemsOutOfRadius: 0
 --- !u!54 &1145032278023569362
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -147,17 +147,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5151820238199306901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3355700368150904841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a0d43d060ea73d478e9bf99e1aac4d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  readme: {fileID: 11400000, guid: c907261d3eda1ca4faadf727861d3262, type: 2}
-  showIconInHierarchy: 1

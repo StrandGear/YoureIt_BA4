@@ -8,12 +8,15 @@ public class CollectableEye : MonoBehaviour
     {
         //other.TryGetComponent(out PlayerInventory playerInventory);
 
-        PlayerInventory playerInventory = other.GetComponentInChildren<PlayerInventory>(); 
+        PlayerInventory playerInventory = other.GetComponentInChildren<PlayerInventory>();
+        
 
-        if (playerInventory != null)
+        if (playerInventory != null && other.gameObject.GetComponent<CharacterController>() != null)
         {
+            print("collecting eye");
             playerInventory.EyeCollected();
             Destroy(gameObject);
         }
+        
     }
 }

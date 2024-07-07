@@ -7,7 +7,7 @@ public class PlayerScan : MonoBehaviour
 {
 
     private bool isScanning = false;
-    public bool IsScanning { get => isScanning; }
+    private int scanningButtonPressed = 0;
 
     [SerializeField] private InputActionReference scanControl;
 
@@ -30,14 +30,35 @@ public class PlayerScan : MonoBehaviour
 
     private void Update()
     {
-        if (scanControl.action.IsPressed() && !IsScanning)
+        if (scanControl.action.IsPressed() && !isScanning)
         {
-            if (PlayerInventory.Instance.NumberOfEyes > 0)
+            if (PlayerInventory.Instance.NumberOfEyes > 0 && scanningButtonPressed == 1)
+            {
+                Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().LayerLookCam);
+
+                //show layer UI 
                 ScanArea();
+            }
+            else if (scanningButtonPressed == 2)
+            {
+                scanningButtonPressed = 0;
+
+                //hide layer UI 
+
+                LayerManager.Instance.ClearLayerList();
+
+                Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam);
+            }
         }
         
         if (scanControl.action.WasReleasedThisFrame())
+        {
+            scanningButtonPressed++;
             isScanning = false;
+        }
+
+        if (scanningButtonPressed < 0 || scanningButtonPressed > 2)
+            scanningButtonPressed = 0;
     }
 
     private void ScanArea()

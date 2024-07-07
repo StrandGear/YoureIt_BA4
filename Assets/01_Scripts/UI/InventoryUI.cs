@@ -16,6 +16,6 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateEyeAmountText(PlayerInventory playerInventory)
     {
-        eyeAmountText.text = playerInventory.NumberOfEyes.ToString();
+        eyeAmountText.text = $"x {playerInventory.NumberOfEyes}";
     }
 }

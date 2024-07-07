@@ -7,6 +7,11 @@ public class Hands : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
 
+    [Header("Animations Settings")]
+    [SerializeField] private float attackMoveTime = 1.5f;
+    [SerializeField] private float attackAnimationDelay = 1.5f;
+    [SerializeField] private float returnMoveTime = 1.5f;
+    
     private Vector3 origin;
     private bool isActive;
 
@@ -43,16 +48,16 @@ public class Hands : MonoBehaviour
         isAnimating = true;
         var x = origin.x + 5;
         LeanTween.cancel(gameObject);
-        LeanTween.moveX(gameObject, x, 1.5f);
-        yield return new WaitForSeconds(1.5f);
+        LeanTween.moveX(gameObject, x, attackMoveTime);
+        yield return new WaitForSeconds(attackAnimationDelay);
         var start = transform.position;
         for (int i = 0; i < 3; i++)
         {
-            print("Attack" + i);
+            //print("Attack" + i);
             var pos = transform.position + new Vector3(Random.Range(-3f, 3f), -2f, Random.Range(-3f, 3f));
             LeanTween.move(gameObject, pos, 1f);
             yield return new WaitForSeconds(1f);
-            LeanTween.move(gameObject, start, 1f);
+            LeanTween.move(gameObject, start, returnMoveTime);
             yield return new WaitForSeconds(1f);
 
         }
