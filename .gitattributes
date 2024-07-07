@@ -1,2 +1,11 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Set all .asset files to use LF line endings
+*.asset text eol=lf
+
+# Set specific files or directories if needed
+Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset text eol=lf
+
+# Handle FMOD bank files
+*.bank binary
