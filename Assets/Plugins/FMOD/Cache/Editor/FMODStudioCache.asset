@@ -62,7 +62,7 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638557037585128480
+  lastModified: 638559820478732175
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -94,26 +94,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6600
---- !u!114 &-4967655333391670318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Test Bank.bank
-  m_EditorClassIdentifier: 
-  Path: You're It FMOD/You're It/Build/Desktop/Test Bank.bank
-  Name: Test Bank
-  StudioPath: bank:/Test Bank
-  lastModified: 638557037585138484
-  FileSizes:
-  - Name: Desktop
-    Value: 72192
-  Exists: 1
 --- !u!114 &-2511764545056424893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,16 +131,16 @@ MonoBehaviour:
   - {fileID: 6038229362154442869}
   - {fileID: -6953529638130834729}
   - {fileID: 2142591997531612160}
-  - {fileID: -4967655333391670318}
+  - {fileID: 8975417445711225575}
   EditorEvents:
   - {fileID: -8050215717319732587}
-  - {fileID: 8880304374867348553}
+  - {fileID: 6375394881138942636}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6953529638130834729}
   StringsBanks:
   - {fileID: 1875977067589827436}
-  cacheTime: 638557037585138484
+  cacheTime: 638559820479324187
   cacheVersion: 131618
 --- !u!114 &937394472946502312
 MonoBehaviour:
@@ -197,10 +177,10 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638557037585128480
+  lastModified: 638559820478754886
   FileSizes:
   - Name: Desktop
-    Value: 952
+    Value: 938
   Exists: 1
 --- !u!114 &2142591997531612160
 MonoBehaviour:
@@ -217,7 +197,7 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Test Bank 2.bank
   Name: Test Bank 2
   StudioPath: bank:/Test Bank 2
-  lastModified: 638557037585138484
+  lastModified: 638559819792932903
   FileSizes:
   - Name: Desktop
     Value: 3424
@@ -257,11 +237,38 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Ambieance .bank
   Name: 'Ambieance '
   StudioPath: 'bank:/Ambieance '
-  lastModified: 638557037585128480
+  lastModified: 638559819791579826
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &6375394881138942636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Select
+  m_EditorClassIdentifier: 
+  Path: event:/Select
+  Guid:
+    Data1: 1350466541
+    Data2: 1284022778
+    Data3: -1301377376
+    Data4: -1572406215
+  Banks:
+  - {fileID: 8975417445711225575}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1609
 --- !u!114 &7172621445418190628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +316,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1032
---- !u!114 &8880304374867348553
+--- !u!114 &8975417445711225575
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,21 +325,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Test Audio
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
   m_EditorClassIdentifier: 
-  Path: event:/Test Audio
-  Guid:
-    Data1: 1035569642
-    Data2: 1321057911
-    Data3: 278908313
-    Data4: 1169038980
-  Banks:
-  - {fileID: -4967655333391670318}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 6600
+  Path: You're It FMOD/You're It/Build/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/UI
+  lastModified: 638559820479324187
+  FileSizes:
+  - Name: Desktop
+    Value: 8768
+  Exists: 1
