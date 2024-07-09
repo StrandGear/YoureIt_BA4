@@ -16,8 +16,8 @@ public class LayerUIManager : MonoBehaviour
     [SerializeField] private GameObject lockToggle;
     public GameObject LockToggle { get => lockToggle; }
 
-    [SerializeField] private GameObject linkToggle;
-    public GameObject LinkToggle { get => linkToggle; }
+/*    [SerializeField] private GameObject linkToggle;
+    public GameObject LinkToggle { get => linkToggle; }*/
 
     private void Awake()
     {
