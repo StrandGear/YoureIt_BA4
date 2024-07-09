@@ -25451,6 +25451,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: 
   objectSprite: {fileID: 0}
+--- !u!23 &1084698341
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084698336}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1084698342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084698336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5934eca5b2928e845a0527ba91156f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHidden: 0
 --- !u!4 &1087551632 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc30aae879310874496a6bf8b9d218be, type: 3}
@@ -39607,6 +39662,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5, y: 2.73, z: 1}
   m_Center: {x: 4.14, y: 1.05, z: -1.21}
+--- !u!114 &1731164337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731164334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde2de26ba5c2314e9b4847b38788550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: 
+  objectSprite: {fileID: 0}
 --- !u!1001 &1733619507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55813,6 +55882,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1989466232515517321, guid: 70cca837e6c34a346bcb557b7935ef1b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1084698340}
+    - targetCorrespondingSourceObject: {fileID: 1989466232515517321, guid: 70cca837e6c34a346bcb557b7935ef1b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1084698342}
+    - targetCorrespondingSourceObject: {fileID: 1989466232515517321, guid: 70cca837e6c34a346bcb557b7935ef1b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1084698341}
   m_SourcePrefab: {fileID: 100100000, guid: 70cca837e6c34a346bcb557b7935ef1b, type: 3}
 --- !u!1001 &2520952854731600576
 PrefabInstance:
@@ -56157,6 +56232,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7023784681202057059, guid: 3124438817eb36d4cb2f0aa0eab7cd51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1731164336}
+    - targetCorrespondingSourceObject: {fileID: 7023784681202057059, guid: 3124438817eb36d4cb2f0aa0eab7cd51, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1731164337}
   m_SourcePrefab: {fileID: 100100000, guid: 3124438817eb36d4cb2f0aa0eab7cd51, type: 3}
 --- !u!1001 &9096122611668513335
 PrefabInstance:
@@ -56218,10 +56296,73 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8894847102457985023, guid: b30b2fb9c7f350b4fb1263f1c9a255e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9096122611668513339}
+    - targetCorrespondingSourceObject: {fileID: 8894847102457985023, guid: b30b2fb9c7f350b4fb1263f1c9a255e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9096122611668513338}
+    - targetCorrespondingSourceObject: {fileID: 8894847102457985023, guid: b30b2fb9c7f350b4fb1263f1c9a255e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9096122611668513337}
     - targetCorrespondingSourceObject: {fileID: 2075531132348704839, guid: b30b2fb9c7f350b4fb1263f1c9a255e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1146998127}
   m_SourcePrefab: {fileID: 100100000, guid: b30b2fb9c7f350b4fb1263f1c9a255e4, type: 3}
+--- !u!1 &9096122611668513336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8894847102457985023, guid: b30b2fb9c7f350b4fb1263f1c9a255e4, type: 3}
+  m_PrefabInstance: {fileID: 9096122611668513335}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9096122611668513337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9096122611668513336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c87b03f8d51de46914f1982f21c608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLocked: 0
+  ConnectedAnimations: []
+--- !u!95 &9096122611668513338
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9096122611668513336}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 07bbc4e5b2fa1034c9e45f25a18208db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9096122611668513339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9096122611668513336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fde2de26ba5c2314e9b4847b38788550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectName: 
+  objectSprite: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
