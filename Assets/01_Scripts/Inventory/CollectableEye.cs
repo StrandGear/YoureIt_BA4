@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectableEye : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+/*    private void OnTriggerEnter(Collider other)
     {
         //other.TryGetComponent(out PlayerInventory playerInventory);
 
@@ -18,5 +18,5 @@ public class CollectableEye : MonoBehaviour
             Destroy(gameObject);
         }
         
-    }
+    }*/
 }
