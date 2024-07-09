@@ -38,10 +38,17 @@ public class HidingLayer : MonoBehaviour, IHiding
         {
             for (int i = 0; i < meshRenderers.Count; i++)
             {
-                meshRenderers[i].enabled = false;
+                if (meshRenderers[i] != null)
+                    meshRenderers[i].enabled = false;
             }
             for (int i = 0; i < colliders.Count; i++)
             {
+                MeshCollider meshCollider = colliders[i] as MeshCollider;
+                if (meshCollider != null)
+                {
+                    meshCollider.convex = true;
+                }
+
                 colliders[i].isTrigger = true;
             }
         }
@@ -49,11 +56,19 @@ public class HidingLayer : MonoBehaviour, IHiding
         {
             for (int i = 0; i < meshRenderers.Count; i++)
             {
-                meshRenderers[i].enabled = true;
+                if (meshRenderers[i] != null)
+                    meshRenderers[i].enabled = true;
             }
             for (int i = 0; i < colliders.Count; i++)
             {
-                colliders[i].isTrigger = false;
+                MeshCollider meshCollider = colliders[i] as MeshCollider;
+                if (meshCollider != null)
+                {
+                    meshCollider.convex = true;
+                }
+
+                else if (colliders[i] != null)
+                    colliders[i].isTrigger = false;
             }
         }
     }
