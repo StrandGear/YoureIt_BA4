@@ -1,7 +1,7 @@
 using UnityEngine;
-/*
+
 [RequireComponent(typeof(LayerObject))]
-public class MoveObject : MonoBehaviour, ILockable
+public class MoveObject : MonoBehaviour
 {
     public enum MovementDirection
     {
@@ -16,8 +16,9 @@ public class MoveObject : MonoBehaviour, ILockable
     public GameObject destinationTarget;
 
     private Vector3 endPosition;
+    private Vector3 startPosition;
     private bool movingToEnd = true;
-   [SerializeField] private bool isFrozen = false; // Flag to control movement
+    [SerializeField] private bool isFrozen = false; // Flag to control movement
 
     public bool IsLocked { get => isFrozen; set => isFrozen = value; }
 
@@ -79,4 +80,3 @@ public class MoveObject : MonoBehaviour, ILockable
         isFrozen = !isFrozen;
     }
 }
-*/
