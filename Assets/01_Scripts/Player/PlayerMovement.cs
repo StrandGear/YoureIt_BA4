@@ -1,70 +1,77 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FMOD.Studio;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Input References")]
     [SerializeField] private InputActionReference movementControl;
     [SerializeField] private InputActionReference jumpControl;
-    [SerializeField] private InputActionReference speedBoostControl; 
-    [SerializeField] private InputActionReference interactControl; 
+    [SerializeField] private InputActionReference speedBoostControl;
+    [SerializeField] private InputActionReference interactControl;
     [SerializeField] private InputActionReference lookControl;
     [SerializeField] private InputActionReference crouchControl;
-    
-    
+
     [Header("Camera Settings")]
-    [SerializeField] private Transform cameraFollowTarget; 
-    [SerializeField] private float minCameraClamp; 
-    [SerializeField] private float maxCameraClamp; 
+    [SerializeField] private Transform cameraFollowTarget;
+    [SerializeField] private float minCameraClamp;
+    [SerializeField] private float maxCameraClamp;
     [SerializeField] private GameObject mainCam;
-    
+
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed = 2.0f;
-    [SerializeField] private float speedBoostMultiplier = 2.0f; 
+    [SerializeField] private float speedBoostMultiplier = 2.0f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
-    
+
     [Header("Crouch Settings")]
     [SerializeField] private float crouchSpeed;
     [SerializeField] private float crouchHeight = 0.5f;
     [SerializeField] private Vector3 crouchCenter = new Vector3(0f, 0.5f, 0f);
     [SerializeField] private float crouchRadius = 0.5f;
-    
+
     [Header("Ground Layer")]
     [SerializeField] private LayerMask groundLayer;
-    
+
     [Header("Animator")]
     [SerializeField] private Animator animControl;
-    
+
+    // Audio
+    private EventInstance playerFootsteps;
+
     private float climbingTimer;
-    
+
     private CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private bool isClimbing;
     private bool isStartingToClimb;
     private bool isCrouching;
-    private bool canStand;
     private Transform cameraMainTransform;
     private float xRotation;
     private float yRotation;
-    
+
     private Vector3 originalCenter;
     private float originalHeight;
     private float originalRadius;
-    //private Animator animator;
 
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
         cameraMainTransform = Camera.main.transform;
         animControl = gameObject.GetComponent<Animator>();
-        
+
         originalCenter = controller.center;
         originalHeight = controller.height;
         originalRadius = controller.radius;
+
+        // Initialize playerFootsteps
+        playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
+
+        // Set initial 3D attributes (position and velocity)
+        playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+        playerFootsteps.start();
     }
 
     void Update()
@@ -73,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleCrouching(); // Call HandleCrouching in Update
         HandleClimbingTransition();
-        
+        UpdateSound(); // Call UpdateSound in Update
     }
 
     private void LateUpdate()
@@ -101,8 +108,6 @@ public class PlayerMovement : MonoBehaviour
         right.y = 0;
         forward.Normalize();
         right.Normalize();
-        
-       
 
         // Calculate final movement vector
         Vector3 desiredMoveDirection = forward * move.z + right * move.x;
@@ -125,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleWalkingAndJumping(desiredMoveDirection, currentSpeed);
         }
-        
+
         // Calculate forwards and sideways speeds
         float forwardSpeed = Vector3.Dot(desiredMoveDirection.normalized, forward);
         float sidewaysSpeed = Vector3.Dot(desiredMoveDirection.normalized, right);
@@ -200,7 +205,6 @@ public class PlayerMovement : MonoBehaviour
                 controller.height = crouchHeight;
                 controller.center = crouchCenter;
                 controller.radius = crouchRadius;
-
             }
         }
     }
@@ -267,5 +271,27 @@ public class PlayerMovement : MonoBehaviour
         interactControl.action.Disable();
         lookControl.action.Disable();
         crouchControl.action.Disable();
+    }
+
+    private void UpdateSound()
+    {
+        // Calculate velocity based on CharacterController movement
+        Vector3 horizontalVelocity = new Vector3(controller.velocity.x, 0, controller.velocity.z);
+
+        // Start footsteps event if the player has a horizontal velocity and is on the ground
+        if (horizontalVelocity.magnitude > 0.1f && groundedPlayer)
+        {
+            // Get the playback state
+            playerFootsteps.getPlaybackState(out PLAYBACK_STATE playbackState);
+            if (playbackState == PLAYBACK_STATE.STOPPED)
+            {
+                playerFootsteps.start();
+            }
+        }
+        // Otherwise, stop the footsteps event
+        else
+        {
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
+        }
     }
 }
