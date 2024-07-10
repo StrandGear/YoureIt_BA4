@@ -17,8 +17,8 @@ public class LayerManager : MonoBehaviour
     [SerializeField] private Button layerBtnDown;
     [SerializeField] private Transform uiParent;
 
-    [Tooltip("Displayed for objects with Transparent Layer")]
-    [SerializeField] private Slider transparencySlider;
+/*    [Tooltip("Displayed for objects with Transparent Layer")]
+    [SerializeField] private Slider transparencySlider;*/
     private ToggleButton activeLayer;
     private bool layerLocked = false;
 
@@ -75,15 +75,10 @@ public class LayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        /*        foreach (ILayerObject obj in FindObjectsOfType<MonoBehaviour>().OfType<ILayerObject>())
-                {
-                    AddLayer(obj);
-                }*/
-
         layerBtnDown.onClick.AddListener(() => MoveLayerDown(CurrentlySelectedLayerData));
         layerBtnUP.onClick.AddListener(() => MoveLayerUp(CurrentlySelectedLayerData));
 
-        HideTransparencySlider();
+        //HideTransparencySlider();
     }
 
     public void AddLayer(ILayerObject obj)
@@ -144,7 +139,6 @@ public class LayerManager : MonoBehaviour
             layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>().onClick.AddListener(() => SetActiveLayer(layer));
             layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener( (value) => OnEyeToggleValueChange(value, layer) );
             layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));
-            layer.layerUIManager.LinkToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLinkToggleValueChange(value, layer));
         }
     }
 
@@ -247,11 +241,11 @@ public class LayerManager : MonoBehaviour
             layerData.gameObject.GetComponent<LockingLayer>().IsLocked = value;
         }
     }
-    public void OnLinkToggleValueChange(bool value, LayerData layerData)
+/*    public void OnLinkToggleValueChange(bool value, LayerData layerData)
     {
         if (layerData.gameObject.GetComponent<HidingLayer>() == null)
             return;
-    }
+    }*/
 
     public void UpdateLockToggleValue(bool value)
     {
@@ -262,7 +256,7 @@ public class LayerManager : MonoBehaviour
             moveObject.ToggleFreeze();*/
     }
 
-    private void ShowTransparencySlider()
+/*    private void ShowTransparencySlider()
     {
         CurrentlySelectedLayerData.gameObject.TryGetComponent(out TransparentLayer tempGameObj);
 
@@ -275,18 +269,18 @@ public class LayerManager : MonoBehaviour
             transparencySlider.onValueChanged.AddListener((value) => tempGameObj.Transparency = value);
         }
         else return;
-    }
+    }*/
 
     private void ShowLockToggle()
     {
         CurrentlySelectedLayerData.uiElement.Find("LockToggle");
     }
 
-    private void HideTransparencySlider()
+/*    private void HideTransparencySlider()
     {
         transparencySlider.onValueChanged.RemoveAllListeners();
         transparencySlider.gameObject.SetActive(false);
-    }
+    }*/
 
     private void MoveLayerDown(LayerData layerData)
     {
