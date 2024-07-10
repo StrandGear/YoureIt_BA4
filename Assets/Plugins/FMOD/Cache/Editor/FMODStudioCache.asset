@@ -20,33 +20,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 494
   Exists: 1
---- !u!114 &-8050215717319732587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Another Test
-  m_EditorClassIdentifier: 
-  Path: event:/Another Test
-  Guid:
-    Data1: 1418214071
-    Data2: 1159971854
-    Data3: 1701299109
-    Data4: 597294218
-  Banks:
-  - {fileID: 2142591997531612160}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1032
 --- !u!114 &-6953529638130834729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +35,7 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638559820478732175
+  lastModified: 638562337514226022
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -114,6 +87,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &-213823011256425082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps 2D
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps 2D
+  Guid:
+    Data1: 123690845
+    Data2: 1164183367
+    Data3: 1007999377
+    Data4: -2084285894
+  Banks:
+  - {fileID: 7623725683668337690}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 310
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,15 +132,18 @@ MonoBehaviour:
   - {fileID: -6953529638130834729}
   - {fileID: 2142591997531612160}
   - {fileID: 8975417445711225575}
+  - {fileID: 7623725683668337690}
   EditorEvents:
-  - {fileID: -8050215717319732587}
   - {fileID: 6375394881138942636}
+  - {fileID: 6625198608051772380}
+  - {fileID: 5675425572186286978}
+  - {fileID: -213823011256425082}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6953529638130834729}
   StringsBanks:
   - {fileID: 1875977067589827436}
-  cacheTime: 638560708690349195
+  cacheTime: 638562337514236028
   cacheVersion: 131618
 --- !u!114 &937394472946502312
 MonoBehaviour:
@@ -177,10 +180,10 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638560708690339188
+  lastModified: 638562337514236028
   FileSizes:
   - Name: Desktop
-    Value: 938
+    Value: 1062
   Exists: 1
 --- !u!114 &2142591997531612160
 MonoBehaviour:
@@ -197,10 +200,10 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Test Bank 2.bank
   Name: Test Bank 2
   StudioPath: bank:/Test Bank 2
-  lastModified: 638559819792932903
+  lastModified: 638562265955972052
   FileSizes:
   - Name: Desktop
-    Value: 3424
+    Value: 494
   Exists: 1
 --- !u!114 &3424997689587722516
 MonoBehaviour:
@@ -222,6 +225,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 3424
   Exists: 1
+--- !u!114 &5675425572186286978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Eye Pickup
+  m_EditorClassIdentifier: 
+  Path: event:/Eye Pickup
+  Guid:
+    Data1: 158783531
+    Data2: 1263044318
+    Data3: -111403338
+    Data4: -2057175078
+  Banks:
+  - {fileID: 8975417445711225575}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6038229362154442869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,19 +286,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Select
   Guid:
-    Data1: 1350466541
-    Data2: 1284022778
-    Data3: -1301377376
-    Data4: -1572406215
+    Data1: 356390982
+    Data2: 1234425868
+    Data3: 143757193
+    Data4: 299584267
   Banks:
   - {fileID: 8975417445711225575}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &6625198608051772380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/Footsteps
+  Guid:
+    Data1: 1935962356
+    Data2: 1266308305
+    Data3: -175373436
+    Data4: 180190033
+  Banks:
+  - {fileID: 7623725683668337690}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1609
+  Length: 310
 --- !u!114 &7172621445418190628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +345,26 @@ MonoBehaviour:
   FileSizes:
   - Name: Desktop
     Value: 72192
+  Exists: 1
+--- !u!114 &7623725683668337690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Footsteps.bank
+  m_EditorClassIdentifier: 
+  Path: You're It FMOD/You're It/Build/Desktop/Footsteps.bank
+  Name: Footsteps
+  StudioPath: bank:/Footsteps
+  lastModified: 638562337514160899
+  FileSizes:
+  - Name: Desktop
+    Value: 37696
   Exists: 1
 --- !u!114 &8814718761829934550
 MonoBehaviour:
@@ -331,8 +408,8 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 638560708690349195
+  lastModified: 638562279628587103
   FileSizes:
   - Name: Desktop
-    Value: 8768
+    Value: 15104
   Exists: 1
