@@ -13,6 +13,9 @@ public class PlayerScan : MonoBehaviour
 
     [SerializeField] private LayerObjectsVisibilityRadius layerObjectsVisibilityRadius;
 
+    [SerializeField]  public GameObject EyeUIElement;
+    [SerializeField]  public GameObject LayersUIElement;
+
     private void OnEnable()
     {
         scanControl.action.Enable();
@@ -21,6 +24,9 @@ public class PlayerScan : MonoBehaviour
         {
             layerObjectsVisibilityRadius = FindObjectOfType<LayerObjectsVisibilityRadius>();
         }
+
+        LayersUIElement.SetActive(false);
+        EyeUIElement.SetActive(true);
     }
 
     private void OnDisable()
@@ -32,11 +38,14 @@ public class PlayerScan : MonoBehaviour
     {
         if (scanControl.action.IsPressed() && !isScanning)
         {
-            if (PlayerInventory.Instance.NumberOfEyes > 0 && scanningButtonPressed == 1)
+            if (/*PlayerInventory.Instance.NumberOfEyes > 0 && */ scanningButtonPressed == 1)
             {
                 Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().LayerLookCam);
 
                 //show layer UI 
+                EyeUIElement.SetActive(false);
+                LayersUIElement.SetActive(true);
+
                 ScanArea();
             }
             else if (scanningButtonPressed == 2)
@@ -44,6 +53,8 @@ public class PlayerScan : MonoBehaviour
                 scanningButtonPressed = 0;
 
                 //hide layer UI 
+                LayersUIElement.SetActive(false);
+                EyeUIElement.SetActive(true);
 
                 LayerManager.Instance.ClearLayerList();
 
@@ -65,7 +76,7 @@ public class PlayerScan : MonoBehaviour
     {
         isScanning = true;
 
-        PlayerInventory.Instance.EyeUsed();
+        //PlayerInventory.Instance.EyeUsed();
 
         foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
         {
