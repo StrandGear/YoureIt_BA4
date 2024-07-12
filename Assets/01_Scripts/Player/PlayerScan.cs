@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerScan : MonoBehaviour
+public class PlayerScan : Singleton
 {
-
     private bool isScanning = false;
     private int scanningButtonPressed = 0;
 
@@ -38,27 +37,13 @@ public class PlayerScan : MonoBehaviour
     {
         if (scanControl.action.IsPressed() && !isScanning)
         {
-            if (/*PlayerInventory.Instance.NumberOfEyes > 0 && */ scanningButtonPressed == 1)
+            if (/*PlayerInventory.Instance.NumberOfEyes > 0 && */ scanningButtonPressed < 2) // scanning
             {
-                Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().LayerLookCam);
-
-                //show layer UI 
-                EyeUIElement.SetActive(false);
-                LayersUIElement.SetActive(true);
-
-                ScanArea();
+                StartScanningLogic();
             }
-            else if (scanningButtonPressed == 2)
+            else if (scanningButtonPressed == 2) // not scanning
             {
-                scanningButtonPressed = 0;
-
-                //hide layer UI 
-                LayersUIElement.SetActive(false);
-                EyeUIElement.SetActive(true);
-
-                LayerManager.Instance.ClearLayerList();
-
-                Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam);
+                StopScanning();
             }
         }
         
@@ -83,5 +68,35 @@ public class PlayerScan : MonoBehaviour
             if (!elem.IsUsed)
                 LayerManager.Instance.AddLayer(elem);
         }
+    }
+
+    public void StartScanningLogic()
+    {
+        //switching camera perspective
+        if (layerObjectsVisibilityRadius.VisibleCamera != null)
+            GetInstance<CameraManager>().SwitchCamera(layerObjectsVisibilityRadius.VisibleCamera);
+        else
+            GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().LayerLookCam);
+
+        //showing layer UI 
+        EyeUIElement.SetActive(false);
+        LayersUIElement.SetActive(true);
+
+        ScanArea();
+    }
+
+    public void StopScanning()
+    {
+        scanningButtonPressed = 0;
+
+        isScanning = false;
+
+        //hide layer UI 
+        LayersUIElement.SetActive(false);
+        EyeUIElement.SetActive(true);
+
+        LayerManager.Instance.ClearLayerList();
+
+        GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam);
     }
 }

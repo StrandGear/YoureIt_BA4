@@ -2357,6 +2357,7 @@ GameObject:
   - component: {fileID: 57889515}
   - component: {fileID: 57889517}
   - component: {fileID: 57889516}
+  - component: {fileID: 57889518}
   m_Layer: 0
   m_Name: PuzzleCam3
   m_TagString: Untagged
@@ -2436,6 +2437,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1271370115}
+--- !u!65 &57889518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57889514}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83, y: 1.95, z: 4.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &58663293 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4a6890d21e1256a4383d196f4cbb0d29, type: 3}
@@ -19792,6 +19814,7 @@ GameObject:
   - component: {fileID: 479151923}
   - component: {fileID: 479151925}
   - component: {fileID: 479151924}
+  - component: {fileID: 479151926}
   m_Layer: 0
   m_Name: PuzzleCam5
   m_TagString: Untagged
@@ -19871,6 +19894,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 888014344}
+--- !u!65 &479151926
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479151922}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83, y: 1.95, z: 4.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &479298015 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc30aae879310874496a6bf8b9d218be, type: 3}
@@ -19958,15 +20002,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7533167732301696475, guid: 40f9e97354136e74eba7c25a03490358, type: 3}
       propertyPath: m_Size.y
-      value: 1.02
+      value: 1.5837426
       objectReference: {fileID: 0}
     - target: {fileID: 7533167732301696475, guid: 40f9e97354136e74eba7c25a03490358, type: 3}
       propertyPath: m_Size.z
       value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 7533167732301696475, guid: 40f9e97354136e74eba7c25a03490358, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0000000048554654
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533167732301696475, guid: 40f9e97354136e74eba7c25a03490358, type: 3}
+      propertyPath: m_Center.y
+      value: 0.281872
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533167732301696475, guid: 40f9e97354136e74eba7c25a03490358, type: 3}
       propertyPath: m_Center.z
-      value: 0.42
+      value: 0.41999996
       objectReference: {fileID: 0}
     - target: {fileID: 7622633257807652267, guid: 40f9e97354136e74eba7c25a03490358, type: 3}
       propertyPath: OnEyeUsed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -25714,6 +25766,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679966449}
   m_Mesh: {fileID: -6964588577964113506, guid: 00085e2cf8f878146bc1c059632f6d11, type: 3}
+--- !u!1001 &680145861
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1903789529}
+    m_Modifications:
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -42.46387
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.10822487
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842954194184640612, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+      propertyPath: m_Name
+      value: CheckPoint
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
 --- !u!1 &681049407
 GameObject:
   m_ObjectHideFlags: 0
@@ -48255,6 +48364,7 @@ GameObject:
   - component: {fileID: 1313999392}
   - component: {fileID: 1313999394}
   - component: {fileID: 1313999393}
+  - component: {fileID: 1313999395}
   m_Layer: 0
   m_Name: PuzzleCam2
   m_TagString: Untagged
@@ -48334,6 +48444,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 847893225}
+--- !u!65 &1313999395
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313999391}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83, y: 1.95, z: 4.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1321160309
 GameObject:
   m_ObjectHideFlags: 0
@@ -49605,6 +49736,7 @@ GameObject:
   - component: {fileID: 1354028329}
   - component: {fileID: 1354028331}
   - component: {fileID: 1354028330}
+  - component: {fileID: 1354028332}
   m_Layer: 0
   m_Name: PuzzleCam6
   m_TagString: Untagged
@@ -49684,6 +49816,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1494760370}
+--- !u!65 &1354028332
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354028328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83, y: 1.95, z: 4.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1356378495
 GameObject:
   m_ObjectHideFlags: 0
@@ -53491,6 +53644,7 @@ GameObject:
   - component: {fileID: 1462105664}
   - component: {fileID: 1462105666}
   - component: {fileID: 1462105665}
+  - component: {fileID: 1462105667}
   m_Layer: 0
   m_Name: PuzzleCam1
   m_TagString: Untagged
@@ -53570,6 +53724,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 118874301}
+--- !u!65 &1462105667
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462105663}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83, y: 1.95, z: 4.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1464574761
 GameObject:
   m_ObjectHideFlags: 0
@@ -54167,6 +54342,7 @@ GameObject:
   - component: {fileID: 1484901887}
   - component: {fileID: 1484901889}
   - component: {fileID: 1484901888}
+  - component: {fileID: 1484901890}
   m_Layer: 0
   m_Name: PuzzleCam4
   m_TagString: Untagged
@@ -54246,6 +54422,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 743974644}
+--- !u!65 &1484901890
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484901886}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83, y: 1.95, z: 4.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1486624624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60618,6 +60815,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aafaefa28bb52754e98fae071b719158, type: 3}
   m_PrefabInstance: {fileID: 1701375721}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1703196398 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1969937140282501070, guid: b08ec092cab0c1444b5cfdc45056fd6f, type: 3}
+  m_PrefabInstance: {fileID: 680145861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1708205357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64775,6 +64977,7 @@ GameObject:
   - component: {fileID: 1870915805}
   - component: {fileID: 1870915807}
   - component: {fileID: 1870915806}
+  - component: {fileID: 1870915808}
   m_Layer: 0
   m_Name: PuzzleCam7
   m_TagString: Untagged
@@ -64854,6 +65057,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1416794245}
+--- !u!65 &1870915808
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870915804}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83, y: 1.95, z: 4.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1871752553 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3719159760006717976, guid: 7b8bf45a0f880fc40b11c336a556a294, type: 3}
@@ -65767,6 +65991,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2adf43dcbe87bdb42b3b023d6259f76a, type: 3}
   m_PrefabInstance: {fileID: 1903478329}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1903789527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1903789529}
+  - component: {fileID: 1903789528}
+  m_Layer: 0
+  m_Name: CheckpointManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1903789528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903789527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a7c9aa593f2ae45ae799876ebee41c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1903789529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903789527}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1703196398}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1905731632
 GameObject:
   m_ObjectHideFlags: 0
@@ -89698,3 +89967,4 @@ SceneRoots:
   - {fileID: 875106768}
   - {fileID: 1120867598}
   - {fileID: 922721045}
+  - {fileID: 1903789529}
