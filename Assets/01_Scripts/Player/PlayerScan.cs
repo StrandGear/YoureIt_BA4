@@ -69,7 +69,11 @@ public class PlayerScan : Singleton
         foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
         {
             if (!elem.IsUsed)
+            {
                 LayerManager.Instance.AddLayer(elem);
+                elem.SetShaderActive(true);
+            }
+                
         }
     }
 
@@ -98,6 +102,11 @@ public class PlayerScan : Singleton
         //hide layer UI 
         LayersUIElement.SetActive(false);
         EyeUIElement.SetActive(true);
+
+        foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
+        {
+                elem.SetShaderActive(false);
+        }
 
         LayerManager.Instance.ClearLayerList();
 
