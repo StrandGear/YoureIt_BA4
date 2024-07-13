@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerScan : Singleton
 {
     private bool isScanning = false;
+
+    public bool IsScanning { get => isScanning; }
+
     private int scanningButtonPressed = 0;
 
     [SerializeField] private InputActionReference scanControl;
@@ -43,11 +46,11 @@ public class PlayerScan : Singleton
             }
             else if (scanningButtonPressed == 2) // not scanning
             {
-                StopScanning();
+                StopScanning(false);
             }
         }
         
-        if (scanControl.action.WasReleasedThisFrame())
+        if (scanControl.action.WasPressedThisFrame())
         {
             scanningButtonPressed++;
             isScanning = false;
@@ -85,9 +88,10 @@ public class PlayerScan : Singleton
         ScanArea();
     }
 
-    public void StopScanning()
+    public void StopScanning(bool resetButtonPress = true)
     {
-        scanningButtonPressed = 0;
+        if (resetButtonPress)
+            scanningButtonPressed = 0;
 
         isScanning = false;
 
