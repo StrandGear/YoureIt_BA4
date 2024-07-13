@@ -160,11 +160,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleWalkingAndJumping(Vector3 move, float currentSpeed)
     {
-        if (jumpControl.action.triggered && groundedPlayer)
+        /*if (jumpControl.action.triggered && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             Debug.Log("Player Jumped");
-        }
+        }*/
 
         if (groundedPlayer && playerVelocity.y <= 0)
         {
