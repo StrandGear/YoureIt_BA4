@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FMOD.Studio;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementSecondLevel : MonoBehaviour
 {
     [Header("Input References")]
     [SerializeField] private InputActionReference movementControl;
@@ -116,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         if (isCrouching)
         {
             currentSpeed = crouchSpeed;
+            print("Player is crouching");
         }
         if (speedBoostControl.action.IsPressed() && !isCrouching)
         {
