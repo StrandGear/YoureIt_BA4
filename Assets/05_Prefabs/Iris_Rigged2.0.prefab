@@ -2404,10 +2404,6 @@ MonoBehaviour:
   interactControl: {fileID: 562261188112217769, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
   lookControl: {fileID: 9160369524482419237, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
   crouchControl: {fileID: 2672623420876683953, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  animControl: {fileID: 7611722595664555950}
   cameraFollowTarget: {fileID: 8716551980237422465}
   minCameraClamp: -2
   maxCameraClamp: 5
@@ -2417,6 +2413,13 @@ MonoBehaviour:
   jumpHeight: 1
   gravityValue: -9.81
   crouchSpeed: 2
+  crouchHeight: 0.5
+  crouchCenter: {x: 0, y: 0.5, z: 0}
+  crouchRadius: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  animControl: {fileID: 7611722595664555950}
 --- !u!114 &1198911272922669462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5878,7 +5881,7 @@ PrefabInstance:
     - target: {fileID: 5939234548013958879, guid: af9248d05f691094e9bbdd7154c49b2d, type: 3}
       propertyPath: layerObjectsVisibilityRadius
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6703032369173170270}
     - target: {fileID: 6325882583502049959, guid: af9248d05f691094e9bbdd7154c49b2d, type: 3}
       propertyPath: OnEyeUsed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6011,3 +6014,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6379026165386863140, guid: 590400df3a525584f92035fdd9b55ed1, type: 3}
   m_PrefabInstance: {fileID: 9128817269667950573}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6703032369173170270 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2573216320883615667, guid: 590400df3a525584f92035fdd9b55ed1, type: 3}
+  m_PrefabInstance: {fileID: 9128817269667950573}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786fe3d7934d45648853647fef4e0bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
