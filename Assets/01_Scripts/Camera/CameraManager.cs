@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class CameraManager : Singleton
 {
-    private List<GameObject> cameras = new List<GameObject>();
+    [SerializeField] private List<GameObject> cameras = new List<GameObject>();
 
     public GameObject MainPlayingCam;
     public GameObject LayerLookCam;
@@ -31,9 +31,23 @@ public class CameraManager : Singleton
             }
         }
     }
+
     public void SwitchCamera(GameObject newCam)
     {
+        //reseting cameras pripority
+        if (currentCam.GetComponent<CinemachineVirtualCamera>() != null)
+        {
+            if (currentCam == MainPlayingCam)
+                currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 20;
+            else
+                currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+        }
+
+        //assigning new camera 
         currentCam = newCam;
+
+        if (currentCam.GetComponent<CinemachineVirtualCamera>() != null)
+            currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 50;
 
         currentCam.SetActive(true);
 
@@ -45,6 +59,5 @@ public class CameraManager : Singleton
             }
             //print(cameras[i].Priority);
         }
-        //print(currentCam);
     }
 }

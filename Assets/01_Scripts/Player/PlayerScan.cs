@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerScan : MonoBehaviour
+public class PlayerScan : Singleton
 {
-
     private bool isScanning = false;
+
+    public bool IsScanning { get => isScanning; }
+
     private int scanningButtonPressed = 0;
 
     [SerializeField] private InputActionReference scanControl;
@@ -38,31 +40,17 @@ public class PlayerScan : MonoBehaviour
     {
         if (scanControl.action.IsPressed() && !isScanning)
         {
-            if (/*PlayerInventory.Instance.NumberOfEyes > 0 && */ scanningButtonPressed == 1)
+            if (/*PlayerInventory.Instance.NumberOfEyes > 0 && */ scanningButtonPressed < 2) // scanning
             {
-                Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().LayerLookCam);
-
-                //show layer UI 
-                EyeUIElement.SetActive(false);
-                LayersUIElement.SetActive(true);
-
-                ScanArea();
+                StartScanningLogic();
             }
-            else if (scanningButtonPressed == 2)
+            else if (scanningButtonPressed == 2) // not scanning
             {
-                scanningButtonPressed = 0;
-
-                //hide layer UI 
-                LayersUIElement.SetActive(false);
-                EyeUIElement.SetActive(true);
-
-                LayerManager.Instance.ClearLayerList();
-
-                Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam);
+                StopScanning(false);
             }
         }
         
-        if (scanControl.action.WasReleasedThisFrame())
+        if (scanControl.action.WasPressedThisFrame())
         {
             scanningButtonPressed++;
             isScanning = false;
@@ -81,7 +69,47 @@ public class PlayerScan : MonoBehaviour
         foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
         {
             if (!elem.IsUsed)
+            {
                 LayerManager.Instance.AddLayer(elem);
+                elem.SetShaderActive(true);
+            }
+                
         }
+    }
+
+    public void StartScanningLogic()
+    {
+        //switching camera perspective
+        if (layerObjectsVisibilityRadius.VisibleCamera != null)
+            GetInstance<CameraManager>().SwitchCamera(layerObjectsVisibilityRadius.VisibleCamera);
+        else
+            GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().LayerLookCam);
+
+        //showing layer UI 
+        EyeUIElement.SetActive(false);
+        LayersUIElement.SetActive(true);
+
+        ScanArea();
+    }
+
+    public void StopScanning(bool resetButtonPress = true)
+    {
+        if (resetButtonPress)
+            scanningButtonPressed = 0;
+
+        isScanning = false;
+
+        //hide layer UI 
+        LayersUIElement.SetActive(false);
+        EyeUIElement.SetActive(true);
+
+        foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
+        {
+                elem.SetShaderActive(false);
+        }
+
+        LayerManager.Instance.ClearLayerList();
+
+        GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam);
     }
 }
