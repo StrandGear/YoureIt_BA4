@@ -7,6 +7,8 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField] private CharacterController playerController; 
     [SerializeField] private Transform respawnPoint;
 
+    private Transform initialRespawnPoint;
+
     private static float yPos; //always keeping y pos the same
 
     private void Start()
@@ -17,6 +19,8 @@ public class PlayerRespawn : MonoBehaviour
         {
             playerController = GetComponent<CharacterController>();
         }
+
+        initialRespawnPoint = respawnPoint;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +47,9 @@ public class PlayerRespawn : MonoBehaviour
 
     private void AssignNewRespawnPosition()
     {
-        respawnPoint = Singleton.GetInstance<CheckpointManager>().GetLastCheckpoint().CheckpointPosition;
+        if (Singleton.GetInstance<CheckpointManager>().GetLastCheckpoint().CheckpointPosition == null)
+            respawnPoint = initialRespawnPoint;
+        else
+            respawnPoint = Singleton.GetInstance<CheckpointManager>().GetLastCheckpoint().CheckpointPosition;
     }
 }
