@@ -99,7 +99,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
 
         // Calculate the movement direction relative to the camera
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
+        Vector3 move = new Vector3(movement.x, 0, 0);
         Vector3 forward = cameraMainTransform.forward;
         Vector3 right = cameraMainTransform.right;
 
