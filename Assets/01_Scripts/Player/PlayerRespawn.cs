@@ -7,9 +7,12 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField] private CharacterController playerController; 
     [SerializeField] private Transform respawnPoint;
 
+    private static float yPos; //always keeping y pos the same
+
     private void Start()
     {
-        
+        yPos = gameObject.transform.position.y;
+
         if (playerController == null)
         {
             playerController = GetComponent<CharacterController>();
@@ -28,12 +31,18 @@ public class PlayerRespawn : MonoBehaviour
 
     private void RespawnPlayer()
     {
-        
-        playerController.enabled = false; 
-        playerController.transform.position = respawnPoint.position;
-        playerController.transform.rotation = respawnPoint.rotation;
-        playerController.enabled = true; 
+        AssignNewRespawnPosition();
 
-        
+        playerController.enabled = false; 
+        playerController.transform.position = new Vector3(respawnPoint.position.x, yPos, respawnPoint.position.z);
+        playerController.transform.rotation = respawnPoint.rotation;
+        playerController.enabled = true;
+
+        Singleton.GetInstance<PlayerScan>().StopScanning();
+    }
+
+    private void AssignNewRespawnPosition()
+    {
+        respawnPoint = Singleton.GetInstance<CheckpointManager>().GetLastCheckpoint().CheckpointPosition;
     }
 }
