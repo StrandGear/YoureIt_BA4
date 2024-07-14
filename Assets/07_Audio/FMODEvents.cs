@@ -4,7 +4,11 @@ using UnityEngine;
 using FMODUnity;
 
 public class FMODEvents : MonoBehaviour
+
 {
+    [field: Header("Ambience")]
+    [field: SerializeField] public EventReference ambience { get; set; }
+
     [field: Header("Player SFX")]
     [field: SerializeField] public EventReference playerFootsteps {  get; set; }
 
