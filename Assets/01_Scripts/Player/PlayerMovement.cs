@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] private float playerSpeed = 2.0f;
     [SerializeField] private float speedBoostMultiplier = 2.0f;
-    [SerializeField] private float jumpHeight = 1.0f;
+    //[SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
 
     [Header("Crouch Settings")]
@@ -196,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
             if (isCrouching)
             {
                 isCrouching = false;
-                jumpHeight = 1.0f;
+                //jumpHeight = 1.0f;
                 controller.center = originalCenter;
                 controller.height = originalHeight;
                 controller.radius = originalRadius;
@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 isCrouching = true;
-                jumpHeight = 0f;
+                //jumpHeight = 0f;
                 controller.height = crouchHeight;
                 controller.center = crouchCenter;
                 controller.radius = crouchRadius;
