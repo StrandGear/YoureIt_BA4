@@ -6,6 +6,7 @@ using FMOD.Studio;
 
 public class AudioManager : MonoBehaviour
 {
+    private EventInstance ambienceEventInstance;
    public static AudioManager instance {  get; private set; }
 
     private void Awake()
@@ -15,6 +16,16 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("Found more than one Audio Manager in the scene.");
         }
         instance = this;
+    }
+
+    private void Start()
+    {
+        InitializeAmbience(FMODEvents.instance.ambience);
+    }
+    private void InitializeAmbience(EventReference ambienceEventReference)
+    {
+        ambienceEventInstance = CreateEventInstance(ambienceEventReference);
+        ambienceEventInstance.start();
     }
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
