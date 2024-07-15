@@ -166,8 +166,8 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Player Jumped");
         }*/
 
-        print(groundedPlayer);
-        print(playerVelocity.y);
+        //print(groundedPlayer);
+        //print(playerVelocity.y);
         if (groundedPlayer && playerVelocity.y <= 0)
         {
             playerVelocity.y = 0f;
