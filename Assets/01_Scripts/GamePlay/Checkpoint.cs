@@ -6,9 +6,9 @@ public class Checkpoint : MonoBehaviour
 {
     public bool activated = false;
 
-    private Transform checkpointPosition;
+    //private Transform checkpointPosition;
 
-    public Transform CheckpointPosition { get => checkpointPosition;}
+    //public Transform CheckpointPosition { get => checkpointPosition;}
 
     private void Awake()
     {
@@ -26,9 +26,14 @@ public class Checkpoint : MonoBehaviour
 
             activated = true;
 
-            checkpointPosition = gameObject.transform;
+            //checkpointPosition = gameObject.transform;
 
             Singleton.GetInstance<CheckpointManager>().AddCheckpoint(this);
         }
+    }
+
+    public Transform CheckpointPosition
+    {
+        get { return this.transform; }
     }
 }

@@ -13,6 +13,13 @@ public class CheckpointManager : Singleton
 
     public Checkpoint GetLastCheckpoint()
     {
-        return checkpointStack.Count > 0 ? checkpointStack.Peek() : null;
+        if (checkpointStack.Count > 0)
+        {
+            return checkpointStack.Peek();
+        }
+        else
+        {
+            return null;
+        }
     }
 }
