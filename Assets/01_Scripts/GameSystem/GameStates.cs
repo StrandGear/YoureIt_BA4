@@ -32,22 +32,14 @@ public class GameStates : Singleton
     private void PlaymodeGameStateOn()
     {
         //resetting layers in PlayerScan
-
-        //disable cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        //stop scanning in case of death
-        //player.gameObject.GetComponentInChildren<PlayerScan>().StopScanning();
+        
+        Cursor.lockState = CursorLockMode.Locked; //disable cursor
 
         //turning off layer UI 
         GetInstance<UIManager>().LayerUI.SetActive(false);
         GetInstance<UIManager>().GameUI.SetActive(true);
 
-        //switching to main camera view
-        
-        GetInstance<CameraManager>().SwitchCamera(GetInstance<CameraManager>().MainPlayingCam);
-
-        
-
+        GetInstance<CameraManager>().SwitchCamera(GetInstance<CameraManager>().MainPlayingCam); //switching to main camera view
     }
 
     private void PuzzleGameStateOn()
@@ -60,10 +52,8 @@ public class GameStates : Singleton
         //turning on layer UI 
         GetInstance<UIManager>().GameUI.SetActive(false);
         GetInstance<UIManager>().LayerUI.SetActive(true);
-
-        //switching to closest layer camera 
-        print("seeting up closest camer");
-        GetInstance<CameraManager>().SetActiveClosestCamera(player);
+        
+        GetInstance<CameraManager>().SetActiveClosestCamera(player); //switching to closest layer camera 
     }
 }
 

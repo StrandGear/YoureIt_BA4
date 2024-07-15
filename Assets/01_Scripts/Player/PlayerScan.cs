@@ -57,6 +57,12 @@ public class PlayerScan : MonoBehaviour
         
         if (scanningButtonPressed < 0 || scanningButtonPressed > 2)
             scanningButtonPressed = 0;
+
+        if (layerObjectsVisibilityRadius.VisibleObjects.Count == 0)
+        {
+            Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+            StopScanning(false);
+        }
     }
 
     private void ScanArea()
