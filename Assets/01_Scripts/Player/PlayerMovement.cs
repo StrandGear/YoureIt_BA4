@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speedBoostMultiplier = 2.0f;
     //[SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
+    [SerializeField] private AnimationCurve accelerationCurve;
+    
 
     [Header("Crouch Settings")]
     [SerializeField] private float crouchSpeed;
@@ -52,9 +54,15 @@ public class PlayerMovement : MonoBehaviour
     private float xRotation;
     private float yRotation;
 
+    //Player collider
     private Vector3 originalCenter;
     private float originalHeight;
     private float originalRadius;
+
+    private float targetSpeed;
+    private float currentSpeed;
+    private float accelerationTimer;
+    
 
     private void Start()
     {
@@ -72,6 +80,11 @@ public class PlayerMovement : MonoBehaviour
         // Set initial 3D attributes (position and velocity)
         playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
         playerFootsteps.start();
+        
+        //Initialize speed variables
+        targetSpeed = playerSpeed;
+        currentSpeed = 0f;
+        accelerationTimer = 0f;
     }
 
     void Update()
@@ -112,14 +125,27 @@ public class PlayerMovement : MonoBehaviour
         // Calculate final movement vector
         Vector3 desiredMoveDirection = forward * move.z + right * move.x;
 
-        float currentSpeed = playerSpeed;
+        // Determine target speed based on input and state
+        targetSpeed = (movement != Vector2.zero) ? playerSpeed : 0f;
         if (isCrouching)
         {
-            currentSpeed = crouchSpeed;
+            targetSpeed = (movement != Vector2.zero) ? crouchSpeed : 0f;
         }
         if (speedBoostControl.action.IsPressed() && !isCrouching)
         {
-            currentSpeed *= speedBoostMultiplier;
+            targetSpeed *= speedBoostMultiplier;
+        }
+
+        // Smoothly transition to the target speed using the animation curve
+        if (currentSpeed != targetSpeed)
+        {
+            accelerationTimer += Time.deltaTime;
+            float curveValue = accelerationCurve.Evaluate(accelerationTimer);
+            currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, curveValue);
+        }
+        else
+        {
+            accelerationTimer = 0f;
         }
 
         if (isClimbing)
@@ -166,12 +192,9 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Player Jumped");
         }*/
 
-        print(groundedPlayer);
-        print(playerVelocity.y);
         if (groundedPlayer && playerVelocity.y <= 0)
         {
             playerVelocity.y = 0f;
-            print("No gravity");
         }
         else
         {
