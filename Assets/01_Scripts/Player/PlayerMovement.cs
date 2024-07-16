@@ -74,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
         originalHeight = controller.height;
         originalRadius = controller.radius;
 
+        if (AudioManager.instance == null)
+            return;
         // Initialize playerFootsteps
         playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
 
