@@ -73,7 +73,7 @@ public class PlayerScan : MonoBehaviour
         {
             if (!elem.IsUsed)
             {
-                LayerManager.Instance.AddLayer(elem);
+                LayerManager2.Instance.AddLayer(elem);
                 elem.SetShaderActive(true);
             }
         }
@@ -91,6 +91,6 @@ public class PlayerScan : MonoBehaviour
                 elem.SetShaderActive(false);
         }
 
-        LayerManager.Instance.ClearLayerList();
+        LayerManager2.Instance.ClearLayerList();
     }
 }
