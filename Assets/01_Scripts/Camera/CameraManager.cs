@@ -5,43 +5,38 @@ using Cinemachine;
 
 public class CameraManager : Singleton
 {
-    [SerializeField] private List<GameObject> cameras = new List<GameObject>();
-
+    [SerializeField] private List<GameObject> layerCameras = new List<GameObject>();
     public GameObject MainPlayingCam;
-    public GameObject LayerLookCam;
+    //public GameObject LayerLookCam;
 
-    private GameObject currentCam;
+    [SerializeField] private GameObject currentCam;
 
-    private void Start()
+    private void Awake()
     {
         currentCam = MainPlayingCam;
+        //cameras.Add(MainPlayingCam);
+        //cameras.Add(LayerLookCam);
 
-        cameras.Add(MainPlayingCam);
-        cameras.Add(LayerLookCam);
-
-        for (int i = 0; i < cameras.Count; i++)
+        for (int i = 0; i < layerCameras.Count; i++)
         {
-            if (cameras[i] == currentCam)
+            if (layerCameras[i] == currentCam)
             {
-                cameras[i].SetActive(true);
+                layerCameras[i].SetActive(true);
             }
             else
             {
-                cameras[i].SetActive(false);
+                layerCameras[i].SetActive(false);
             }
         }
+        currentCam.SetActive(true);
     }
 
     public void SwitchCamera(GameObject newCam)
     {
-        //reseting cameras pripority
-        if (currentCam.GetComponent<CinemachineVirtualCamera>() != null)
-        {
-            if (currentCam == MainPlayingCam)
-                currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 20;
-            else
-                currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
-        }
+        ResetCamerasPriority();
+
+        if (newCam == null)
+            newCam = MainPlayingCam;
 
         //assigning new camera 
         currentCam = newCam;
@@ -51,13 +46,46 @@ public class CameraManager : Singleton
 
         currentCam.SetActive(true);
 
-        for (int i = 0; i < cameras.Count; i++)
+        if (currentCam != MainPlayingCam)
+            MainPlayingCam.SetActive(false);
+
+        for (int i = 0; i < layerCameras.Count; i++)
         {
-            if (cameras[i] != currentCam)
+            if (layerCameras[i] != currentCam)
             {
-                cameras[i].SetActive(false);
+                layerCameras[i].SetActive(false);
             }
-            //print(cameras[i].Priority);
         }
+    }
+
+    private void ResetCamerasPriority()
+    {
+        if (currentCam.GetComponent<CinemachineVirtualCamera>() != null)
+        {
+            if (currentCam == MainPlayingCam)
+                currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 20;
+            else
+                currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+        }
+    }
+
+    public void SetActiveClosestCamera(Transform closestToThisGameObject)
+    {
+        float shortestDistance = float.MaxValue;
+
+        GameObject closestCamera = null;
+
+        foreach (GameObject elem in layerCameras)
+        {
+            float distanceToPlayer = Vector3.Distance(closestToThisGameObject.position, elem.transform.position);
+
+            if (shortestDistance > distanceToPlayer)
+            {
+                shortestDistance = distanceToPlayer;
+                closestCamera = elem;
+            }
+        }
+
+        SwitchCamera(closestCamera);
     }
 }
