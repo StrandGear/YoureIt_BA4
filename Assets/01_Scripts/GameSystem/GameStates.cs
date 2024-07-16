@@ -36,8 +36,8 @@ public class GameStates : Singleton
         Cursor.lockState = CursorLockMode.Locked; //disable cursor
 
         //turning off layer UI 
-        GetInstance<UIManager>().LayerUI.SetActive(false);
-        GetInstance<UIManager>().GameUI.SetActive(true);
+        UIManager.Instance.LayerUI.SetActive(false);
+        UIManager.Instance.GameUI.SetActive(true);
 
         GetInstance<CameraManager>().SwitchCamera(GetInstance<CameraManager>().MainPlayingCam); //switching to main camera view
     }
@@ -50,9 +50,12 @@ public class GameStates : Singleton
         Cursor.lockState = CursorLockMode.Confined;
 
         //turning on layer UI 
-        GetInstance<UIManager>().GameUI.SetActive(false);
-        GetInstance<UIManager>().LayerUI.SetActive(true);
-        
+        //GetInstance<UIManager>().GameUI.SetActive(false);
+        //GetInstance<UIManager>().LayerUI.SetActive(true);
+
+        UIManager.Instance.GameUI.SetActive(false);
+        UIManager.Instance.LayerUI.SetActive(true);
+
         GetInstance<CameraManager>().SetActiveClosestCamera(player); //switching to closest layer camera 
     }
 }
