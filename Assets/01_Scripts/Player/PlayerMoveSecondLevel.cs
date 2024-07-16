@@ -137,7 +137,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         float sidewaysSpeed = Vector3.Dot(desiredMoveDirection.normalized, right);
 
         // Update animator parameters
-        animControl.SetFloat("ForwardsSpeed", forwardSpeed);
+        //animControl.SetFloat("ForwardsSpeed", forwardSpeed);
         animControl.SetFloat("SidewaysSpeed", sidewaysSpeed);
 
         UpdateClimbingTimer();
