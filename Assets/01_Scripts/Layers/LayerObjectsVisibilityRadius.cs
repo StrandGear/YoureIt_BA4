@@ -9,9 +9,9 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
 
     public List<LayerObject> VisibleObjects { get => visibleObjects; }
 
-    [SerializeField] private GameObject visibleCamera = null;
+/*    [SerializeField] private GameObject visibleCamera = null;
 
-    public GameObject VisibleCamera { get => visibleCamera; }
+    public GameObject VisibleCamera { get => visibleCamera; }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,13 +26,13 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
 
 
         // Check for CinemachineVirtualCamera
-        if (other.TryGetComponent(out CinemachineVirtualCamera camera))
+/*        if (other.TryGetComponent(out CinemachineVirtualCamera camera))
         {
             if (camera != null)
             {
                 visibleCamera = camera.gameObject;
             }
-        }
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
@@ -44,12 +44,12 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
         }
 
         //removing camera if there is one
-        if (other.TryGetComponent(out CinemachineVirtualCamera camera))
+/*        if (other.TryGetComponent(out CinemachineVirtualCamera camera))
         {
             if (camera != null)
             {
                 visibleCamera = null;
             }
-        }
+        }*/
     }
 }
