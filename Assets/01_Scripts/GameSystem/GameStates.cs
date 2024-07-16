@@ -14,8 +14,11 @@ public class GameStates : Singleton
 
     [SerializeField] private Transform player;
 
-    private void Awake()
+    private void Start()
     {
+        if (player == null)
+            player = FindFirstObjectByType<CharacterController>().gameObject.transform;
+
         SetGameState(GameState.Playmode);
     }
 

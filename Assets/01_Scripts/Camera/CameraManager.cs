@@ -11,6 +11,11 @@ public class CameraManager : Singleton
 
     [SerializeField] private GameObject currentCam;
 
+    private void OnValidate()
+    {
+        currentCam = MainPlayingCam;
+    }
+
     private void Awake()
     {
         currentCam = MainPlayingCam;
