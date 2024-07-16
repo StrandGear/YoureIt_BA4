@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerScan : Singleton
+public class PlayerScan : MonoBehaviour
 {
     private bool isScanning = false;
 
@@ -26,9 +26,6 @@ public class PlayerScan : Singleton
         {
             layerObjectsVisibilityRadius = FindObjectOfType<LayerObjectsVisibilityRadius>();
         }
-
-        LayersUIElement.SetActive(false);
-        EyeUIElement.SetActive(true);
     }
 
     private void OnDisable()
@@ -38,33 +35,39 @@ public class PlayerScan : Singleton
 
     private void Update()
     {
-        if (scanControl.action.IsPressed() && !isScanning)
-        {
-            if (/*PlayerInventory.Instance.NumberOfEyes > 0 && */ scanningButtonPressed < 2) // scanning
-            {
-                StartScanningLogic();
-            }
-            else if (scanningButtonPressed == 2) // not scanning
-            {
-                StopScanning(false);
-            }
-        }
-        
         if (scanControl.action.WasPressedThisFrame())
         {
             scanningButtonPressed++;
             isScanning = false;
         }
 
+        if (scanControl.action.IsPressed() && !isScanning)
+        {
+            if (scanningButtonPressed == 1) // scanning
+            {
+                ScanArea();
+                Singleton.GetInstance<GameStates>().SetGameState(GameState.Puzzlemode);
+            }
+            else if (scanningButtonPressed == 2) // not scanning
+            {
+                Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+                StopScanning(false);
+            }
+        }
+        
         if (scanningButtonPressed < 0 || scanningButtonPressed > 2)
             scanningButtonPressed = 0;
+
+        if (layerObjectsVisibilityRadius.VisibleObjects.Count == 0)
+        {
+            Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+            StopScanning(false);
+        }
     }
 
     private void ScanArea()
     {
         isScanning = true;
-
-        //PlayerInventory.Instance.EyeUsed();
 
         foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
         {
@@ -73,23 +76,7 @@ public class PlayerScan : Singleton
                 LayerManager.Instance.AddLayer(elem);
                 elem.SetShaderActive(true);
             }
-                
         }
-    }
-
-    public void StartScanningLogic()
-    {
-        //switching camera perspective
-        if (layerObjectsVisibilityRadius.VisibleCamera != null)
-            GetInstance<CameraManager>().SwitchCamera(layerObjectsVisibilityRadius.VisibleCamera);
-        else
-            GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().LayerLookCam);
-
-        //showing layer UI 
-        EyeUIElement.SetActive(false);
-        LayersUIElement.SetActive(true);
-
-        ScanArea();
     }
 
     public void StopScanning(bool resetButtonPress = true)
@@ -99,17 +86,11 @@ public class PlayerScan : Singleton
 
         isScanning = false;
 
-        //hide layer UI 
-        LayersUIElement.SetActive(false);
-        EyeUIElement.SetActive(true);
-
         foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
         {
                 elem.SetShaderActive(false);
         }
 
         LayerManager.Instance.ClearLayerList();
-
-        GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam);
     }
 }

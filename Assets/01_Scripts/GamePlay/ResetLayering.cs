@@ -13,12 +13,13 @@ public class ResetLayering : MonoBehaviour
     {
         if (other.GetComponent<CharacterController>() != null)
         {
-            if (Singleton.GetInstance<PlayerScan>().IsScanning)
+            Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+/*            if (Singleton.GetInstance<PlayerScan>().IsScanning)
             {
                 LayerManager.Instance.ClearLayerList();
 
                 Singleton.GetInstance<PlayerScan>().StopScanning();
-            }
+            }*/
 
         }
     }

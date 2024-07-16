@@ -38,6 +38,7 @@ public class PlayerRespawn : MonoBehaviour
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Hole"))
         {
+            print("enemy hit");
             AssignNewRespawnPosition();
             RespawnPlayer();            
         }
@@ -50,7 +51,7 @@ public class PlayerRespawn : MonoBehaviour
         playerController.transform.rotation = respawnPoint.rotation;
         playerController.enabled = true;
 
-        Singleton.GetInstance<PlayerScan>().StopScanning();
+        Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
     }
 
     private void AssignNewRespawnPosition()

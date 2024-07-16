@@ -137,8 +137,16 @@ public class LayerManager : MonoBehaviour
 
             //Assigning Listeners
             layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>().onClick.AddListener(() => SetActiveLayer(layer));
-            layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener( (value) => OnEyeToggleValueChange(value, layer) );
-            layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));
+
+            if (layer.gameObject.GetComponent<HidingLayer>() != null)
+                layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnEyeToggleValueChange(value, layer));
+            else
+                layer.layerUIManager.SetEyeToggleInactive();
+
+            if (layer.gameObject.GetComponent<LockingLayer>() != null)
+                layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));
+            else
+                layer.layerUIManager.SetLockToggleInactive();
         }
     }
 
