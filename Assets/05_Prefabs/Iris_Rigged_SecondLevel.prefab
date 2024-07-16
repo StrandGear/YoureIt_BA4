@@ -316,37 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e052a6c472fe2d47bfbf22417eba566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfEyes: 100
-  OnEyeCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: UpdateEyeAmountText
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnEyeUsed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: UpdateEyeAmountText
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8994117393805446567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +330,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scanControl: {fileID: 8772536870705236788, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
   layerObjectsVisibilityRadius: {fileID: 0}
+  EyeUIElement: {fileID: 0}
+  LayersUIElement: {fileID: 0}
 --- !u!1 &220767297057157748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3880,6 +3851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibleObjects: []
+  visibleCamera: {fileID: 0}
 --- !u!54 &4682912899865638803
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5046,7 +5018,7 @@ Animator:
   m_GameObject: {fileID: 7266639231272709902}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 352d2b260d4c38146b92a9e7af316500, type: 3}
-  m_Controller: {fileID: 9100000, guid: ffaae3ceb89362a4796f4f636c4619b1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9bbceb654d98f6f47b5e6985929ef9ab, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5107,7 +5079,6 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   playerSpeed: 6
   speedBoostMultiplier: 2
-  jumpHeight: 1
   gravityValue: -9.81
   crouchSpeed: 2
   crouchHeight: 0.5
@@ -5131,6 +5102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 2695985676714310497}
   respawnPoint: {fileID: 0}
+  keepXposStatic: 0
+  keepYposStatic: 1
+  keepZposStatic: 0
 --- !u!1 &7334459994033514933
 GameObject:
   m_ObjectHideFlags: 0
