@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class PlayerRespawn : MonoBehaviour
     public bool keepXposStatic = false;
     public bool keepYposStatic = true;
     public bool keepZposStatic = false; // for second level
+    public event Action onPlayerRespawn;
 
     private Transform initialRespawnPoint;
 
@@ -50,7 +52,7 @@ public class PlayerRespawn : MonoBehaviour
         playerController.transform.position = respawnPoint.position;
         playerController.transform.rotation = respawnPoint.rotation;
         playerController.enabled = true;
-
+        onPlayerRespawn?.Invoke();
         Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
     }
 
