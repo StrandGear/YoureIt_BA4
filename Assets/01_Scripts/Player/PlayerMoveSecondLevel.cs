@@ -36,6 +36,8 @@ public class PlayerMovementSecondLevel : MonoBehaviour
 
     [Header("Animator")]
     [SerializeField] private Animator animControl;
+    
+    [SerializeField] private AnimationCurve accelerationCurve;
 
     // Audio
     private EventInstance playerFootsteps;
@@ -55,6 +57,10 @@ public class PlayerMovementSecondLevel : MonoBehaviour
     private Vector3 originalCenter;
     private float originalHeight;
     private float originalRadius;
+    
+    private float targetSpeed;
+    private float currentSpeed;
+    private float accelerationTimer;
 
     private void Start()
     {
@@ -72,6 +78,11 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         // Set initial 3D attributes (position and velocity)
         //playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
         //playerFootsteps.start();
+        
+        //Initialize speed variables
+        targetSpeed = playerSpeed;
+        currentSpeed = 0f;
+        accelerationTimer = 0f;
     }
 
     void Update()
@@ -97,6 +108,12 @@ public class PlayerMovementSecondLevel : MonoBehaviour
     private void HandleMovement()
     {
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
+        
+        if (movement.sqrMagnitude < .001f)
+        {
+            currentSpeed = 0f;
+            accelerationTimer = 0f;
+        }
 
         // Calculate the movement direction relative to the camera
         Vector3 move = new Vector3(movement.x, 0, 0);
@@ -111,8 +128,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
 
         // Calculate final movement vector
         Vector3 desiredMoveDirection = forward * move.z + right * move.x;
-
-        float currentSpeed = playerSpeed;
+        
         if (isCrouching)
         {
             currentSpeed = crouchSpeed;
@@ -122,6 +138,17 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         {
             currentSpeed *= speedBoostMultiplier;
         }
+        if (currentSpeed < targetSpeed)
+        {
+            accelerationTimer += Time.deltaTime * 2;
+            float curveValue = accelerationCurve.Evaluate(accelerationTimer);
+            currentSpeed = Mathf.Lerp(0, targetSpeed, curveValue);
+        }
+        else
+        {
+            accelerationTimer = 0f;
+        }
+
 
         if (isClimbing)
         {

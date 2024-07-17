@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyFollow
@@ -8,15 +9,39 @@ public class EnemyFollow
     [SerializeField] float attackRange = 2f; // Range within which the enemy starts attacking
     [SerializeField] float moveSpeed = 5f; // Movement speed when following
     [SerializeField] float attackingSpeed = 7f; // Movement speed when attacking
+    [SerializeField]  PlayerRespawn playerRespawn; 
+    [SerializeField]  float respawnDistance; 
 
-    private Vector3 targetStoredPosition; // Position where the player was when attack started
-    private bool attack = false; // Flag indicating if the enemy is attacking
-    private bool isFollowingThePlayer = false; // Flag indicating if the enemy is following the player
-    private float distance; // Distance between the enemy and the player
+    private Vector3 targetStoredPosition; 
+    private bool attack = false; 
+    private bool isFollowingThePlayer = false; 
+    private float distance;
+
+    private void OnEnable()
+    {
+        playerRespawn.onPlayerRespawn += ResetEnemy;
+    }
+
+    private void ResetEnemy()
+    {
+        transform.position = target.position + Vector3.right * (rangeToFollow + respawnDistance);
+        Debug.Log("Enemy Respawn");
+    }
+
+    private void OnDisable()
+    {
+        playerRespawn.onPlayerRespawn -= ResetEnemy;
+    }
 
     void Update()
     {
-        distance = Vector3.Distance(transform.position, target.position);
+        var targetPosition = target.position + Vector3.right * rangeToFollow;
+        var difference = targetPosition - transform.position;
+        var movement = difference.normalized * moveSpeed * Time.deltaTime;
+        transform.position += movement;
+        var pos = transform.position;
+        transform.position = new Vector3(pos.x, targetPosition.y, pos.z);
+        /*distance = Vector3.Distance(transform.position, target.position);
 
         if (!attack)
         {
@@ -43,6 +68,6 @@ public class EnemyFollow
             {
                 attack = false;
             }
-        }
+        }*/
     }
 }
