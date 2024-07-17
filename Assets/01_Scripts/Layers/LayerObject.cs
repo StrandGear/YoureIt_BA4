@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LayerObject : MonoBehaviour, ILayerObject
 {
-    [SerializeField]
     private string objectName = "";
     public string Name { get => objectName; set => objectName = value; }
 
@@ -52,7 +51,10 @@ public class LayerObject : MonoBehaviour, ILayerObject
         {
             shader = FindShaderObject(transform, "shader");
         }
+    }
 
+    private void Start()
+    {
         SetShaderActive(false);
     }
 

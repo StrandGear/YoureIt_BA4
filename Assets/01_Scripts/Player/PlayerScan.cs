@@ -43,7 +43,7 @@ public class PlayerScan : MonoBehaviour
 
         if (scanControl.action.IsPressed() && !isScanning)
         {
-            if (scanningButtonPressed == 1) // scanning
+            if (scanningButtonPressed == 1 && layerObjectsVisibilityRadius.VisibleObjects.Count > 0) // scanning
             {
                 ScanArea();
                 Singleton.GetInstance<GameStates>().SetGameState(GameState.Puzzlemode);

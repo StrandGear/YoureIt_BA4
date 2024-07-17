@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class AttackTriggerZone : MonoBehaviour
 {
-    public EnemyAttack enemyAttack; // Reference to the EnemyAttack script
+    public EnemyAttack enemyAttack; 
+    public float killedTimer = 5.0f;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            enemyAttack.PlayerEntered(); // Notify EnemyAttack that the player entered
+            enemyAttack.PlayerEntered();
             print("Player In");
         }
     }

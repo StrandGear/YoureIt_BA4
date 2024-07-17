@@ -24,6 +24,7 @@ public class EnemyAttack : MonoBehaviour
     {
         isPlayerInside = false;
         animator.SetBool("HandAttack", false); 
+        animator.Update(0f);
         print("Enemy Retreat");
     }
 }
