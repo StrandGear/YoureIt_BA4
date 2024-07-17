@@ -5,7 +5,7 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     public bool activated = false;
-
+    public EnemyAttack enemyAttack; 
     //private Transform checkpointPosition;
 
     //public Transform CheckpointPosition { get => checkpointPosition;}
@@ -13,6 +13,11 @@ public class Checkpoint : MonoBehaviour
     private void Awake()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
+        
+        if (enemyAttack == null)
+        {
+            Debug.LogError("EnemyAttack reference is not assigned in Checkpoint script.");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,6 +35,27 @@ public class Checkpoint : MonoBehaviour
             //checkpointPosition = gameObject.transform;
 
             Singleton.GetInstance<CheckpointManager>().AddCheckpoint(this);
+            
+            if (enemyAttack != null)
+            {
+                enemyAttack.PlayerExited(); // Call PlayerExited to stop the attack animation
+            }
+            else
+            {
+                Debug.LogError("EnemyAttack reference is not assigned in Checkpoint script.");
+            }
+        }
+        
+        if (other.CompareTag("Player"))
+        {
+            if (enemyAttack != null)
+            {
+                enemyAttack.PlayerExited(); // Call PlayerExited to stop the attack animation
+            }
+            else
+            {
+                Debug.LogError("EnemyAttack reference is not assigned in Checkpoint script.");
+            }
         }
     }
 
