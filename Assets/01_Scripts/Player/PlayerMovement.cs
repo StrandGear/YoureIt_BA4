@@ -139,11 +139,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Smoothly transition to the target speed using the animation curve
-        if (currentSpeed != targetSpeed)
+        if (currentSpeed < targetSpeed)
         {
             accelerationTimer += Time.deltaTime;
             float curveValue = accelerationCurve.Evaluate(accelerationTimer);
-            currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, curveValue);
+            currentSpeed = Mathf.Lerp(0, targetSpeed, curveValue);
         }
         else
         {
