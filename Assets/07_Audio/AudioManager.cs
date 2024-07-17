@@ -32,6 +32,13 @@ public class AudioManager : MonoBehaviour
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
+    public void PlayRandomShotFromList(List<EventReference> listOfSounds, Vector3 worldPos)
+    {
+        int rand = Random.Range(0, listOfSounds.Count - 1);
+
+        PlayOneShot(listOfSounds[rand], worldPos);
+    }
+
     public EventInstance CreateEventInstance(EventReference eventReference)
     {
         EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
