@@ -51,6 +51,7 @@ public class HidingLayer : MonoBehaviour, IHiding
 
                 colliders[i].isTrigger = true;
             }
+            gameObject.GetComponent<LayerObject>().SetShaderActive(false);
         }
         else
         {
@@ -70,6 +71,7 @@ public class HidingLayer : MonoBehaviour, IHiding
                 else if (colliders[i] != null)
                     colliders[i].isTrigger = false;
             }
+            gameObject.GetComponent<LayerObject>().SetShaderActive(true);
         }
     }
 
