@@ -10,12 +10,16 @@ public class InteractableObject : MonoBehaviour
     private GameObject interactionTextElement;
 
     private bool canInteract = false;
-    public BoxCollider InteractionRadius { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public BoxCollider InteractionRadius { get; set; }
 
     private void Awake()
     {
+        InteractionRadius = GetComponent<BoxCollider>();
+        InteractionRadius.isTrigger = true;
+
         interactionTextElement = transform.Find("GameCanvas").gameObject;
         interactionTextElement.SetActive(false);
+
         StopInteraction();
     }
 

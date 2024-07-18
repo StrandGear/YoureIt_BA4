@@ -16,7 +16,7 @@ public class Checkpoint : MonoBehaviour
         
         if (enemyAttack == null)
         {
-            Debug.LogError("EnemyAttack reference is not assigned in Checkpoint script.");
+            Debug.Log("EnemyAttack reference is not assigned in Checkpoint script.");
         }
     }
 
@@ -42,7 +42,7 @@ public class Checkpoint : MonoBehaviour
             }
             else
             {
-                Debug.LogError("EnemyAttack reference is not assigned in Checkpoint script.");
+                Debug.Log("EnemyAttack reference is not assigned in Checkpoint script.");
             }
         }
         
@@ -54,7 +54,7 @@ public class Checkpoint : MonoBehaviour
             }
             else
             {
-                Debug.LogError("EnemyAttack reference is not assigned in Checkpoint script.");
+                Debug.Log("EnemyAttack reference is not assigned in Checkpoint script.");
             }
         }
     }
