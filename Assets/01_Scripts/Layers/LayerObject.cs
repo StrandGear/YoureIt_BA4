@@ -20,7 +20,7 @@ public class LayerObject : MonoBehaviour, ILayerObject
     [SerializeField] private Sprite objectSprite;
     public Sprite ObjectSprite { get => objectSprite; set => objectSprite = value; }
 
-    [SerializeField] private Transform shader;
+     private Transform shader;
 
     private void OnValidate()
     {
@@ -74,7 +74,8 @@ public class LayerObject : MonoBehaviour, ILayerObject
 
     public void SetShaderActive(bool active)
     {
-        shader?.gameObject.SetActive(active);
+        if (shader != null)
+            shader.gameObject.SetActive(active);
     }
 
     //Utilities
