@@ -13,7 +13,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference music { get; private set; }
 
     [field: Header("Player SFX")]
-    [field: SerializeField] public List<EventReference> playerFootsteps {  get; set; }
+    [field: SerializeField] public EventReference playerFootsteps {  get; set; }
 
     [field: Header("Eye SFX")]
     
@@ -31,6 +31,9 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference Door { get; private set; }
     [field: SerializeField] public EventReference BackpackZipper { get; private set; }
     [field: SerializeField] public EventReference eyeCollected { get; private set; }
+
+    [field: Header("Dialogues")]
+    [field: SerializeField] public EventReference Dialogue_StupidItsBlocked { get; private set; }
     public static FMODEvents instance { get; private set; }
 
     private void Awake()

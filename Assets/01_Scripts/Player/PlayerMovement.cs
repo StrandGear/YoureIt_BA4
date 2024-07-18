@@ -75,11 +75,11 @@ public class PlayerMovement : MonoBehaviour
         if (AudioManager.instance == null)
             return;
         // Initialize playerFootsteps
-        //playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
+        playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
 
         // Set initial 3D attributes (position and velocity)
-        //playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
-        //playerFootsteps.start();
+        playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+        playerFootsteps.start();
         
         //Initialize speed variables
         targetSpeed = playerSpeed;
