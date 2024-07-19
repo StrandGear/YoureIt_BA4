@@ -78,6 +78,7 @@ public class PlayerRespawn : MonoBehaviour
                     tempZpos = zPos;
 
                 respawnPoint.position = new Vector3(tempXpos, tempYpos, tempZpos);
+                respawnPoint.rotation = lastCheckpoint.PlayerRotation;
             }
             else
             {
