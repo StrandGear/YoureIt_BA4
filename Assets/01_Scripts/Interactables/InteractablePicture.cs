@@ -6,14 +6,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(InteractableObject))]
 public class InteractablePicture : InteractableObject
 {
-    public Sprite drawing;
+    [Tooltip("This is gonna be displayed as a drawing on UI")]
+    public Sprite UIdrawing;    
 
-    private GameObject uiGameObjectToRenderPicture;
+    private GameObject uiGameObjectToRenderPicture; //normal UI 
 
     private void Start()
     {
         uiGameObjectToRenderPicture = transform.Find("UICanvas").gameObject.GetComponentInChildren<Image>().gameObject;
-        uiGameObjectToRenderPicture.GetComponentInChildren<Image>().sprite = drawing;
+        uiGameObjectToRenderPicture.GetComponentInChildren<Image>().sprite = UIdrawing;
     }
     public override void Interact()
     {
