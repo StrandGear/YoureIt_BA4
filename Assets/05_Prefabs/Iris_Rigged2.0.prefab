@@ -2312,6 +2312,7 @@ GameObject:
   - component: {fileID: 292809829683741917}
   - component: {fileID: 7384199826987215584}
   - component: {fileID: 1198911272922669462}
+  - component: {fileID: 6367806712588649124}
   m_Layer: 0
   m_Name: Iris_Rigged2.0
   m_TagString: Player
@@ -2410,8 +2411,13 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   playerSpeed: 6
   speedBoostMultiplier: 2
-  jumpHeight: 1
   gravityValue: -9.81
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   crouchSpeed: 2
   crouchHeight: 0.5
   crouchCenter: {x: 0, y: 0.5, z: 0}
@@ -2434,6 +2440,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 292809829683741917}
   respawnPoint: {fileID: 0}
+  keepXposStatic: 0
+  keepYposStatic: 1
+  keepZposStatic: 0
+--- !u!114 &6367806712588649124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3675777180004170140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 717b66d68cda5bb409199e2a49639d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionButton: {fileID: 562261188112217769, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
 --- !u!1 &3683308561125612039
 GameObject:
   m_ObjectHideFlags: 0

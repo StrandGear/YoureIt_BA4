@@ -38,7 +38,7 @@ public class Checkpoint : MonoBehaviour
 
             playerRotation = other.transform.rotation;
 
-            Singleton.GetInstance<CheckpointManager>().AddCheckpoint(this);
+            CheckpointManager.instance.AddCheckpoint(this);
             
             if (enemyAttack != null)
             {

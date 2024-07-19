@@ -71,7 +71,7 @@ public class PlayerScan : MonoBehaviour
             if (!elem.IsUsed)
             {
                 LayerManager.Instance.AddLayer(elem);
-                elem.SetShaderActive(true);
+                //elem.SetShaderActive(true);
             }
         }
     }

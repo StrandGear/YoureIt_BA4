@@ -13,7 +13,7 @@ public class PlayerRespawn : MonoBehaviour
     public bool keepZposStatic = false; // for second level
     public event Action onPlayerRespawn;
 
-    private Transform initialRespawnPoint;
+    private Vector3 initialRespawnPoint = new Vector3(-43f, 0.07f, 32f);
 
     private static float xPos; //always keeping y pos the same
     private static float yPos; //always keeping y pos the same
@@ -30,8 +30,8 @@ public class PlayerRespawn : MonoBehaviour
             playerController = GetComponent<CharacterController>();
         }
 
-        if (initialRespawnPoint == null)
-            initialRespawnPoint = gameObject.transform;
+
+        respawnPoint.position = initialRespawnPoint;
 
         AssignNewRespawnPosition();
     }
@@ -58,12 +58,16 @@ public class PlayerRespawn : MonoBehaviour
 
     private void AssignNewRespawnPosition()
     {
-        var checkpointManager = Singleton.GetInstance<CheckpointManager>();
+        var checkpointManager = CheckpointManager.instance;
+        respawnPoint.position = initialRespawnPoint;
+        print(respawnPoint);
+        
         if (checkpointManager != null)
         {
             var lastCheckpoint = checkpointManager.GetLastCheckpoint();
             if (lastCheckpoint != null)
             {
+                print(lastCheckpoint);
                 float tempXpos = lastCheckpoint.CheckpointPosition.position.x;
                 float tempYpos = lastCheckpoint.CheckpointPosition.position.y;
                 float tempZpos = lastCheckpoint.CheckpointPosition.position.z;
@@ -83,13 +87,13 @@ public class PlayerRespawn : MonoBehaviour
             else
             {
                 //Debug.LogWarning("No checkpoint found. Using initial respawn point.");
-                respawnPoint = initialRespawnPoint;
+                respawnPoint.position = initialRespawnPoint;
             }
         }
         else
         {
             //Debug.LogError("CheckpointManager instance is not available.");
-            respawnPoint = initialRespawnPoint;
+            respawnPoint.position = initialRespawnPoint;
         }
     }
 }

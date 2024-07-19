@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using FMOD.Studio;
 
 public class LayerManager : MonoBehaviour
 {
@@ -63,6 +64,8 @@ public class LayerManager : MonoBehaviour
         }
     }
 
+    //private EventInstance UI_selectObject_sound;
+
     private void Awake()
     {
         if (instance == null)
@@ -79,6 +82,18 @@ public class LayerManager : MonoBehaviour
         layerBtnUP.onClick.AddListener(() => MoveLayerUp(CurrentlySelectedLayerData));
 
         //HideTransparencySlider();
+    }
+
+    private void Start()
+    {
+        if (AudioManager.instance == null)
+            return;
+        // Initialize playerFootsteps
+        //UI_selectObject_sound = AudioManager.instance.CreateEventInstance(FMODEvents.instance.UI_selectElement);
+
+        // Set initial 3D attributes (position and velocity)
+        //UIsounds.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+        
     }
 
     public void AddLayer(ILayerObject obj)
@@ -138,15 +153,13 @@ public class LayerManager : MonoBehaviour
             //Assigning Listeners
             layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>().onClick.AddListener(() => SetActiveLayer(layer));
 
-            if (layer.gameObject.GetComponent<HidingLayer>() != null)
-                layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnEyeToggleValueChange(value, layer));
-            else
+            if (layer.gameObject.GetComponent<HidingLayer>() == null)
                 layer.layerUIManager.SetEyeToggleInactive();
+            layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnEyeToggleValueChange(value, layer));
 
-            if (layer.gameObject.GetComponent<LockingLayer>() != null)
-                layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));
-            else
+            if (layer.gameObject.GetComponent<LockingLayer>() == null)
                 layer.layerUIManager.SetLockToggleInactive();
+            layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));                
         }
     }
 
@@ -209,13 +222,17 @@ public class LayerManager : MonoBehaviour
             activeLayer.Deselect();
             ClearActiveLayer();
         }
-
         activeLayer = activeLayerToggleButton;
         activeLayer.Highlight(true);
 
         CurrentlySelectedLayerData = layers.Find(layer => layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>() == activeLayer); //wtf
+        
+        AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
 
         newActiveLayer.layerUIManager.ShowLayerFrame(true);
+
+        newActiveLayer.layerObject.SetShaderActive(true);
+        //UI_selectObject_sound.start();
     }
 
     public void ClearActiveLayer()
@@ -224,6 +241,7 @@ public class LayerManager : MonoBehaviour
         {
             activeLayer.Highlight(false);
             currentlySelectedLayerData.layerUIManager.ShowLayerFrame(false);
+            currentlySelectedLayerData.layerObject.SetShaderActive(false);
 
             activeLayer = null;
             CurrentlySelectedLayerData = null;
@@ -240,14 +258,22 @@ public class LayerManager : MonoBehaviour
     void OnEyeToggleValueChange(bool value, LayerData layerData)
     {
         if (layerData.gameObject.GetComponent<HidingLayer>() != null)
+        {
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
             layerData.gameObject.GetComponent<HidingLayer>().IsHidden = !value; //fix later
+        }    
+        else
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_cantSelect);
     }
     public void OnLockToggleValueChange(bool value, LayerData layerData)
     {  
         if (layerData.gameObject.GetComponent<LockingLayer>() != null)
         {
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
             layerData.gameObject.GetComponent<LockingLayer>().IsLocked = value;
         }
+        else
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_cantSelect);
     }
 /*    public void OnLinkToggleValueChange(bool value, LayerData layerData)
     {
@@ -293,17 +319,22 @@ public class LayerManager : MonoBehaviour
     private void MoveLayerDown(LayerData layerData)
     {
         int index = layers.IndexOf(layerData);
-        print("first " + index);
+        //print("first " + index);
         if (index < layers.Count - 1)
         {
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
             int swappedLayerIndex = index + 1;
             layers.RemoveAt(index);
             print(index);
             layers.Insert(index + 1, layerData);
             UpdateLayerPositions(index, swappedLayerIndex);
         }
-        else 
+        else
+        {
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_cantSelect);
             return;
+        }
+            
     }
 
     private void MoveLayerUp(LayerData layerData)
@@ -311,13 +342,17 @@ public class LayerManager : MonoBehaviour
         int index = layers.IndexOf(layerData);
         if (index > 0)
         {
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
             int swappedLayerIndex = index - 1;
             layers.RemoveAt(index);
             layers.Insert(index - 1, layerData);
             UpdateLayerPositions(index, swappedLayerIndex);
         }
         else
+        {
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_cantSelect);
             return;
+        }
     }
 
     private void UpdateLayerPositions(int selectedLayerIndex, int swappedLayerIndex)
