@@ -15,9 +15,6 @@ public class PlayerScan : MonoBehaviour
 
     [SerializeField] private LayerObjectsVisibilityRadius layerObjectsVisibilityRadius;
 
-    [SerializeField]  public GameObject EyeUIElement;
-    [SerializeField]  public GameObject LayersUIElement;
-
     private void OnEnable()
     {
         scanControl.action.Enable();
