@@ -14,14 +14,14 @@ public class DialogueSoundManager : Singleton
 
     private int currentDialogueIndex = 0;
 
-    private void Start()
+/*    private void Start()
     {
         // Enqueue all dialogue sequences
         foreach (var dialogue in dialogueSequences)
         {
             dialogueQueue.Enqueue(dialogue);
         }
-    }
+    }*/
 
     public void PlayDialogueSequence(int index)
     {
@@ -37,9 +37,14 @@ public class DialogueSoundManager : Singleton
 
     public void PlayNextDialogueSequence()
     {
-        if (!isPlaying && dialogueQueue.Count > 0)
+        if (currentDialogueIndex < dialogueSequences.Count)
         {
-            StartCoroutine(PlayDialogue());
+            dialogueQueue.Enqueue(dialogueSequences[currentDialogueIndex]);
+            currentDialogueIndex++;
+            if (!isPlaying)
+            {
+                StartCoroutine(PlayDialogue());
+            }
         }
     }
 
