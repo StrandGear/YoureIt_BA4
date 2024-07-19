@@ -215,8 +215,6 @@ public class LayerManager : MonoBehaviour
 
     public void SetActiveLayer(LayerData newActiveLayer)
     {
-        AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
-
         ToggleButton activeLayerToggleButton = newActiveLayer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>();
 
         if (activeLayer != null && activeLayer != activeLayerToggleButton)
@@ -224,14 +222,16 @@ public class LayerManager : MonoBehaviour
             activeLayer.Deselect();
             ClearActiveLayer();
         }
-
         activeLayer = activeLayerToggleButton;
         activeLayer.Highlight(true);
 
         CurrentlySelectedLayerData = layers.Find(layer => layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>() == activeLayer); //wtf
+        
+        AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
 
         newActiveLayer.layerUIManager.ShowLayerFrame(true);
 
+        newActiveLayer.layerObject.SetShaderActive(true);
         //UI_selectObject_sound.start();
     }
 
@@ -241,6 +241,7 @@ public class LayerManager : MonoBehaviour
         {
             activeLayer.Highlight(false);
             currentlySelectedLayerData.layerUIManager.ShowLayerFrame(false);
+            currentlySelectedLayerData.layerObject.SetShaderActive(false);
 
             activeLayer = null;
             CurrentlySelectedLayerData = null;
