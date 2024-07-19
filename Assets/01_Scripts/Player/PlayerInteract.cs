@@ -33,7 +33,7 @@ public class PlayerInteract : MonoBehaviour
             }
         }
 
-        if (interactionButton.action.WasReleasedThisFrame())
+        if (interactionButton.action.WasPressedThisFrame())
         {
             interactionButtonPressedTimes++;
 
