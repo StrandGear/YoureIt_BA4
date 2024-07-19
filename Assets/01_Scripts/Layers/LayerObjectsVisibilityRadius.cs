@@ -17,7 +17,7 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
     {
         //getting all layer objects
         other.gameObject.TryGetComponent(out LayerObject layerObject);
-        if (layerObject != null)
+        if (layerObject != null && !layerObject.IsUsed)
         {
             visibleObjects.Add(layerObject);
         }
