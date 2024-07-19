@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private int numberOfEyes;
+/*    [SerializeField] private int numberOfEyes;
     public int NumberOfEyes { get => numberOfEyes; 
         set {
             value = value < 0 ? 0 : value;
@@ -13,7 +13,7 @@ public class PlayerInventory : MonoBehaviour
         } }
 
     public UnityEvent<PlayerInventory> OnEyeCollected;
-    public UnityEvent<PlayerInventory> OnEyeUsed;
+    public UnityEvent<PlayerInventory> OnEyeUsed;*/
 
     private static PlayerInventory instance = null;
     public static PlayerInventory Instance
@@ -46,14 +46,15 @@ public class PlayerInventory : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (OnEyeCollected == null)
+/*        if (OnEyeCollected == null)
             OnEyeCollected = new UnityEvent<PlayerInventory>();
 
         if (OnEyeUsed == null)
             OnEyeUsed = new UnityEvent<PlayerInventory>();
+*/
     }
 
-    public void EyeCollected()
+/*    public void EyeCollected()
     {
         NumberOfEyes++;
         OnEyeCollected.Invoke(this);
@@ -63,5 +64,5 @@ public class PlayerInventory : MonoBehaviour
     {
         NumberOfEyes--;
         OnEyeCollected.Invoke(this);
-    }
+    }*/
 }

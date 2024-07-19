@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class LayerObject : MonoBehaviour, ILayerObject
 {
-    [SerializeField]
     private string objectName = "";
     public string Name { get => objectName; set => objectName = value; }
 
@@ -20,6 +19,8 @@ public class LayerObject : MonoBehaviour, ILayerObject
 
     [SerializeField] private Sprite objectSprite;
     public Sprite ObjectSprite { get => objectSprite; set => objectSprite = value; }
+
+     private Transform shader;
 
     private void OnValidate()
     {
@@ -45,6 +46,16 @@ public class LayerObject : MonoBehaviour, ILayerObject
         ObjectSprite = objectSprite;
 
         ID = GetInstanceID();
+
+        if (shader == null)
+        {
+            shader = FindShaderObject(transform, "shader");
+        }
+    }
+
+    private void Start()
+    {
+        SetShaderActive(false);
     }
 
     public void ResetPosition()
@@ -60,4 +71,30 @@ public class LayerObject : MonoBehaviour, ILayerObject
 
         transform.position = CurrentFixedPosition;
     }
+
+    public void SetShaderActive(bool active)
+    {
+        if (shader != null)
+            shader.gameObject.SetActive(active);
+    }
+
+    //Utilities
+    private Transform FindShaderObject(Transform parent, string postfix)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.name.ToLower().Contains(postfix.ToLower()))
+            {
+                return child;
+            }
+
+            Transform found = FindShaderObject(child, postfix);
+            if (found != null)
+            {
+                return found;
+            }
+        }
+        return null;
+    }
+
 }

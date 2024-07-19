@@ -17,8 +17,8 @@ public class LayerManager : MonoBehaviour
     [SerializeField] private Button layerBtnDown;
     [SerializeField] private Transform uiParent;
 
-    [Tooltip("Displayed for objects with Transparent Layer")]
-    [SerializeField] private Slider transparencySlider;
+/*    [Tooltip("Displayed for objects with Transparent Layer")]
+    [SerializeField] private Slider transparencySlider;*/
     private ToggleButton activeLayer;
     private bool layerLocked = false;
 
@@ -75,15 +75,10 @@ public class LayerManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        /*        foreach (ILayerObject obj in FindObjectsOfType<MonoBehaviour>().OfType<ILayerObject>())
-                {
-                    AddLayer(obj);
-                }*/
-
         layerBtnDown.onClick.AddListener(() => MoveLayerDown(CurrentlySelectedLayerData));
         layerBtnUP.onClick.AddListener(() => MoveLayerUp(CurrentlySelectedLayerData));
 
-        HideTransparencySlider();
+        //HideTransparencySlider();
     }
 
     public void AddLayer(ILayerObject obj)
@@ -121,21 +116,37 @@ public class LayerManager : MonoBehaviour
         {
             GameObject uiElement = Instantiate(layerUIPrefab, uiParent);
             layer.uiElement = uiElement.GetComponent<RectTransform>();
-            //layer.toggleButton = uiElement.GetComponentInChildren<ToggleButton>();
             layer.layerUIManager = uiElement.GetComponent<LayerUIManager>();
-            //uiElement.GetComponentInChildren<TMP_Text>().text = layer.name;
-
-            // Set up the toggle button's onClick listener to handle layer selection
-            //layer.toggleButton.onClick.AddListener(() => SetActiveLayer(layer.toggleButton));
 
             if(layer.layerObject.ObjectSprite != null)
                 layer.layerUIManager.ItemImageButton.GetComponent<Image>().sprite = layer.layerObject?.ObjectSprite;
 
+
+            // Setting default values
+            layer.layerObject.TryGetComponent(out HidingLayer hidingLayer);
+            if (hidingLayer != null)
+            {
+                layer.layerUIManager.EyeToggle.GetComponent<Toggle>().isOn = !hidingLayer.IsHidden;
+            }
+
+            layer.layerObject.TryGetComponent(out LockingLayer lockingLayer);
+            if (lockingLayer != null)
+            {
+                layer.layerUIManager.LockToggle.GetComponent<Toggle>().isOn = lockingLayer.IsLocked;
+            }
+
             //Assigning Listeners
             layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>().onClick.AddListener(() => SetActiveLayer(layer));
-            layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener( (value) => OnEyeToggleValueChange(value, layer) );
-            layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));
-            layer.layerUIManager.LinkToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLinkToggleValueChange(value, layer));
+
+            if (layer.gameObject.GetComponent<HidingLayer>() != null)
+                layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnEyeToggleValueChange(value, layer));
+            else
+                layer.layerUIManager.SetEyeToggleInactive();
+
+            if (layer.gameObject.GetComponent<LockingLayer>() != null)
+                layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));
+            else
+                layer.layerUIManager.SetLockToggleInactive();
         }
     }
 
@@ -232,15 +243,17 @@ public class LayerManager : MonoBehaviour
             layerData.gameObject.GetComponent<HidingLayer>().IsHidden = !value; //fix later
     }
     public void OnLockToggleValueChange(bool value, LayerData layerData)
-    {
+    {  
         if (layerData.gameObject.GetComponent<LockingLayer>() != null)
+        {
             layerData.gameObject.GetComponent<LockingLayer>().IsLocked = value;
+        }
     }
-    public void OnLinkToggleValueChange(bool value, LayerData layerData)
+/*    public void OnLinkToggleValueChange(bool value, LayerData layerData)
     {
         if (layerData.gameObject.GetComponent<HidingLayer>() == null)
             return;
-    }
+    }*/
 
     public void UpdateLockToggleValue(bool value)
     {
@@ -251,7 +264,7 @@ public class LayerManager : MonoBehaviour
             moveObject.ToggleFreeze();*/
     }
 
-    private void ShowTransparencySlider()
+/*    private void ShowTransparencySlider()
     {
         CurrentlySelectedLayerData.gameObject.TryGetComponent(out TransparentLayer tempGameObj);
 
@@ -264,18 +277,18 @@ public class LayerManager : MonoBehaviour
             transparencySlider.onValueChanged.AddListener((value) => tempGameObj.Transparency = value);
         }
         else return;
-    }
+    }*/
 
     private void ShowLockToggle()
     {
         CurrentlySelectedLayerData.uiElement.Find("LockToggle");
     }
 
-    private void HideTransparencySlider()
+/*    private void HideTransparencySlider()
     {
         transparencySlider.onValueChanged.RemoveAllListeners();
         transparencySlider.gameObject.SetActive(false);
-    }
+    }*/
 
     private void MoveLayerDown(LayerData layerData)
     {
