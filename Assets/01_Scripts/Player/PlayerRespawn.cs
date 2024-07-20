@@ -13,7 +13,7 @@ public class PlayerRespawn : MonoBehaviour
     public bool keepZposStatic = false; // for second level
     public event Action onPlayerRespawn;
 
-    private Vector3 initialRespawnPoint = new Vector3(-43f, 0.07f, 32f);
+    private Vector3 initialRespawnPoint;
 
     private static float xPos; //always keeping y pos the same
     private static float yPos; //always keeping y pos the same
@@ -25,11 +25,12 @@ public class PlayerRespawn : MonoBehaviour
         yPos = gameObject.transform.position.y;
         zPos = gameObject.transform.position.z;
 
+        initialRespawnPoint = gameObject.transform.position;
+
         if (playerController == null)
         {
             playerController = GetComponent<CharacterController>();
         }
-
 
         respawnPoint.position = initialRespawnPoint;
 
@@ -73,7 +74,7 @@ public class PlayerRespawn : MonoBehaviour
                 float tempZpos = lastCheckpoint.CheckpointPosition.position.z;
 
                 if (keepXposStatic)
-                    tempYpos = yPos;
+                    tempYpos = xPos;
 
                 if (keepYposStatic)
                     tempYpos = yPos;
