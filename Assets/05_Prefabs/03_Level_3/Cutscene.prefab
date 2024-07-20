@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6833653290739851056}
   - component: {fileID: 1044277007737439990}
+  - component: {fileID: 5988110072306262572}
   m_Layer: 0
   m_Name: Timeline Lv3
   m_TagString: Untagged
@@ -232,7 +233,7 @@ Transform:
   m_GameObject: {fileID: 1298619883696046844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.031999588, y: -1.029, z: -0.018997192}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -263,7 +264,27 @@ PlayableDirector:
     value: {fileID: 0}
   - key: {fileID: 6438568398203599477, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
     value: {fileID: 0}
-  - key: {fileID: 5028006207026589923, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+  - key: {fileID: 9134425410907434550, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 2690329876307055688}
+  - key: {fileID: 3095895357204002444, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 5439331417677904291}
+  - key: {fileID: 2937245330966553031, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 5439331417677904291}
+  - key: {fileID: -2754728606719725622, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 5419018667370198067}
+  - key: {fileID: 5882441062523855866, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 2724064495212145779}
+  - key: {fileID: 5300916886365953582, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 5343453028981325109}
+  - key: {fileID: 1048506458658266030, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 3359930430741838907}
+  - key: {fileID: -4078979620059508872, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 7536486535979440769}
+  - key: {fileID: -9141205081841199739, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 9021273964288605614}
+  - key: {fileID: 6837308770966580724, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
+    value: {fileID: 8720186410518785492}
+  - key: {fileID: 7954645617883891232, guid: 8c2c6c6a852b0c34b9f29a9d0ac59255, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -276,6 +297,37 @@ PlayableDirector:
     - bc0842f94189e0941860ca59afd0a5cb: {fileID: 8602557304283283615}
     - ac18ff6c52c067745b44968830da6dd4: {fileID: 6525954366006017240}
     - 94254e7b670448e43b9e9fa0b7c6a338: {fileID: 6164319095583478127}
+--- !u!114 &5988110072306262572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298619883696046844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1483153175
+      Data2: 1293966742
+      Data3: -502312531
+      Data4: -798461160
+    Path: event:/Cutscenes/Level 1/Intro Cutscene
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1413550897248987565
 GameObject:
   m_ObjectHideFlags: 0
