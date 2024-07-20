@@ -7,6 +7,8 @@ public class Checkpoint : MonoBehaviour
     public bool activated = false;
     public EnemyAttack enemyAttack;
 
+    public bool ResetLayers = true;
+
     private Quaternion playerRotation;
     //private Transform checkpointPosition;
 
@@ -26,7 +28,9 @@ public class Checkpoint : MonoBehaviour
     {
         if(other.GetComponent<CharacterController>() != null )
         {
-            LayerManager.Instance.SetAllObjectsAsUsed();
+            if(ResetLayers)
+                LayerManager.Instance.SetAllObjectsAsUsed();
+
             LayerManager.Instance.ClearLayerList();
 
             //Singleton.GetInstance<PlayerScan>().StopScanning();
