@@ -12542,6 +12542,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1785926390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785926386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 459932004
+      Data2: 1182849600
+      Data3: 544463502
+      Data4: -836809899
+    Path: event:/General SFX/Teddy Bear by the window
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 12
 --- !u!1 &1794319833
 GameObject:
   m_ObjectHideFlags: 0
@@ -20064,6 +20095,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3264619496346029592, guid: ea6eb701d44f5424ba54ee1730bc8d38, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1785926388}
+    - targetCorrespondingSourceObject: {fileID: 3264619496346029592, guid: ea6eb701d44f5424ba54ee1730bc8d38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1785926390}
     - targetCorrespondingSourceObject: {fileID: 613916523340263121, guid: ea6eb701d44f5424ba54ee1730bc8d38, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1768120429}
@@ -20114,6 +20148,46 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1124932729009370694, guid: ea6eb701d44f5424ba54ee1730bc8d38, type: 3}
   m_PrefabInstance: {fileID: 6689686114398945588}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6689686114398945591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3254180637046210949, guid: ea6eb701d44f5424ba54ee1730bc8d38, type: 3}
+  m_PrefabInstance: {fileID: 6689686114398945588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6689686114398945592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6689686114398945591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088d55d9874ea8c4597c2d40c1a09ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionText: Interact(E)
+  drawing: {fileID: 0}
+--- !u!65 &6689686114398945593
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6689686114398945591}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4196401, y: 0.5718013, z: 0.07058736}
+  m_Center: {x: 0.66260666, y: 0.28894246, z: -0.0476}
 --- !u!1001 &8169441161711403394
 PrefabInstance:
   m_ObjectHideFlags: 0
