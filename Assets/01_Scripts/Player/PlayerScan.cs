@@ -15,9 +15,6 @@ public class PlayerScan : MonoBehaviour
 
     [SerializeField] private LayerObjectsVisibilityRadius layerObjectsVisibilityRadius;
 
-    [SerializeField]  public GameObject EyeUIElement;
-    [SerializeField]  public GameObject LayersUIElement;
-
     private void OnEnable()
     {
         scanControl.action.Enable();
@@ -74,7 +71,7 @@ public class PlayerScan : MonoBehaviour
             if (!elem.IsUsed)
             {
                 LayerManager.Instance.AddLayer(elem);
-                elem.SetShaderActive(true);
+                //elem.SetShaderActive(true);
             }
         }
     }

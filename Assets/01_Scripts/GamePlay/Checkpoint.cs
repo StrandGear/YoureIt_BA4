@@ -5,7 +5,11 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     public bool activated = false;
-    public EnemyAttack enemyAttack; 
+    public EnemyAttack enemyAttack;
+
+    public bool ResetLayers = true;
+
+    private Quaternion playerRotation;
     //private Transform checkpointPosition;
 
     //public Transform CheckpointPosition { get => checkpointPosition;}
@@ -22,9 +26,11 @@ public class Checkpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<CharacterController>() != null && !activated)
+        if(other.GetComponent<CharacterController>() != null )
         {
-            LayerManager.Instance.SetAllObjectsAsUsed();
+            if(ResetLayers)
+                LayerManager.Instance.SetAllObjectsAsUsed();
+
             LayerManager.Instance.ClearLayerList();
 
             //Singleton.GetInstance<PlayerScan>().StopScanning();
@@ -34,7 +40,9 @@ public class Checkpoint : MonoBehaviour
 
             //checkpointPosition = gameObject.transform;
 
-            Singleton.GetInstance<CheckpointManager>().AddCheckpoint(this);
+            playerRotation = other.transform.rotation;
+
+            CheckpointManager.instance.AddCheckpoint(this);
             
             if (enemyAttack != null)
             {
@@ -62,5 +70,10 @@ public class Checkpoint : MonoBehaviour
     public Transform CheckpointPosition
     {
         get { return this.transform; }
+    }
+
+    public Quaternion PlayerRotation // Add this property
+    {
+        get { return playerRotation; }
     }
 }
