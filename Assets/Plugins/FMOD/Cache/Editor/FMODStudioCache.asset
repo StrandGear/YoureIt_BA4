@@ -284,7 +284,7 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638571664954216331
+  lastModified: 638571689268265335
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -466,7 +466,7 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Dialogues.bank
   Name: Dialogues
   StudioPath: bank:/Dialogues
-  lastModified: 638571666159198887
+  lastModified: 638571689268094103
   FileSizes:
   - Name: Desktop
     Value: 5671488
@@ -486,10 +486,10 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Cutscenes.bank
   Name: Cutscenes
   StudioPath: bank:/Cutscenes
-  lastModified: 638571645026976453
+  lastModified: 638571690367314165
   FileSizes:
   - Name: Desktop
-    Value: 96448
+    Value: 131072
   Exists: 1
 --- !u!114 &-4615051250818673645
 MonoBehaviour:
@@ -1141,12 +1141,13 @@ MonoBehaviour:
   - {fileID: -4182069106623506955}
   - {fileID: 571608702427351032}
   - {fileID: -4545674309238654804}
+  - {fileID: 5445674083095167855}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6953529638130834729}
   StringsBanks:
   - {fileID: 1875977067589827436}
-  cacheTime: 638571666159198887
+  cacheTime: 638571690367314165
   cacheVersion: 131618
 --- !u!114 &93355040950764804
 MonoBehaviour:
@@ -1372,10 +1373,10 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638571664954236326
+  lastModified: 638571689268285522
   FileSizes:
   - Name: Desktop
-    Value: 4372
+    Value: 4430
   Exists: 1
 --- !u!114 &2142591997531612160
 MonoBehaviour:
@@ -1849,6 +1850,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1394
+--- !u!114 &5445674083095167855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Cutscenes/Level 1/Opening Locker
+  m_EditorClassIdentifier: 
+  Path: event:/Cutscenes/Level 1/Opening Locker
+  Guid:
+    Data1: -501659741
+    Data2: 1145377283
+    Data3: -1068526426
+    Data4: 280955408
+  Banks:
+  - {fileID: -4941395138631175102}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &5596750598182324325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1945,7 +1973,7 @@ MonoBehaviour:
   Path: You're It FMOD/You're It/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638571665885757915
+  lastModified: 638571689307047906
   FileSizes:
   - Name: Desktop
     Value: 10271680
