@@ -3,30 +3,72 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 public class CutsceneManager : Singleton
 {
-    [SerializeField] public List<CutsceneData> cutscenes;
+    public List<GameObject> cutsceneObjects;
+
+    private Queue<GameObject> cutsceneQueue = new Queue<GameObject>();
+    private bool isPlaying = false;
 
     private void Awake()
     {
-        foreach (CutsceneData elem in cutscenes)
+        // Initialize the cutscene queue
+        foreach (GameObject cutsceneObject in cutsceneObjects)
         {
-            elem.unityEvent.AddListener(() => PlayCutscene(elem.playableDirector));
+            cutsceneQueue.Enqueue(cutsceneObject);
         }
     }
 
-    void PlayCutscene(PlayableDirector playableDirector)
+    public void PlayNextCutscene()
     {
-        playableDirector.Play();
-        print("Should play cutscene");
+        if (!isPlaying && cutsceneQueue.Count > 0)
+        {
+            StartCoroutine(PlayCutscene(cutsceneQueue.Dequeue()));
+        }
     }
+
+    public void PlayCutsceneByIndex(int index)
+    {
+        if (!isPlaying && index >= 0 && index < cutsceneObjects.Count)
+        {
+            cutsceneQueue.Clear(); // Clear the queue to prevent any overlap
+            cutsceneQueue.Enqueue(cutsceneObjects[index]);
+            PlayNextCutscene();
+        }
+    }
+
+    private IEnumerator PlayCutscene(GameObject cutsceneObject)
+    {
+        isPlaying = true;
+
+        // Activate the cutscene object
+        cutsceneObject.SetActive(true);
+
+        // Get the PlayableDirector component and play the cutscene
+        PlayableDirector director = cutsceneObject.GetComponentInChildren<PlayableDirector>();
+        if (director != null)
+        {
+            //director.Play();
+            yield return new WaitForSeconds((float)director.duration);
+        }
+
+        // Deactivate the cutscene object
+        cutsceneObject.SetActive(false);
+
+        isPlaying = false;
+
+        // Check if there's another cutscene to play
+        PlayNextCutscene();
+    }
+
 }
 
-[System.Serializable]
+/*[System.Serializable]
 public class CutsceneData
 {
-    public PlayableDirector playableDirector;
+    public GameObject CutsceneObject;
 
     public UnityEvent unityEvent;
-}
+}*/
