@@ -1670,6 +1670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 369119781}
   - component: {fileID: 369119782}
+  - component: {fileID: 369119783}
   m_Layer: 0
   m_Name: Timeline2_Lvl1
   m_TagString: Untagged
@@ -1726,6 +1727,37 @@ PlayableDirector:
     - 18663f86ef17c3246b5b74c2f16c286b: {fileID: 230746517}
     - 2de0999d88d0f35449259c578ad14a26: {fileID: 0}
     - 95a76233f41b9f240924cb05f96ead02: {fileID: 230746517}
+--- !u!114 &369119783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369119780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -501659741
+      Data2: 1145377283
+      Data3: -1068526426
+      Data4: 280955408
+    Path: event:/Cutscenes/Level 1/Opening Locker
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &369399418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7060804812521571648, guid: 1774f99cb66925841b8968df01e75439, type: 3}
