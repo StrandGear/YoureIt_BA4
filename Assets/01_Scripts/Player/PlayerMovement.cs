@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateGroundedStatus()
     {
-        var ray = new Ray(transform.position, Vector3.down);
+        var ray = new Ray(transform.position + new Vector3(0f, 0.1f, 0f), Vector3.down);
         groundedPlayer = Physics.Raycast(ray, 0.1f, groundLayer);
     }
 
