@@ -992,6 +992,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8025743849772053279}
+  - component: {fileID: 5108490706525029409}
+  - component: {fileID: 8446747034133211171}
   m_Layer: 0
   m_Name: Timeline-Lvl1
   m_TagString: Untagged
@@ -1014,6 +1016,88 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3786527273613366413}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &5108490706525029409
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7940881853885034875}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 5535987463029618114, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1084976662283731530, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4149566217069000889, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1483905461973850660, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 3191353095871092844}
+  - key: {fileID: -237498218959462226, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5252330078176367016, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 3191353095871092844}
+  - key: {fileID: -2948990204194806807, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 6684207336782296060}
+  - key: {fileID: -1049812942901032090, guid: 1b4564483acc61d4ca6bb3dce80fba94, type: 2}
+    value: {fileID: 3200349357951550774}
+  m_ExposedReferences:
+    m_References:
+    - e1555ad9d956e3142bf0372b5c56f272: {fileID: 8207167250553480436}
+    - 14583894d4bdf324da7f5ce7fccd746c: {fileID: 8207167250553480436}
+    - 358dd98eb6943624bb2785599715e1fc: {fileID: 8207167250553480436}
+    - fdd98faae773a46419663f042974d099: {fileID: 8207167250553480436}
+    - d546544dfbdb1894d853ad434e7ad807: {fileID: 8207167250553480436}
+    - 2d70beed6050cee47b88104e7b1117c2: {fileID: 8207167250553480436}
+    - 9f3bc3677e36d5c45afa53de5a97a86b: {fileID: 8207167250553480436}
+    - fe2a9471756f1644b88da92d8e5f8315: {fileID: 8207167250553480436}
+    - 1a6bc2abc98360e4fa9f3e429f148192: {fileID: 87186167243181191}
+    - 493c8e396a6368f43b6ccbc0f141fbcb: {fileID: 8207167250553480436}
+    - 6ea587871445536429e735ef52a5829a: {fileID: 7706457763651037023}
+    - 8360dcde5132aa44cb21b69e163e261b: {fileID: 8207167250553480436}
+    - 72b2753ba5e601a4f82d46ae30ff3979: {fileID: 8207167250553480436}
+    - 13639a922f0d932459210e7db24b48f3: {fileID: 7154022845530813542}
+    - 80cd03bbdb096d24291d79d70466831e: {fileID: 8207167250553480436}
+    - ca99ed4a29c8a74418ae39b6cdf0c293: {fileID: 1441091510516152067}
+    - 8a89243d53ce44345817950b67588c0d: {fileID: 8207167250553480436}
+    - 40e763ec26db5544eac6cc0cd581ac12: {fileID: 8207167250553480436}
+--- !u!114 &8446747034133211171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7940881853885034875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1483153175
+      Data2: 1293966742
+      Data3: -502312531
+      Data4: -798461160
+    Path: event:/Cutscenes/Level 1/Intro Cutscene
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8186417899617878224
 GameObject:
   m_ObjectHideFlags: 0
