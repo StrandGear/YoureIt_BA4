@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class TriggerNextDialogue : MonoBehaviour
+public class ResetDialogueTriggers : MonoBehaviour
 {
-    public bool isTriggered { get; set; }
+    public List<TriggerNextDialogue> DialoguesToReset;
+
     private void Awake()
     {
         GetComponent<BoxCollider>().isTrigger = true;
 
         GetComponent<MeshRenderer>().enabled = false;
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!isTriggered)
+        if (other.GetComponent<CharacterController>() != null)
         {
-            if (other.GetComponent<CharacterController>() != null)
+            foreach (TriggerNextDialogue elem in DialoguesToReset)
             {
-                Singleton.GetInstance<DialogueSoundManager>().PlayNextDialogueSequence();
-                isTriggered = true;
+                elem.isTriggered = false;
             }
         }
     }
