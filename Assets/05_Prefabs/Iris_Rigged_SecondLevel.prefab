@@ -316,6 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e052a6c472fe2d47bfbf22417eba566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasKey: 0
+  KeyUI: {fileID: 0}
 --- !u!114 &8994117393805446567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,8 +332,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scanControl: {fileID: 8772536870705236788, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
   layerObjectsVisibilityRadius: {fileID: 0}
-  EyeUIElement: {fileID: 0}
-  LayersUIElement: {fileID: 0}
 --- !u!1 &220767297057157748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,7 +3851,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibleObjects: []
-  visibleCamera: {fileID: 0}
 --- !u!54 &4682912899865638803
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4997,7 +4996,7 @@ Transform:
   m_GameObject: {fileID: 7266639231272709902}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.6427876, z: 0, w: 0.7660445}
-  m_LocalPosition: {x: -8.918334, y: 1.886, z: -24.2}
+  m_LocalPosition: {x: -10.56, y: 17.376, z: -102.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5080,6 +5079,12 @@ MonoBehaviour:
   playerSpeed: 6
   speedBoostMultiplier: 2
   gravityValue: -9.81
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   crouchSpeed: 2
   crouchHeight: 0.5
   crouchCenter: {x: 0, y: 0.5, z: 0}

@@ -93,9 +93,30 @@ public class PlayerMovementSecondLevel : MonoBehaviour
     {
         UpdateGroundedStatus();
         HandleMovement();
-        HandleCrouching(); // Call HandleCrouching in Update
+        //HandleCrouching(); 
         HandleClimbingTransition();
         UpdateSound(); // Call UpdateSound in Update
+        
+        if (isClimbing)
+        {
+            Vector2 movement = movementControl.action.ReadValue<Vector2>();
+            if (movement != Vector2.zero)
+            {
+                animControl.speed = 1f; 
+            }
+            else
+            {
+                animControl.speed = 0f; 
+            }
+        }
+        else if (isCrouching)
+        {
+            animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f; 
+        }
+        else
+        {
+            animControl.speed = 1f; 
+        }
     }
 
     private void LateUpdate()
@@ -187,6 +208,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
             !raycastHit.transform.CompareTag("Ladder") || (groundedPlayer && !isStartingToClimb))
         {
             isClimbing = false;
+            animControl.SetBool("Climbing", false);
         }
     }
 
@@ -221,27 +243,24 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         controller.Move(localMove + playerVelocity * Time.deltaTime);
     }
 
-    private void HandleCrouching()
+    private void HandleCrouching(InputAction.CallbackContext context)
     {
-        if (crouchControl.action.triggered)
-        {
-            if (isCrouching)
-            {
-                isCrouching = false;
-                jumpHeight = 1.0f;
-                controller.center = originalCenter;
-                controller.height = originalHeight;
-                controller.radius = originalRadius;
-            }
-            else
-            {
-                isCrouching = true;
-                jumpHeight = 0f;
-                controller.height = crouchHeight;
-                controller.center = crouchCenter;
-                controller.radius = crouchRadius;
-            }
-        }
+        isCrouching = true;
+        controller.height = crouchHeight;
+        controller.center = crouchCenter;
+        controller.radius = crouchRadius;
+        animControl.SetBool("Crouch", true);
+        animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f;
+    }
+
+    private void HandleStanding(InputAction.CallbackContext context)
+    {
+        isCrouching = false;
+        controller.center = originalCenter;
+        controller.height = originalHeight;
+        controller.radius = originalRadius;
+        animControl.SetBool("Crouch", false);
+        animControl.speed = 1f;
     }
 
     private void CameraRotation()
@@ -279,6 +298,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
                 if (raycastHit.transform.CompareTag("Ladder"))
                 {
                     isClimbing = true;
+                    animControl.SetBool("Climbing", true);
                     groundedPlayer = true;
                     isStartingToClimb = true;
                     climbingTimer = 2f;
@@ -296,6 +316,9 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         interactControl.action.Enable();
         lookControl.action.Enable();
         crouchControl.action.Enable();
+
+        crouchControl.action.performed += HandleCrouching;
+        crouchControl.action.canceled += HandleStanding;
     }
 
     private void OnDisable()
@@ -306,6 +329,9 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         interactControl.action.Disable();
         lookControl.action.Disable();
         crouchControl.action.Disable();
+
+        crouchControl.action.performed -= HandleCrouching;
+        crouchControl.action.canceled -= HandleStanding;
     }
 
     private void UpdateSound()
