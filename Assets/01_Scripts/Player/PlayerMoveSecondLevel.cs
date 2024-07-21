@@ -24,6 +24,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
     [SerializeField] private float speedBoostMultiplier = 2.0f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
+    private float initialZPosition;
 
     [Header("Crouch Settings")]
     [SerializeField] private float crouchSpeed;
@@ -78,7 +79,10 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         // Set initial 3D attributes (position and velocity)
         playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
         playerFootsteps.start();
-        
+
+        //Saving initial Z value 
+        initialZPosition = transform.position.z;
+
         //Initialize speed variables
         targetSpeed = playerSpeed;
         currentSpeed = 0f;
@@ -193,6 +197,9 @@ public class PlayerMovementSecondLevel : MonoBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             Debug.Log("Player Jumped");
         }*/
+        Vector3 currentPosition = transform.position;
+        currentPosition.z = initialZPosition;
+        transform.position = currentPosition;
 
         if (groundedPlayer && playerVelocity.y <= 0)
         {

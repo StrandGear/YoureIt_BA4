@@ -1608,7 +1608,7 @@ MonoBehaviour:
   maxCameraClamp: 5
   mainCam: {fileID: 0}
   playerSpeed: 3.11
-  speedBoostMultiplier: 2
+  speedBoostMultiplier: 1
   jumpHeight: 0.3
   gravityValue: -9.81
   crouchSpeed: 2
@@ -1619,6 +1619,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   animControl: {fileID: 184283763725323926}
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &141166490731158523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1644,6 +1650,12 @@ MonoBehaviour:
   playerSpeed: 6
   speedBoostMultiplier: 2
   gravityValue: -9.81
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   crouchSpeed: 2
   crouchHeight: 0.5
   crouchCenter: {x: 0, y: 0.5, z: 0}

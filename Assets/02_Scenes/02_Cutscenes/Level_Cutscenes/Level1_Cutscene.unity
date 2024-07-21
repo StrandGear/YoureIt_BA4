@@ -1566,6 +1566,104 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dc30aae879310874496a6bf8b9d218be, type: 3}
   m_PrefabInstance: {fileID: 314027504}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &369119780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 369119781}
+  - component: {fileID: 369119782}
+  - component: {fileID: 369119783}
+  m_Layer: 0
+  m_Name: Timeline2_Lvl1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &369119781
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369119780}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10.833454, y: 2.059562, z: 11.521896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1992377954}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &369119782
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369119780}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: ee2b11e7e8561794ea62c485b14b0553, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 3359798551802351889, guid: ee2b11e7e8561794ea62c485b14b0553, type: 2}
+    value: {fileID: 5649028988231041606}
+  - key: {fileID: 2074958005011566679, guid: ee2b11e7e8561794ea62c485b14b0553, type: 2}
+    value: {fileID: 230746516}
+  - key: {fileID: 317821349324430931, guid: ee2b11e7e8561794ea62c485b14b0553, type: 2}
+    value: {fileID: 1218151368}
+  - key: {fileID: 588625697449661427, guid: ee2b11e7e8561794ea62c485b14b0553, type: 2}
+    value: {fileID: 2086249343}
+  - key: {fileID: 2444579356619454675, guid: ee2b11e7e8561794ea62c485b14b0553, type: 2}
+    value: {fileID: 1209827125}
+  - key: {fileID: -5142282308069026840, guid: ee2b11e7e8561794ea62c485b14b0553, type: 2}
+    value: {fileID: 230746516}
+  m_ExposedReferences:
+    m_References:
+    - 7912c26af66d3234f93342adf114f281: {fileID: 230746517}
+    - c1368b08380db5e41a171cf81969bde7: {fileID: 0}
+    - 18663f86ef17c3246b5b74c2f16c286b: {fileID: 230746517}
+    - 2de0999d88d0f35449259c578ad14a26: {fileID: 0}
+    - 95a76233f41b9f240924cb05f96ead02: {fileID: 230746517}
+--- !u!114 &369119783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369119780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -501659741
+      Data2: 1145377283
+      Data3: -1068526426
+      Data4: 280955408
+    Path: event:/Cutscenes/Level 1/Opening Locker
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &369399418 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7060804812521571648, guid: 1774f99cb66925841b8968df01e75439, type: 3}

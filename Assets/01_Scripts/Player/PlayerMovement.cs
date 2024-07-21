@@ -74,14 +74,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (AudioManager.instance == null)
             return;
+
         // Initialize playerFootsteps
         playerFootsteps = AudioManager.instance.CreateEventInstance(FMODEvents.instance.playerFootsteps);
-
-        // Set initial 3D attributes (position and velocity)
         playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
         playerFootsteps.start();
         
-        //Initialize speed variables
+        // Initialize speed variables
         targetSpeed = playerSpeed;
         currentSpeed = 0f;
         accelerationTimer = 0f;
@@ -93,6 +92,28 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleClimbingTransition();
         UpdateSound(); // Call UpdateSound in Update
+        
+        // Adjust animation speed based on climbing and movement state
+        if (isClimbing)
+        {
+            Vector2 movement = movementControl.action.ReadValue<Vector2>();
+            if (movement != Vector2.zero)
+            {
+                animControl.speed = 1f; 
+            }
+            else
+            {
+                animControl.speed = 0f; 
+            }
+        }
+        else if (isCrouching)
+        {
+            animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f; 
+        }
+        else
+        {
+            animControl.speed = 1f; 
+        }
     }
 
     private void LateUpdate()
@@ -102,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateGroundedStatus()
     {
-        var ray = new Ray(transform.position, Vector3.down);
+        var ray = new Ray(transform.position + new Vector3(0f, 0.1f, 0f), Vector3.down);
         groundedPlayer = Physics.Raycast(ray, 0.1f, groundLayer);
     }
 
@@ -219,6 +240,7 @@ public class PlayerMovement : MonoBehaviour
         controller.center = crouchCenter;
         controller.radius = crouchRadius;
         animControl.SetBool("Crouch", true);
+        animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f;
     }
 
     private void HandleStanding(InputAction.CallbackContext context)
@@ -228,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
         controller.height = originalHeight;
         controller.radius = originalRadius;
         animControl.SetBool("Crouch", false);
+        animControl.speed = 1f;
     }
 
     private void CameraRotation()
