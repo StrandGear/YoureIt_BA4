@@ -3391,7 +3391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5046028572425915416, guid: 6347a8c57dad9bb41bc52f7f6d91dd73, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6944632560220397093, guid: 6347a8c57dad9bb41bc52f7f6d91dd73, type: 3}
       propertyPath: m_SceneBindings.Array.size
@@ -3444,7 +3444,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2606690108442270534, guid: 6347a8c57dad9bb41bc52f7f6d91dd73, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 815542019}
   m_SourcePrefab: {fileID: 100100000, guid: 6347a8c57dad9bb41bc52f7f6d91dd73, type: 3}
 --- !u!1 &426972020 stripped
 GameObject:
@@ -6402,6 +6405,42 @@ MonoBehaviour:
   cullingEnabled: 0
   cullingMaxDistance: 10
   m_AlphaAdditionalRuntime: 1
+--- !u!1 &815542016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2606690108442270534, guid: 6347a8c57dad9bb41bc52f7f6d91dd73, type: 3}
+  m_PrefabInstance: {fileID: 426972019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &815542019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815542016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -501659741
+      Data2: 1145377283
+      Data3: -1068526426
+      Data4: 280955408
+    Path: event:/Cutscenes/Level 1/Opening Locker
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &838884198
 GameObject:
   m_ObjectHideFlags: 0
@@ -7832,11 +7871,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1483153175
-      Data2: 1293966742
-      Data3: -502312531
-      Data4: -798461160
-    Path: event:/Cutscenes/Level 1/Intro Cutscene
+      Data1: -501659741
+      Data2: 1145377283
+      Data3: -1068526426
+      Data4: 280955408
+    Path: event:/Cutscenes/Level 1/Opening Locker
   Event: 
   PlayEvent: 1
   StopEvent: 2
