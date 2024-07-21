@@ -48,10 +48,10 @@ public class HidingLayer : MonoBehaviour, IHiding
                 {
                     meshCollider.convex = true;
                 }
-
+                if (colliders[i] != null)
                 colliders[i].isTrigger = true;
             }
-            //gameObject.GetComponent<LayerObject>().SetShaderActive(false);
+            gameObject.GetComponent<LayerObject>().SetShaderActive(false);
         }
         else
         {

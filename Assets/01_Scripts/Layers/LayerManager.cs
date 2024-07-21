@@ -228,7 +228,9 @@ public class LayerManager : MonoBehaviour
         CurrentlySelectedLayerData = layers.Find(layer => layer.layerUIManager.ItemImageButton.GetComponent<ToggleButton>() == activeLayer); //wtf
         
         AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
-        //newActiveLayer.layerObject.SetShaderActive(true);
+
+        if (newActiveLayer.gameObject.GetComponent<HidingLayer>() != null && !newActiveLayer.gameObject.GetComponent<HidingLayer>().IsHidden)
+            newActiveLayer.layerObject.SetShaderActive(true);
        /* if (!isActiveLayerHidden)
             
         else
@@ -268,11 +270,10 @@ public class LayerManager : MonoBehaviour
         else
             AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_cantSelect);
 
-        if (layerData == CurrentlySelectedLayerData)
+        if (layerData == currentlySelectedLayerData)
         {
-            layerData.layerObject.SetShaderActive(!value);
-        }
-
+            layerData.layerObject.SetShaderActive(value);
+        }        
     }
     public void OnLockToggleValueChange(bool value, LayerData layerData)
     {  
