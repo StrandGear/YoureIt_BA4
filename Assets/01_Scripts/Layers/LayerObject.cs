@@ -10,7 +10,7 @@ public class LayerObject : MonoBehaviour, ILayerObject
 
     public GameObject LayerGameObject => gameObject;
 
-    private bool isUsed = false;
+    [SerializeField] private bool isUsed = false;
     public bool IsUsed { get => isUsed; set => isUsed = value; }
     public int ID { get; private set; }
 
