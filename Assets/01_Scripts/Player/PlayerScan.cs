@@ -45,10 +45,10 @@ public class PlayerScan : MonoBehaviour
                 ScanArea();
                 Singleton.GetInstance<GameStates>().SetGameState(GameState.Puzzlemode);
             }
-            else if (scanningButtonPressed == 2) // not scanning
+            else if (scanningButtonPressed >= 2) // not scanning
             {
+                StopScanning(true);
                 Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
-                StopScanning(false);
             }
         }
         
