@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <LayerUI>k__BackingField: {fileID: 0}
   <GameUI>k__BackingField: {fileID: 0}
+  <LayerUI_AnimatorUnfolding>k__BackingField: {fileID: 0}
+  <LayerUI_AnimatorFolding>k__BackingField: {fileID: 0}
 --- !u!1 &2279368057677844570
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +116,37 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!1 &2309127478821820476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5114012185381797088}
+  m_Layer: 0
+  m_Name: Temp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5114012185381797088
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2309127478821820476}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3391627910330343469}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3908785507689816547
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +273,7 @@ Transform:
   - {fileID: 1339372192129980934}
   - {fileID: 7361933527980553550}
   - {fileID: 3639504371639395319}
+  - {fileID: 5114012185381797088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6994624678252092341
