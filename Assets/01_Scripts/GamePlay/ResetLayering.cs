@@ -15,12 +15,12 @@ public class ResetLayering : MonoBehaviour
         {
             LayerManager.Instance.ClearLayerList();
             Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
-/*            if (Singleton.GetInstance<PlayerScan>().IsScanning)
-            {
-                LayerManager.Instance.ClearLayerList();
+            /*            if (Singleton.GetInstance<PlayerScan>().IsScanning)
+                        {
+                            LayerManager.Instance.ClearLayerList();
 
-                Singleton.GetInstance<PlayerScan>().StopScanning();
-            }*/
+                            Singleton.GetInstance<PlayerScan>().StopScanning();
+                        }*/
 
         }
     }

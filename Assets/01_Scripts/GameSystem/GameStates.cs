@@ -7,6 +7,8 @@ public class GameStates : Singleton
 {
     GameState gameState;
 
+    bool gameStarted = true;
+
     public GameState GetCurrentGameState()
     {
         return gameState;
@@ -18,29 +20,43 @@ public class GameStates : Singleton
     {
         if (player == null)
             player = FindFirstObjectByType<CharacterController>().gameObject.transform;
-
+       
         SetGameState(GameState.Playmode);
     }
 
     public void SetGameState(GameState state)
     {
-        gameState = state;
-
-        if (gameState == GameState.Playmode)
-            PlaymodeGameStateOn();
-        else if (gameState == GameState.Puzzlemode)
-            PuzzleGameStateOn();
+        if (state == GameState.Playmode)
+        {
+            if (gameState != state)
+            {
+                gameState = state;
+                PlaymodeGameStateOn();
+            }
+            else
+                return;
+        }
+        else if (state == GameState.Puzzlemode)
+        {
+            if (gameState != state)
+            {
+                gameState = state;
+                PuzzleGameStateOn();
+            }
+            else
+                return;
+        }    
     }
 
     private void PlaymodeGameStateOn()
     {
         //resetting layers in PlayerScan
-        
-        Cursor.lockState = CursorLockMode.Locked; //disable cursor
 
-        //turning off layer UI 
-        UIManager.Instance.LayerUI.SetActive(false);
-        UIManager.Instance.GameUI.SetActive(true);
+        //disable cursor
+        Cursor.lockState = CursorLockMode.Locked; 
+
+        //turning on layer UI 
+        UIManager.Instance.CloseLayerUI();
 
         GetInstance<CameraManager>().SwitchCamera(GetInstance<CameraManager>().MainPlayingCam); //switching to main camera view
     }
@@ -53,11 +69,7 @@ public class GameStates : Singleton
         Cursor.lockState = CursorLockMode.Confined;
 
         //turning on layer UI 
-        //GetInstance<UIManager>().GameUI.SetActive(false);
-        //GetInstance<UIManager>().LayerUI.SetActive(true);
-
-        UIManager.Instance.GameUI.SetActive(false);
-        UIManager.Instance.LayerUI.SetActive(true);
+        UIManager.Instance.OpenLayerUI();
 
         GetInstance<CameraManager>().SetActiveClosestCamera(player); //switching to closest layer camera 
     }
