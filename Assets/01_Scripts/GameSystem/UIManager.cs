@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [field: SerializeField] public GameObject CanvasObjects { get; private set; }
     [field: SerializeField] public GameObject LayerUI { get; private set; }
     [field: SerializeField] public GameObject GameUI { get; private set; }
     [field: SerializeField] public Animator LayerUI_AnimatorUnfolding { get; private set; }
@@ -106,6 +107,19 @@ public class UIManager : MonoBehaviour
         startTimer_f = true;
     }
 
+    public void SetAllGameUIActive(bool active)
+    {
+        CanvasObjects.SetActive(active);
+    }
+
+    public void SetLayerUIActive(bool active)
+    {
+        LayerUI.SetActive(active);
+    }
+    public void SetEyeUIActive(bool active)
+    {
+        GameUI.SetActive(active);
+    }
     /*private void CloseObjectAfterDelay(GameObject gameObject)
     {
 

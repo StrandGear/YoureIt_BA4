@@ -9,6 +9,8 @@ public class PlayerScan : MonoBehaviour
 
     public bool IsScanning { get => isScanning; }
 
+    public bool NoObjectsToScan = false;
+
     private int scanningButtonPressed = 0;
 
     [SerializeField] private InputActionReference scanControl;
@@ -55,10 +57,12 @@ public class PlayerScan : MonoBehaviour
         if (scanningButtonPressed < 0 || scanningButtonPressed > 2)
             scanningButtonPressed = 0;
 
-        if (layerObjectsVisibilityRadius.VisibleObjects.Count == 0)
+        if (layerObjectsVisibilityRadius.VisibleObjects.Count == 0) //get out of Puzzle mode when no olayerobjects nearby
         {
-            Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+            NoObjectsToScan = true;
+            //Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
             StopScanning(false);
+            
         }
     }
 
@@ -89,5 +93,8 @@ public class PlayerScan : MonoBehaviour
         }
 
         LayerManager.Instance.ClearLayerList();
+
+/*        if (Singleton.GetInstance<GameStates>().GetCurrentGameState() != GameState.Playmode)
+            Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);*/
     }
 }

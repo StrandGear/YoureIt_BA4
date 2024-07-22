@@ -32,11 +32,11 @@ public class InputCutsceneTrigger : MonoBehaviour
             triggerIsActivated = true;
             if (cutsceneIndex >= 0)
             {
-                Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex);
+                //Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex);
             }
             else
             {
-                Singleton.GetInstance<CutsceneManager>().PlayNextCutscene();
+                //Singleton.GetInstance<CutsceneManager>().PlayNextCutscene();
             }
         }
     }
