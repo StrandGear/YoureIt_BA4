@@ -7,6 +7,7 @@ public class PlayerRespawn : MonoBehaviour
 {
     [SerializeField] private CharacterController playerController; 
     [SerializeField] private Transform respawnPoint;
+    public GameObject deathScreen;
 
     public bool keepXposStatic = false;
     public bool keepYposStatic = true;
@@ -42,19 +43,32 @@ public class PlayerRespawn : MonoBehaviour
         if (other.CompareTag("Enemy") || other.CompareTag("Hole"))
         {
             print("enemy hit");
+            if (deathScreen != null)
+            {
+                deathScreen.SetActive(true);
+            }
+            PauseGame(); 
             AssignNewRespawnPosition();
-            RespawnPlayer();            
+            StartCoroutine(RespawnPlayer());
         }
     }
 
-    private void RespawnPlayer()
+    private IEnumerator RespawnPlayer()
     {
+        
+        yield return new WaitForSecondsRealtime(2); 
+
         playerController.enabled = false; 
         playerController.transform.position = respawnPoint.position;
         playerController.transform.rotation = respawnPoint.rotation;
         playerController.enabled = true;
         onPlayerRespawn?.Invoke();
         Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+        if (deathScreen != null)
+        {
+            deathScreen.SetActive(false);
+        }
+        UnpauseGame(); 
     }
 
     private void AssignNewRespawnPosition()
@@ -74,7 +88,7 @@ public class PlayerRespawn : MonoBehaviour
                 float tempZpos = lastCheckpoint.CheckpointPosition.position.z;
 
                 if (keepXposStatic)
-                    tempYpos = xPos;
+                    tempXpos = xPos;
 
                 if (keepYposStatic)
                     tempYpos = yPos;
@@ -96,5 +110,15 @@ public class PlayerRespawn : MonoBehaviour
             //Debug.LogError("CheckpointManager instance is not available.");
             respawnPoint.position = initialRespawnPoint;
         }
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0f; 
+    }
+
+    private void UnpauseGame()
+    {
+        Time.timeScale = 1f; 
     }
 }
