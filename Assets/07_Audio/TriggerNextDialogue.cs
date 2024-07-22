@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class TriggerNextDialogue : MonoBehaviour
 {
-    private bool isTriggered = false;
+    public bool isTriggered { get; set; }
     private void Awake()
     {
         GetComponent<BoxCollider>().isTrigger = true;

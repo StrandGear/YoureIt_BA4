@@ -21,7 +21,7 @@ public class LayerManager : MonoBehaviour
 /*    [Tooltip("Displayed for objects with Transparent Layer")]
     [SerializeField] private Slider transparencySlider;*/
     private ToggleButton activeLayer;
-    private bool layerLocked = false;
+    private bool isActiveLayerHidden = false;
 
     [SerializeField] private List<LayerData> layers = new List<LayerData>();
     public List<LayerData> Layers { get => layers; }
@@ -229,9 +229,14 @@ public class LayerManager : MonoBehaviour
         
         AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
 
-        newActiveLayer.layerUIManager.ShowLayerFrame(true);
+        if (newActiveLayer.gameObject.GetComponent<HidingLayer>() != null && !newActiveLayer.gameObject.GetComponent<HidingLayer>().IsHidden)
+            newActiveLayer.layerObject.SetShaderActive(true);
+       /* if (!isActiveLayerHidden)
+            
+        else
+            newActiveLayer.layerObject.SetShaderActive(false);*/
 
-        newActiveLayer.layerObject.SetShaderActive(true);
+        newActiveLayer.layerUIManager.ShowLayerFrame(true);
         //UI_selectObject_sound.start();
     }
 
@@ -264,6 +269,11 @@ public class LayerManager : MonoBehaviour
         }    
         else
             AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_cantSelect);
+
+        if (layerData == currentlySelectedLayerData)
+        {
+            layerData.layerObject.SetShaderActive(value);
+        }        
     }
     public void OnLockToggleValueChange(bool value, LayerData layerData)
     {  
@@ -283,7 +293,7 @@ public class LayerManager : MonoBehaviour
 
     public void UpdateLockToggleValue(bool value)
     {
-        layerLocked = value;
+        //layerLocked = value;
         print("layer locked " + value);
 /*        currentlySelectedLayerData.layerGameObject.TryGetComponent(out LockingLayer moveObject);
         if (moveObject != null)
