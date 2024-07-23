@@ -9,6 +9,8 @@ public class GameStates : Singleton
 
     bool gameStartedFirstTime = true;
 
+    public GameState initialLevelState;
+
     public GameState GetCurrentGameState()
     {
         return gameState;
@@ -22,7 +24,7 @@ public class GameStates : Singleton
             player = FindFirstObjectByType<CharacterController>().gameObject.transform;
 
         
-            SetGameState(GameState.IngameUIMenumode);
+            SetGameState(initialLevelState);
         //else
            // SetGameState(GameState.Playmode);
     }
@@ -149,6 +151,7 @@ public class GameStates : Singleton
     }
 }
 
+[SerializeField]
 public enum GameState
 {
     Playmode,

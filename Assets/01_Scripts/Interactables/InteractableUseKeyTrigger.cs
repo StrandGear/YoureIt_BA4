@@ -21,7 +21,7 @@ public class InteractableUseKeyTrigger : InteractableObject
     {
         print("Interacting with key");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.UI_puzzleSuccess, gameObject.transform.position);
-        Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(1/*, ( () =>SceneManager.LoadScene("Level2"))*/);
+        Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(1, (() => SceneManager.LoadScene(1)));
         //Singleton.GetInstance<CutsceneManager>().PlayNextCutscene(cutsceneGameObject);
         //cutsceneGameObject.SetActive(true);
     }

@@ -91,7 +91,7 @@ public class CutsceneManager : Singleton
         }
     }
 
-    public void PlayCutsceneByIndex(int index, float duration = 10f, UnityAction callback = null)
+    public void PlayCutsceneByIndex(int index, UnityAction callback = null)
     {
         if (!isPlaying && index >= 0 && index < cutsceneObjects.Count)
         {
@@ -100,11 +100,11 @@ public class CutsceneManager : Singleton
             {
                 StopCoroutine(currentCoroutine);
             }
-            currentCoroutine = StartCoroutine(PlayCutscene(cutsceneObjects[index], duration));
+            currentCoroutine = StartCoroutine(PlayCutscene(cutsceneObjects[index]));
         }
     }
 
-    private IEnumerator PlayCutscene(GameObject cutsceneObject, float duration)
+    private IEnumerator PlayCutscene(GameObject cutsceneObject)
     {
         Singleton.GetInstance<GameStates>().SetGameState(GameState.Cutscenemode);
 
@@ -122,7 +122,7 @@ public class CutsceneManager : Singleton
             if (director.duration > 0)
                 yield return new WaitForSeconds((float)director.duration);
             else
-                yield return new WaitForSeconds(duration);
+                yield return new WaitForSeconds(5f);
         }
 
         // Deactivate the cutscene object

@@ -16,7 +16,7 @@ public class CameraManager : Singleton
 
     private void OnValidate()
     {
-        if (gameStartedFirstTime)
+        if (gameStartedFirstTime && IngameUIMenuCam != null)
             currentCam = IngameUIMenuCam;
         else
             currentCam = MainPlayingCam;
@@ -24,7 +24,11 @@ public class CameraManager : Singleton
 
     private void Awake()
     {
-        currentCam = IngameUIMenuCam;
+        if (gameStartedFirstTime && IngameUIMenuCam != null)
+            currentCam = IngameUIMenuCam;
+        else
+            currentCam = MainPlayingCam;
+
         /*        if (gameStartedFirstTime)
                     currentCam = IngameUIMenuCam;
                 else
@@ -44,10 +48,16 @@ public class CameraManager : Singleton
             }
         }
         currentCam.SetActive(true);
+
+        if (currentCam == null)
+            currentCam = MainPlayingCam;
     }
 
     public void SwitchCamera(GameObject newCam)
     {
+        if (currentCam == null)
+            currentCam = MainPlayingCam;
+
         ResetCamerasPriority();
 
         if (newCam == null)
