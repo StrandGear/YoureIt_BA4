@@ -50,7 +50,8 @@ public class PlayerInventory : MonoBehaviour
             Destroy(gameObject);
         }
 
-        KeyUI.SetActive(false);
+        if (KeyUI != null)
+            KeyUI.SetActive(false);
 
 /*        if (OnEyeCollected == null)
             OnEyeCollected = new UnityEvent<PlayerInventory>();
