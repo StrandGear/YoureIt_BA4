@@ -10,6 +10,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
     [SerializeField] private InputActionReference jumpControl;
     [SerializeField] private InputActionReference speedBoostControl;
     [SerializeField] private InputActionReference interactControl;
+    [SerializeField] private InputActionReference climbControl;
     [SerializeField] private InputActionReference lookControl;
     [SerializeField] private InputActionReference crouchControl;
 
@@ -288,7 +289,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
 
     private void HandleClimbingTransition()
     {
-        if (interactControl.action.triggered && !isClimbing)
+        if (climbControl.action.triggered && !isClimbing)
         {
             Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
             float ladderGrabDistance = 1f;
@@ -314,6 +315,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         jumpControl.action.Enable();
         speedBoostControl.action.Enable();
         interactControl.action.Enable();
+        climbControl.action.Enable();
         lookControl.action.Enable();
         crouchControl.action.Enable();
 
@@ -327,6 +329,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         jumpControl.action.Disable();
         speedBoostControl.action.Disable();
         interactControl.action.Disable();
+        climbControl.action.Disable();
         lookControl.action.Disable();
         crouchControl.action.Disable();
 
