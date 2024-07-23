@@ -52,6 +52,17 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<InteractableObject>() != null || other.GetComponentInChildren<InteractableObject>() != null)
+        {
+            currentInteractable = other.GetComponent<InteractableObject>();
+
+            currentInteractable.CanInteract(true);
+
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.GetComponent<InteractableObject>() != null || other.GetComponentInChildren<InteractableObject>() != null)
