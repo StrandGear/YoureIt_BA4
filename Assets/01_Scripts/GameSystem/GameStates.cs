@@ -5,7 +5,7 @@ using UnityEngine;
 //Defining changes when trigger difeerent game mechanics
 public class GameStates : Singleton
 {
-    GameState gameState;
+    public GameState gameState;
 
     bool gameStartedFirstTime = true;
 
@@ -17,6 +17,11 @@ public class GameStates : Singleton
     }
 
     [SerializeField] private Transform player;
+
+    public GameObject Enemy;
+
+    //DEBUG
+    //public GameState currentGameState;
 
     private void Start()
     {
@@ -40,6 +45,7 @@ public class GameStates : Singleton
 
     public void SetGameState(GameState state)
     {
+        print("Setting state- " + state);
         if (state == GameState.Playmode)
         {
             if (gameState != state)
@@ -87,6 +93,15 @@ public class GameStates : Singleton
         //enable player if it wasnt 
         player.gameObject.GetComponent<CharacterController>().enabled = true;
 
+        //enable player mesh renderer 
+        player.Find("0 Iris").gameObject.SetActive(true);
+
+        //enable enemy if there is one
+        if (Enemy != null)
+        {
+            Enemy.SetActive(true);
+        }
+
         print("PlaymodeGameStateOn");
         //resetting layers in PlayerScan
 
@@ -130,6 +145,10 @@ public class GameStates : Singleton
 
         //stop character controller 
         player.gameObject.GetComponent<CharacterController>().enabled = false;
+        player.Find("0 Iris").gameObject.SetActive(false);
+
+        //disable Enemy object
+        Enemy.SetActive(false);
 
         //disable all UI 
         UIManager.Instance.SetAllGameUIActive(false);
