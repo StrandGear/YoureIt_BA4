@@ -19,31 +19,33 @@ public class InteractableObject : MonoBehaviour
     public Sprite InGameSprite;
 
     private GameObject inGameUiGameObjectToRenderPicture; //small gmae in UI
-
     private void Awake()
     {
         InteractionRadius = GetComponent<BoxCollider>();
-        InteractionRadius.isTrigger = true;
+        if (InteractionRadius != null)
+            InteractionRadius.isTrigger = true;
 
         interactionCanvasElement = transform.Find("GameCanvas").gameObject;
         interactionCanvasElement.GetComponentInChildren<TMP_Text>().text = interactionText;
-
+    }
+    private void Start()
+    {
         if (InGameSprite != null)
         {
-            inGameUiGameObjectToRenderPicture = interactionCanvasElement.GetComponentInChildren<Image>().gameObject;
-            inGameUiGameObjectToRenderPicture.GetComponentInChildren<Image>().sprite = InGameSprite;
+            //inGameUiGameObjectToRenderPicture = interactionCanvasElement.GetComponentInChildren<Image>().gameObject;
+            interactionCanvasElement.GetComponentInChildren<Image>().sprite = InGameSprite;
 
             //clearing text if we have Image
             interactionCanvasElement.GetComponentInChildren<TMP_Text>().text = "";
         }
+        else
+        {
+            if (interactionCanvasElement.GetComponentInChildren<Image>().gameObject != null)
+                interactionCanvasElement.GetComponentInChildren<Image>().gameObject.SetActive(false);
+        }
         interactionCanvasElement.SetActive(false);
 
         StopInteraction();
-    }
-
-    private void Start()
-    {
-
     }
 
     public void CanInteract(bool value)

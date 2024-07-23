@@ -15,6 +15,7 @@ public class InteractablePicture : InteractableObject
     {
         uiGameObjectToRenderPicture = transform.Find("UICanvas").gameObject.GetComponentInChildren<Image>().gameObject;
         uiGameObjectToRenderPicture.GetComponentInChildren<Image>().sprite = UIdrawing;
+        StopInteraction();
     }
     public override void Interact()
     {
