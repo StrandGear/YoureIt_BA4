@@ -18,7 +18,7 @@ public class GameStates : Singleton
 
     [SerializeField] private Transform player;
 
-    public GameObject Enemy;
+    public GameObject Enemy = null;
 
     //DEBUG
     //public GameState currentGameState;
@@ -148,7 +148,8 @@ public class GameStates : Singleton
         player.Find("0 Iris").gameObject.SetActive(false);
 
         //disable Enemy object
-        Enemy.SetActive(false);
+        if (Enemy != null)
+            Enemy.SetActive(false);
 
         //disable all UI 
         UIManager.Instance.SetAllGameUIActive(false);
