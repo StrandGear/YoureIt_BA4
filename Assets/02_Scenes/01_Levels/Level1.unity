@@ -13509,6 +13509,42 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510406045}
   m_Mesh: {fileID: -5989904304992506424, guid: 19ccfea125c966341acdaabba761fbaa, type: 3}
+--- !u!1 &1516529788 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 989230807876337526, guid: 33ad7e56b94ef124199de556cf8ffaf4, type: 3}
+  m_PrefabInstance: {fileID: 6396500024308867879}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1516529790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516529788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Ground
+  EventReference:
+    Guid:
+      Data1: -1779795568
+      Data2: 1136257925
+      Data3: -18017625
+      Data4: -2003812106
+    Path: event:/General SFX/Ladder
+  Event: 
+  PlayEvent: 3
+  StopEvent: 4
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1529223500
 GameObject:
   m_ObjectHideFlags: 0
@@ -24751,6 +24787,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6642265686064663746, guid: 33ad7e56b94ef124199de556cf8ffaf4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1337000487}
+    - targetCorrespondingSourceObject: {fileID: 989230807876337526, guid: 33ad7e56b94ef124199de556cf8ffaf4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1516529790}
     - targetCorrespondingSourceObject: {fileID: 5136777333665520053, guid: 33ad7e56b94ef124199de556cf8ffaf4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2141180770}
