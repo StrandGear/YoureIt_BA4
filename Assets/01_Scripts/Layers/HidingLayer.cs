@@ -75,9 +75,9 @@ public class HidingLayer : MonoBehaviour, IHiding
                     meshCollider.convex = true;
                 }
 
-                else if (colliders[i] != null)
+                if (colliders[i] != null && i < initialColliders.Count)
                     colliders[i].isTrigger = initialColliders[i].isTrigger;
-                    //colliders[i].isTrigger = false;
+                //colliders[i].isTrigger = false;
             }
             //gameObject.GetComponent<LayerObject>().SetShaderActive(true);
         }
