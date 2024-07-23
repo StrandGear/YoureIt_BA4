@@ -8,6 +8,7 @@ public class PlayerRespawn : MonoBehaviour
     [SerializeField] private CharacterController playerController; 
     [SerializeField] private Transform respawnPoint;
     public GameObject deathScreen;
+    
 
     public bool keepXposStatic = false;
     public bool keepYposStatic = true;
@@ -36,6 +37,7 @@ public class PlayerRespawn : MonoBehaviour
         respawnPoint.position = initialRespawnPoint;
 
         AssignNewRespawnPosition();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,8 +49,12 @@ public class PlayerRespawn : MonoBehaviour
             {
                 deathScreen.SetActive(true);
             }
-            PauseGame(); 
+            
             AssignNewRespawnPosition();
+
+            PauseGame();
+
+            //RespawnPlayer();
             StartCoroutine(RespawnPlayer());
         }
     }
@@ -68,7 +74,8 @@ public class PlayerRespawn : MonoBehaviour
         {
             deathScreen.SetActive(false);
         }
-        UnpauseGame(); 
+        UnpauseGame();
+        StopCoroutine(RespawnPlayer());
     }
 
     private void AssignNewRespawnPosition()
