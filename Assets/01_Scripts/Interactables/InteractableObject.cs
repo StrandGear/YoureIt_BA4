@@ -50,6 +50,7 @@ public class InteractableObject : MonoBehaviour
 
     public void CanInteract(bool value)
     {
+        print("Can Interact");
         canInteract = value;
 
         interactionCanvasElement.SetActive(canInteract);

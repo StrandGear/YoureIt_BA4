@@ -19,7 +19,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        print("Awake called");
+        //print("Awake called");
         playButton.onClick.AddListener((() =>
         {
             //SceneManager.LoadScene(1);
@@ -39,21 +39,21 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start()
     {
-        print("Start called");
+        //print("Start called");
     }
 
     private void Update()
     {
-        print("Update called");
+        //print("Update called");
         CheckPauseInput();
     }
 
     public void CheckPauseInput()
     {
-        print("CheckPauseInput called");
+        //print("CheckPauseInput called");
         if (pauseControl.action.triggered)
         {
-            print("Pause Menu triggered");
+            //print("Pause Menu triggered");
             TogglePauseMenu();
         }
     }

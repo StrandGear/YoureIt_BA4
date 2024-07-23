@@ -262,7 +262,7 @@ public class PlayerMovement : MonoBehaviour
         yRotation += lookAround.x * Time.deltaTime * 10;
         xRotation = Mathf.Clamp(xRotation, minCameraClamp, maxCameraClamp);
         Quaternion camRotation = Quaternion.Euler(xRotation, yRotation, 0);
-        print(yRotation);
+        //print(yRotation);
         cameraFollowTarget.rotation = camRotation;
     }
 
