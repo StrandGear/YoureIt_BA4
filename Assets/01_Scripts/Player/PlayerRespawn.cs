@@ -34,6 +34,7 @@ public class PlayerRespawn : MonoBehaviour
             playerController = GetComponent<CharacterController>();
         }
 
+        if (respawnPoint ==null)
         respawnPoint.position = initialRespawnPoint;
 
         AssignNewRespawnPosition();
@@ -81,7 +82,8 @@ public class PlayerRespawn : MonoBehaviour
     private void AssignNewRespawnPosition()
     {
         var checkpointManager = CheckpointManager.instance;
-        respawnPoint.position = initialRespawnPoint;
+        if (initialRespawnPoint != null)
+                respawnPoint.position = initialRespawnPoint;
         print(respawnPoint);
         
         if (checkpointManager != null)
