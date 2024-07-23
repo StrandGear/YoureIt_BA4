@@ -50,7 +50,7 @@ public class CutsceneManager : Singleton
 
      private IEnumerator PlayCutscene(GameObject cutsceneObject)
      {
-         Singleton.GetInstance<GameStates>().SetGameState(GameState.Cutscenemode);
+         GameStates.Instance.SetGameState(GameState.Cutscenemode);
 
          isPlaying = true;
 
@@ -70,7 +70,7 @@ public class CutsceneManager : Singleton
          print("playing cutscene2");
          isPlaying = false;
 
-         Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+         GameStates.Instance.SetGameState(GameState.Playmode);
 
          // Check if there's another cutscene to play
          PlayNextCutscene();
@@ -106,7 +106,7 @@ public class CutsceneManager : Singleton
 
     private IEnumerator PlayCutscene(GameObject cutsceneObject)
     {
-        Singleton.GetInstance<GameStates>().SetGameState(GameState.Cutscenemode);
+        GameStates.Instance.SetGameState(GameState.Cutscenemode);
 
         isPlaying = true;
 
@@ -130,7 +130,8 @@ public class CutsceneManager : Singleton
 
         isPlaying = false;
 
-        Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+        //GameStates.Instance.SetGameState(GameState.Playmode);
+        GameStates.Instance.SetGameState(GameState.Playmode);
 
         // Call the callback function if it is specified
         onCutsceneEnd?.Invoke();

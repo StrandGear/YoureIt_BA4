@@ -45,12 +45,12 @@ public class PlayerScan : MonoBehaviour
             if (scanningButtonPressed == 1 && layerObjectsVisibilityRadius.VisibleObjects.Count > 0) // scanning
             {
                 ScanArea();
-                Singleton.GetInstance<GameStates>().SetGameState(GameState.Puzzlemode);
+                GameStates.Instance.SetGameState(GameState.Puzzlemode);
             }
             else if (scanningButtonPressed >= 2) // not scanning
             {
                 StopScanning(true);
-                Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+                GameStates.Instance.SetGameState(GameState.Playmode);
             }
         }
         
@@ -60,7 +60,7 @@ public class PlayerScan : MonoBehaviour
         if (layerObjectsVisibilityRadius.VisibleObjects.Count == 0) //get out of Puzzle mode when no olayerobjects nearby
         {
             NoObjectsToScan = true;
-            //Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+            //GameStates.Instance.SetGameState(GameState.Playmode);
             StopScanning(false);
             
         }
@@ -94,7 +94,7 @@ public class PlayerScan : MonoBehaviour
 
         LayerManager.Instance.ClearLayerList();
 
-/*        if (Singleton.GetInstance<GameStates>().GetCurrentGameState() != GameState.Playmode)
-            Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);*/
+/*        if (GameStates.Instance.GetCurrentGameState() != GameState.Playmode)
+            GameStates.Instance.SetGameState(GameState.Playmode);*/
     }
 }

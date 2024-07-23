@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Defining changes when trigger difeerent game mechanics
-public class GameStates : Singleton
+public class GameStates : MonoBehaviour
 {
     public GameState gameState;
 
@@ -22,8 +22,41 @@ public class GameStates : Singleton
 
     //DEBUG
     //public GameState currentGameState;
+    private static GameStates instance = null;
+    public static GameStates Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameStates>();
+                if (instance == null)
+                {
+                    GameObject go = new GameObject("GameStates");
+                    instance = go.AddComponent<GameStates>();
+                }
+            }
 
-    private void Start()
+            return instance;
+        }
+    }
+
+    //private EventInstance UI_selectObject_sound;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+        private void Start()
     {
         if (player == null)
             player = FindFirstObjectByType<CharacterController>().gameObject.transform;
@@ -114,7 +147,7 @@ public class GameStates : Singleton
         //turning on layer UI 
         UIManager.Instance.CloseLayerUI();
 
-        GetInstance<CameraManager>().SwitchCamera(GetInstance<CameraManager>().MainPlayingCam); //switching to main camera view
+        Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam); //switching to main camera view
     }
 
     private void PuzzleGameStateOn()
@@ -134,7 +167,7 @@ public class GameStates : Singleton
         //turning on layer UI 
         UIManager.Instance.OpenLayerUI();
 
-        GetInstance<CameraManager>().SetActiveClosestCamera(player); //switching to closest layer camera 
+        Singleton.GetInstance<CameraManager>().SetActiveClosestCamera(player); //switching to closest layer camera 
     }
 
     private void CutsceneModeOn()
@@ -167,7 +200,7 @@ public class GameStates : Singleton
         //disable all other UIs
         UIManager.Instance.SetAllGameUIActive(false);
         //switch camera
-        GetInstance<CameraManager>().SetActiveIngameUIMenuCamera();
+        Singleton.GetInstance<CameraManager>().SetActiveIngameUIMenuCamera();
     }
 }
 

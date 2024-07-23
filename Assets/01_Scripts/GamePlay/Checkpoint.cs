@@ -34,7 +34,7 @@ public class Checkpoint : MonoBehaviour
             LayerManager.Instance.ClearLayerList();
 
             //Singleton.GetInstance<PlayerScan>().StopScanning();
-            Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+            GameStates.Instance.SetGameState(GameState.Playmode);
 
             activated = true;
 

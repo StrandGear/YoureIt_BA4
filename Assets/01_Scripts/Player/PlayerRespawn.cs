@@ -70,7 +70,7 @@ public class PlayerRespawn : MonoBehaviour
         playerController.transform.rotation = respawnPoint.rotation;
         playerController.enabled = true;
         onPlayerRespawn?.Invoke();
-        Singleton.GetInstance<GameStates>().SetGameState(GameState.Playmode);
+        GameStates.Instance.SetGameState(GameState.Playmode);
         if (deathScreen != null)
         {
             deathScreen.SetActive(false);
