@@ -21,5 +21,7 @@ public class InteractableCutsceneTrigger : InteractableObject
             Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex, (() => SceneManager.LoadScene(SceneToLoad)));
         else
             Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex);
+
+        StopInteraction();
     }
 }

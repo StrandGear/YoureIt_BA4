@@ -24,5 +24,6 @@ public class InteractableUseKeyTrigger : InteractableObject
         Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(1, (() => SceneManager.LoadScene(1)));
         //Singleton.GetInstance<CutsceneManager>().PlayNextCutscene(cutsceneGameObject);
         //cutsceneGameObject.SetActive(true);
+        StopInteraction();
     }
 }
