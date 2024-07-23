@@ -5,11 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.InputSystem;
+
 
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private InputActionReference pauseControl;
 
     bool firstTimeGameStarted = true;
 
