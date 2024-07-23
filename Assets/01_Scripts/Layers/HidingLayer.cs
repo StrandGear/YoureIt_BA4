@@ -17,6 +17,7 @@ public class HidingLayer : MonoBehaviour, IHiding
 
     private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
     private List<Collider> colliders = new List<Collider>();
+    private List<Collider> initialColliders = new List<Collider>();
 
     private void OnValidate()
     {
@@ -30,6 +31,12 @@ public class HidingLayer : MonoBehaviour, IHiding
     {
         meshRenderers = FillListWithComponentsInChildren<MeshRenderer>();
         colliders = FillListWithComponentsInChildren<Collider>();
+
+        initialColliders.Clear();
+        foreach (var col in colliders)
+        {
+            initialColliders.Add(col);
+        }
     }
 
     public void UpdateHidingProperty()
@@ -69,7 +76,8 @@ public class HidingLayer : MonoBehaviour, IHiding
                 }
 
                 else if (colliders[i] != null)
-                    colliders[i].isTrigger = false;
+                    colliders[i].isTrigger = initialColliders[i].isTrigger;
+                    //colliders[i].isTrigger = false;
             }
             //gameObject.GetComponent<LayerObject>().SetShaderActive(true);
         }
