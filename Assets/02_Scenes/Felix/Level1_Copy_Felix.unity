@@ -2560,6 +2560,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6c87b03f8d51de46914f1982f21c608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <SoundToPlayWhenStateChanged>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   isLocked: 0
   ConnectedAnimations: []
 --- !u!95 &192739239
@@ -2595,6 +2602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde2de26ba5c2314e9b4847b38788550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsed: 0
   objectSprite: {fileID: 0}
 --- !u!1 &199750377
 GameObject:
@@ -2795,6 +2803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde2de26ba5c2314e9b4847b38788550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsed: 0
   objectSprite: {fileID: 21300000, guid: d00dbf0e4f783a245b7cda0e237adf38, type: 3}
 --- !u!1001 &229355507
 PrefabInstance:
@@ -7097,6 +7106,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextField
       objectReference: {fileID: 0}
+    - target: {fileID: 646379660975381495, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 734654916308335336, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -43.939
@@ -7137,6 +7150,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 974678919622463775, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1188412558781506609, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
       propertyPath: UIdrawing
       value: 
@@ -7144,7 +7161,7 @@ PrefabInstance:
     - target: {fileID: 1188412558781506609, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
       propertyPath: InGameSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7abdd8d94804cc743bc5ced18eb13224, type: 3}
+      objectReference: {fileID: 21300000, guid: 448d9704d5cca324a9fa236666d38f61, type: 3}
     - target: {fileID: 2033498242329965895, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -7176,6 +7193,14 @@ PrefabInstance:
     - target: {fileID: 2311535872637349831, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001522877825144608, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da9de23b6dd264b42b91153e52b86d8a, type: 3}
+    - target: {fileID: 4001522877825144608, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5102269722211587179, guid: d258086873324ae4eb6f51e2853d043d, type: 3}
       propertyPath: m_Name
@@ -19195,6 +19220,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1581254985}
+    - target: {fileID: 4067657776184314290, guid: b7cd6446724467b41816efa5fa18ecea, type: 3}
+      propertyPath: initialLevelState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4412243923215816518, guid: b7cd6446724467b41816efa5fa18ecea, type: 3}
       propertyPath: <GameUI>k__BackingField
       value: 
@@ -19550,6 +19579,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 03_Character_lvl1
       objectReference: {fileID: 0}
+    - target: {fileID: 4738256291164054271, guid: 327af05ce8da91c4488acff09c347054, type: 3}
+      propertyPath: climbControl
+      value: 
+      objectReference: {fileID: 3574012537170133078, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
     - target: {fileID: 4738256291164054271, guid: 327af05ce8da91c4488acff09c347054, type: 3}
       propertyPath: accelerationCurve.m_Curve.Array.size
       value: 2
