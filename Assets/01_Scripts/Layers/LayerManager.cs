@@ -229,7 +229,7 @@ public class LayerManager : MonoBehaviour
         
         AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
 
-        if (newActiveLayer.gameObject.GetComponent<HidingLayer>() != null && !newActiveLayer.gameObject.GetComponent<HidingLayer>().IsHidden)
+        //if (newActiveLayer.gameObject.GetComponent<HidingLayer>() != null && !newActiveLayer.gameObject.GetComponent<HidingLayer>().IsHidden)
             newActiveLayer.layerObject.SetShaderActive(true);
        /* if (!isActiveLayerHidden)
             
