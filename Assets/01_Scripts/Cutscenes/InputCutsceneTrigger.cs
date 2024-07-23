@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(BoxCollider))]
-public class InputCutsceneTrigger : MonoBehaviour
+public class InputCutsceneTrigger : InteractableObject
 {
     public int cutsceneIndex = -1;
     [SerializeField] private InputActionReference triggerKey;
