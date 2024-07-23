@@ -7,18 +7,32 @@ public class CameraManager : Singleton
 {
     [SerializeField] private List<GameObject> layerCameras = new List<GameObject>();
     public GameObject MainPlayingCam;
+    public GameObject IngameUIMenuCam;
     //public GameObject LayerLookCam;
 
     [SerializeField] private GameObject currentCam;
 
+    bool gameStartedFirstTime = true;
+
     private void OnValidate()
     {
-        currentCam = MainPlayingCam;
+        if (gameStartedFirstTime && IngameUIMenuCam != null)
+            currentCam = IngameUIMenuCam;
+        else
+            currentCam = MainPlayingCam;
     }
 
     private void Awake()
     {
-        currentCam = MainPlayingCam;
+        if (gameStartedFirstTime && IngameUIMenuCam != null)
+            currentCam = IngameUIMenuCam;
+        else
+            currentCam = MainPlayingCam;
+
+        /*        if (gameStartedFirstTime)
+                    currentCam = IngameUIMenuCam;
+                else
+                    currentCam = MainPlayingCam;*/
         //cameras.Add(MainPlayingCam);
         //cameras.Add(LayerLookCam);
 
@@ -34,10 +48,16 @@ public class CameraManager : Singleton
             }
         }
         currentCam.SetActive(true);
+
+        if (currentCam == null)
+            currentCam = MainPlayingCam;
     }
 
     public void SwitchCamera(GameObject newCam)
     {
+        if (currentCam == null)
+            currentCam = MainPlayingCam;
+
         ResetCamerasPriority();
 
         if (newCam == null)
@@ -67,7 +87,7 @@ public class CameraManager : Singleton
     {
         if (currentCam.GetComponent<CinemachineVirtualCamera>() != null)
         {
-            if (currentCam == MainPlayingCam)
+            if (currentCam == MainPlayingCam || currentCam == IngameUIMenuCam)
                 currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 20;
             else
                 currentCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
@@ -92,5 +112,10 @@ public class CameraManager : Singleton
         }
 
         SwitchCamera(closestCamera);
+    }
+
+    public void SetActiveIngameUIMenuCamera()
+    {
+        SwitchCamera(IngameUIMenuCam);
     }
 }

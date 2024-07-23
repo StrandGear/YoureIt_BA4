@@ -11,12 +11,19 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button exitButton;
 
+    bool firstTimeGameStarted = true;
+
 
     private void Awake()
     {
         playButton.onClick.AddListener((() =>
         {
-            SceneManager.LoadScene(1);
+            //SceneManager.LoadScene(1);
+            if (firstTimeGameStarted)
+            {
+                firstTimeGameStarted = false;
+                Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(0);
+            }
         }));
         
         exitButton.onClick.AddListener((() =>

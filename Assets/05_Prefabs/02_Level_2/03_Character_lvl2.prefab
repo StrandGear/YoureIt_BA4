@@ -1558,9 +1558,6 @@ PrefabInstance:
       addedObject: {fileID: 2890273681968208504}
     - targetCorrespondingSourceObject: {fileID: 7266639231272709902, guid: 4805812c17b41a54c8470a7294caaa7d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 141166490731158523}
-    - targetCorrespondingSourceObject: {fileID: 7266639231272709902, guid: 4805812c17b41a54c8470a7294caaa7d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4249854285537258272}
   m_SourcePrefab: {fileID: 100100000, guid: 4805812c17b41a54c8470a7294caaa7d, type: 3}
 --- !u!95 &184283763725323926 stripped
@@ -1613,45 +1610,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &141166490731158523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672502941076075983}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bae1e9ac9c3894b42834e2156a44fdc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementControl: {fileID: -101466221488517505, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
-  jumpControl: {fileID: 4438194441265629595, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
-  speedBoostControl: {fileID: -1519889990976958023, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
-  interactControl: {fileID: 562261188112217769, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
-  lookControl: {fileID: 9160369524482419237, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
-  crouchControl: {fileID: 2672623420876683953, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
-  cameraFollowTarget: {fileID: 4986518466138188197}
-  minCameraClamp: -2
-  maxCameraClamp: 5
-  mainCam: {fileID: 0}
-  playerSpeed: 6
-  speedBoostMultiplier: 2
-  gravityValue: -9.81
-  accelerationCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  crouchSpeed: 2
-  crouchHeight: 0.5
-  crouchCenter: {x: 0, y: 0.5, z: 0}
-  crouchRadius: 0.5
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  animControl: {fileID: 184283763725323926}
 --- !u!54 &4249854285537258272
 Rigidbody:
   m_ObjectHideFlags: 0
