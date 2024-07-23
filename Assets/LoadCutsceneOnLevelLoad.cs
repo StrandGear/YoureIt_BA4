@@ -7,5 +7,9 @@ public class LoadCutsceneOnLevelLoad : MonoBehaviour
     public bool LoadCutsceneOnGameStart = false;
     public int cutsceneID = 0;
 
-
+    private void Start()
+    {
+        if (LoadCutsceneOnGameStart)
+            Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneID);
+    }
 }
