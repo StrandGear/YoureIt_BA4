@@ -32,12 +32,12 @@ public class InputCutsceneTrigger : MonoBehaviour
             triggerIsActivated = true;
             if (cutsceneIndex >= 0)
             {
-                //Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex);
+                Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex);
             }
-            else
+/*            else
             {
                 //Singleton.GetInstance<CutsceneManager>().PlayNextCutscene();
-            }
+            }*/
         }
     }
     private void OnTriggerEnter(Collider other)

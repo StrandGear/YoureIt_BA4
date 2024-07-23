@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerRespawn : MonoBehaviour
 {
     [SerializeField] private CharacterController playerController; 
-    [SerializeField] private Transform respawnPoint;
-    public GameObject deathScreen;
+    [SerializeField] private Transform respawnPoint = null;
+    public GameObject deathScreen = null;
     
 
     public bool keepXposStatic = false;
