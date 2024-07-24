@@ -9,6 +9,8 @@ public class GameStates : MonoBehaviour
 
     bool gameStartedFirstTime = true;
 
+    public bool DisablePlayerInCutscene = false;
+
     public GameState initialLevelState;
 
     public GameState GetCurrentGameState()
@@ -178,7 +180,8 @@ public class GameStates : MonoBehaviour
 
         //stop character controller 
         player.gameObject.GetComponent<CharacterController>().enabled = false;
-        player.Find("0 Iris").gameObject.SetActive(false);
+        if (DisablePlayerInCutscene)
+            player.Find("0 Iris").gameObject.SetActive(false);
 
         //disable Enemy object
         if (Enemy != null)
