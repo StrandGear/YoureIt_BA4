@@ -155,10 +155,12 @@ public class LayerManager : MonoBehaviour
 
             if (layer.gameObject.GetComponent<HidingLayer>() == null)
                 layer.layerUIManager.SetEyeToggleInactive();
+            else
             layer.layerUIManager.EyeToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnEyeToggleValueChange(value, layer));
 
             if (layer.gameObject.GetComponent<LockingLayer>() == null)
                 layer.layerUIManager.SetLockToggleInactive();
+            else
             layer.layerUIManager.LockToggle.GetComponent<Toggle>().onValueChanged.AddListener((value) => OnLockToggleValueChange(value, layer));                
         }
     }
@@ -230,11 +232,17 @@ public class LayerManager : MonoBehaviour
         AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.UI_selectElement);
 
         //if (newActiveLayer.gameObject.GetComponent<HidingLayer>() != null && !newActiveLayer.gameObject.GetComponent<HidingLayer>().IsHidden)
-            newActiveLayer.layerObject.SetShaderActive(true);
-       /* if (!isActiveLayerHidden)
-            
+        if (newActiveLayer.gameObject.GetComponent<HidingLayer>() != null)
+        {
+            if (!newActiveLayer.gameObject.GetComponent<HidingLayer>().IsHidden)
+                newActiveLayer.layerObject.SetShaderActive(true);
+        }
         else
-            newActiveLayer.layerObject.SetShaderActive(false);*/
+            newActiveLayer.layerObject.SetShaderActive(true);
+        /* if (!isActiveLayerHidden)
+
+         else
+             newActiveLayer.layerObject.SetShaderActive(false);*/
 
         newActiveLayer.layerUIManager.ShowLayerFrame(true);
         //UI_selectObject_sound.start();
