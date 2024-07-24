@@ -11,6 +11,7 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button restartButton;
     [SerializeField] private InputActionReference pauseControl;
     [SerializeField] private GameObject pauseScreen;
 
@@ -35,6 +36,11 @@ public class MainMenuUI : MonoBehaviour
         {
             Application.Quit();
         }));
+        
+        restartButton.onClick.AddListener((() =>
+                {
+                    SceneManager.LoadScene(0);
+                }));
     }
 
     private void Start()
