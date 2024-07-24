@@ -8,9 +8,12 @@ public class AudioManager : MonoBehaviour
 {
     private EventInstance ambienceEventInstance;
     private EventInstance musicEventInstance;
-   public static AudioManager instance {  get; private set; }
+    public static AudioManager instance { get; private set; }
 
     public GameObject player;
+
+    // Use EventReference struct instead of EventRef attribute
+    public EventReference uiPaperUnfoldingEvent;
 
     private void Awake()
     {
@@ -29,6 +32,16 @@ public class AudioManager : MonoBehaviour
         InitializeAmbience(FMODEvents.instance.ambience);
         InitializeMusic(FMODEvents.instance.music);
     }
+
+    private void Update()
+    {
+        // Check for the F key press
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            PlayOneShotAtPlayerPosition(uiPaperUnfoldingEvent);
+        }
+    }
+
     private void InitializeAmbience(EventReference ambienceEventReference)
     {
         ambienceEventInstance = CreateEventInstance(ambienceEventReference);
@@ -40,6 +53,7 @@ public class AudioManager : MonoBehaviour
         musicEventInstance = CreateEventInstance(musicEventReference);
         musicEventInstance.start();
     }
+
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
@@ -47,16 +61,13 @@ public class AudioManager : MonoBehaviour
 
     public void PlayOneShotAtPlayerPosition(EventReference sound)
     {
-        
         Vector3 playerPos = player.transform.position;
-
         RuntimeManager.PlayOneShot(sound, playerPos);
     }
 
     public void PlayRandomShotFromList(List<EventReference> listOfSounds, Vector3 worldPos)
     {
-        int rand = Random.Range(0, listOfSounds.Count - 1);
-
+        int rand = Random.Range(0, listOfSounds.Count);
         PlayOneShot(listOfSounds[rand], worldPos);
     }
 
