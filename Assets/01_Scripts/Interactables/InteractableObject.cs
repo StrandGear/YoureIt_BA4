@@ -28,8 +28,6 @@ public class InteractableObject : MonoBehaviour
         interactionCanvasElement = transform.Find("GameCanvas").gameObject;
         interactionCanvasElement.GetComponentInChildren<TMP_Text>().text = interactionText;
 
-        if (gameObject.GetComponent<MeshRenderer>() != null)
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
     }
     private void Start()
     {
