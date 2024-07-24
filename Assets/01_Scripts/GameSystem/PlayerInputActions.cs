@@ -91,6 +91,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SOS_Respawn"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ef82316-823c-4030-975b-9ce0ba0510bd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""651125a6-3ed4-4b71-917f-5b5362e1bb5c"",
@@ -373,6 +382,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Climb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cfe95db-ad75-42e4-bc45-291b64e5403e"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SOS_Respawn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -388,6 +408,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Scan = m_Player.FindAction("Scan", throwIfNotFound: true);
+        m_Player_SOS_Respawn = m_Player.FindAction("SOS_Respawn", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Climb = m_Player.FindAction("Climb", throwIfNotFound: true);
     }
@@ -458,6 +479,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Scan;
+    private readonly InputAction m_Player_SOS_Respawn;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Climb;
     public struct PlayerActions
@@ -471,6 +493,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Scan => m_Wrapper.m_Player_Scan;
+        public InputAction @SOS_Respawn => m_Wrapper.m_Player_SOS_Respawn;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Climb => m_Wrapper.m_Player_Climb;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -503,6 +526,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Scan.started += instance.OnScan;
             @Scan.performed += instance.OnScan;
             @Scan.canceled += instance.OnScan;
+            @SOS_Respawn.started += instance.OnSOS_Respawn;
+            @SOS_Respawn.performed += instance.OnSOS_Respawn;
+            @SOS_Respawn.canceled += instance.OnSOS_Respawn;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
@@ -534,6 +560,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Scan.started -= instance.OnScan;
             @Scan.performed -= instance.OnScan;
             @Scan.canceled -= instance.OnScan;
+            @SOS_Respawn.started -= instance.OnSOS_Respawn;
+            @SOS_Respawn.performed -= instance.OnSOS_Respawn;
+            @SOS_Respawn.canceled -= instance.OnSOS_Respawn;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
@@ -566,6 +595,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnCrouch(InputAction.CallbackContext context);
         void OnScan(InputAction.CallbackContext context);
+        void OnSOS_Respawn(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnClimb(InputAction.CallbackContext context);
     }
