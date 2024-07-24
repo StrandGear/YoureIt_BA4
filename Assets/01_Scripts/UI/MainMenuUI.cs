@@ -72,13 +72,15 @@ public class MainMenuUI : MonoBehaviour
 
     private void PauseGame()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         isPaused = true;
         pauseScreen.SetActive(true);
         Time.timeScale = 0f;
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         isPaused = false;
         pauseScreen.SetActive(false);
         Time.timeScale = 1f;
