@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class IKEnemy : MonoBehaviour
 {
-    [SerializeField] private int chainLength = 2;
+/*    [SerializeField] private int chainLength = 2;
     
     
     [SerializeField] private Transform target;
@@ -184,5 +184,5 @@ public class IKEnemy : MonoBehaviour
             Handles.DrawWireCube(Vector3.up * 0.5f, Vector3.one);
             current = current.parent;
         }
-    }
+    }*/
 }

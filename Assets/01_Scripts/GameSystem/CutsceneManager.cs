@@ -82,6 +82,8 @@ public class CutsceneManager : Singleton
     private UnityAction onCutsceneEnd;
     private Coroutine currentCoroutine;
 
+    public bool CutSceneIsDone = false; 
+
     private void Awake()
     {
         // Ensure all cutscene objects are initially inactive
@@ -129,6 +131,9 @@ public class CutsceneManager : Singleton
         cutsceneObject.SetActive(false);
 
         isPlaying = false;
+
+        if (cutsceneObject == cutsceneObjects[1])
+            CutSceneIsDone = true;
 
         // Call the callback if it is specified, otherwise return to Playmode
         if (onCutsceneEnd != null)

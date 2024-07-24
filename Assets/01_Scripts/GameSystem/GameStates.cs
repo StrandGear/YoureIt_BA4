@@ -198,7 +198,7 @@ public class GameStates : MonoBehaviour
         print("IngameUIMenumode");
         //stop character controller 
         player.gameObject.GetComponent<CharacterController>().enabled = false;
-
+        Cursor.lockState = CursorLockMode.Confined;
         //disable camera
         //disable all other UIs
         UIManager.Instance.SetAllGameUIActive(false);

@@ -39,6 +39,10 @@ public class MainMenuUI : MonoBehaviour
         
         restartButton.onClick.AddListener((() =>
                 {
+                    Cursor.lockState = CursorLockMode.Confined;
+                    isPaused = false;
+                    pauseScreen.SetActive(false);
+                    Time.timeScale = 1f;
                     SceneManager.LoadScene(0);
                 }));
     }
