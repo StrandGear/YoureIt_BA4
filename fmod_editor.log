@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001860E8D7E08 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001B599112988 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -17,76 +17,8 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000001860E5F14B8, queue head = 000001863A4DC108, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001860E5F14B8
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000001849AF1FC88, queue head = 000001863A4DC108, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001860E5F14B8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001849AF1FC88
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001849AF1FC88
-[LOG] SoundI::release                          :  (00000184AA6433A8)
-[LOG] SoundI::release                          :     plank falling 3 (00000182669713E8)
-[LOG] SoundI::release                          :  (00000184AA644208)
-[LOG] SoundI::release                          :     plank falling 4 (0000018266971588)
-[LOG] SoundI::release                          :  (00000184AA63DED8)
-[LOG] SoundI::release                          :     i dont like playing alone 1 (000001867B304F18)
-[LOG] SoundI::release                          :  (00000184AA63D4C8)
-[LOG] SoundI::release                          :     i dont like playing alone 2 (000001863D32E078)
-[LOG] SoundI::release                          :  (00000184AA63E328)
-[LOG] SoundI::release                          :     i dont like playing alone 3 (000001867B305258)
-[LOG] SoundI::release                          :  (00000184AA63DA88)
-[LOG] SoundI::release                          :     i dont like playing alone 4 (000001863D32E6F8)
-[LOG] SoundI::release                          : Level 1 demo (000001856D7CFC38)
-[LOG] SoundI::release                          :     Level 1 demo (00000184902F0F48)
-[LOG] SoundI::release                          :     Level 1 demo (000001860E5F14B8)
-[LOG] SoundI::release                          : ambience 1 (000001860E5F1308)
-[LOG] SoundI::release                          :     ambience 1 (0000018639D10DA8)
-[LOG] SoundI::release                          :     ambience 1 (000001849AF1FC88)
-[LOG] SoundI::release                          :  (00000184AA641F88)
-[LOG] SoundI::release                          :     iris 4 (00000184FEB246A8)
-[LOG] SoundI::release                          :  (00000184AA642DE8)
-[LOG] SoundI::release                          :     iris 3 (00000184999BCBB8)
-[LOG] SoundI::release                          :  (00000184AA642C78)
-[LOG] SoundI::release                          :     iris 2 (00000184999BC538)
-[LOG] SoundI::release                          :  (00000184AA644D88)
-[LOG] SoundI::release                          :     iris 13 (00000184999BC398)
-[LOG] SoundI::release                          :  (00000184AA63E048)
-[LOG] SoundI::release                          :     iris 1  (00000184999BCEF8)
-[LOG] SoundI::release                          :  (00000184AA63EEA8)
-[LOG] SoundI::release                          :     lvl 3 step 1 (00000184FEB24368)
-[LOG] SoundI::release                          :  (00000184AA641128)
-[LOG] SoundI::release                          :     lvl 3 step 10 (00000185719C70B8)
-[LOG] SoundI::release                          :  (00000184AA640438)
-[LOG] SoundI::release                          :     lvl 3 step 2 (00000185719C78D8)
-[LOG] SoundI::release                          :  (00000184AA641858)
-[LOG] SoundI::release                          :     lvl 3 step 3 (000001866C35F208)
-[LOG] SoundI::release                          :  (00000184AA6426B8)
-[LOG] SoundI::release                          :     lvl 3 step 4 (00000185719C7DB8)
-[LOG] SoundI::release                          :  (00000184AA63E8E8)
-[LOG] SoundI::release                          :     lvl 3 step 5 (00000185719C7738)
-[LOG] SoundI::release                          :  (00000184AA63FFE8)
-[LOG] SoundI::release                          :     lvl 3 step 6 (000001866C35EEC8)
-[LOG] SoundI::release                          :  (00000184AA63EA58)
-[LOG] SoundI::release                          :     lvl 3 step 7 (000001866C35F068)
-[LOG] SoundI::release                          :  (00000184AA6416E8)
-[LOG] SoundI::release                          :     lvl 3 step 8 (000001866C35F6E8)
-[LOG] SoundI::release                          :  (00000184AA6402C8)
-[LOG] SoundI::release                          :     lvl 3 step 9 (00000185719C73F8)
-[LOG] SoundI::release                          :  (00000184AA642B08)
-[LOG] SoundI::release                          :     select (0000018639D11428)
-[LOG] SoundI::release                          :  (00000184AA63ED38)
-[LOG] SoundI::release                          :     Drawing Pencil   Sound Effect [Free No Copyright] (0000018639D11768)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -94,5 +26,3 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.

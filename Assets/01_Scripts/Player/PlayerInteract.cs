@@ -52,7 +52,7 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+/*    private void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<InteractableObject>() != null || other.GetComponentInChildren<InteractableObject>() != null)
         {
@@ -61,7 +61,7 @@ public class PlayerInteract : MonoBehaviour
             currentInteractable.CanInteract(true);
 
         }
-    }
+    }*/
 
     private void OnTriggerExit(Collider other)
     {
