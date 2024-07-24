@@ -130,11 +130,16 @@ public class CutsceneManager : Singleton
 
         isPlaying = false;
 
-        //GameStates.Instance.SetGameState(GameState.Playmode);
-        GameStates.Instance.SetGameState(GameState.Playmode);
+        // Call the callback if it is specified, otherwise return to Playmode
+        if (onCutsceneEnd != null)
+        {
+            onCutsceneEnd?.Invoke();
+        }
+        else
+        {
+            GameStates.Instance.SetGameState(GameState.Playmode);
+        }
 
-        // Call the callback function if it is specified
-        onCutsceneEnd?.Invoke();
     }
 
 }

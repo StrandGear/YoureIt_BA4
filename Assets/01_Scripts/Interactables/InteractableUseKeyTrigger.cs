@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class InteractableUseKeyTrigger : InteractableObject
 {
     public GameObject cutsceneGameObject;
+
+    public GameObject blackGlobalVolume = null;
     public override void Interact()
     {
         if (!PlayerInventory.Instance.hasKey)
@@ -21,7 +23,7 @@ public class InteractableUseKeyTrigger : InteractableObject
     {
         print("Interacting with key");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.UI_puzzleSuccess, gameObject.transform.position);
-        Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(1, (() => SceneManager.LoadScene(1)));
+        Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(1, ( () => { blackGlobalVolume.SetActive(true); SceneManager.LoadScene(1); }));
         //Singleton.GetInstance<CutsceneManager>().PlayNextCutscene(cutsceneGameObject);
         //cutsceneGameObject.SetActive(true);
         StopInteraction();

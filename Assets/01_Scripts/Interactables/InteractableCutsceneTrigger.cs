@@ -8,6 +8,8 @@ public class InteractableCutsceneTrigger : InteractableObject
     public int cutsceneIndex;
 
     public int SceneToLoad = -1;
+
+    public GameObject blackGlobalVolume = null;
     public override void Interact()
     {
             Open();
@@ -15,10 +17,8 @@ public class InteractableCutsceneTrigger : InteractableObject
 
     private void Open()
     {
-        print("Interacting with key");
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.UI_puzzleSuccess, gameObject.transform.position);
         if (SceneToLoad >=0 )
-            Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex, (() => SceneManager.LoadScene(SceneToLoad)));
+            Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex, (() => { blackGlobalVolume.SetActive(true); SceneManager.LoadScene(SceneToLoad); }));
         else
             Singleton.GetInstance<CutsceneManager>().PlayCutsceneByIndex(cutsceneIndex);
 
