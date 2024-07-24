@@ -125,6 +125,10 @@ public class CutsceneManager : Singleton
                 yield return new WaitForSeconds(5f);
         }
 
+        // Deactivate the cutscene object
+        cutsceneObject.SetActive(false);
+
+        isPlaying = false;
 
         // Call the callback if it is specified, otherwise return to Playmode
         if (onCutsceneEnd != null)
@@ -135,10 +139,7 @@ public class CutsceneManager : Singleton
         {
             GameStates.Instance.SetGameState(GameState.Playmode);
         }
-        // Deactivate the cutscene object
-        cutsceneObject.SetActive(false);
 
-        isPlaying = false;
     }
 
 }
