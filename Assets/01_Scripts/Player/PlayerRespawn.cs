@@ -60,6 +60,21 @@ public class PlayerRespawn : MonoBehaviour
         }
     }
 
+    public void RespawnPlayerOtsideTriggerEvents()
+    {
+        if (deathScreen != null)
+        {
+            deathScreen.SetActive(true);
+        }
+
+        AssignNewRespawnPosition();
+
+        PauseGame();
+
+        //RespawnPlayer();
+        StartCoroutine(RespawnPlayer());
+    }
+
     private IEnumerator RespawnPlayer()
     {
         
