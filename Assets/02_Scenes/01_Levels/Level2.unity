@@ -3373,6 +3373,111 @@ MonoBehaviour:
   _SortingOrder: 0
   _FadeOutBegin: -150
   _FadeOutEnd: -200
+--- !u!1 &336560373
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336560377}
+  - component: {fileID: 336560376}
+  - component: {fileID: 336560375}
+  - component: {fileID: 336560374}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &336560374
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336560373}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &336560375
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336560373}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &336560376
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336560373}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &336560377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336560373}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -68.96, y: 17.88, z: -102.93}
+  m_LocalScale: {x: 1, y: 4.6296, z: 5.8438}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &390164465
 GameObject:
   m_ObjectHideFlags: 0
@@ -9385,6 +9490,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 101850190020420126, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
+      propertyPath: respawnPoint
+      value: 
+      objectReference: {fileID: 336560377}
     - target: {fileID: 133189157395644605, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.8675606
@@ -9937,6 +10046,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.22282144
       objectReference: {fileID: 0}
+    - target: {fileID: 5238991647928741166, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
+      propertyPath: climbControl
+      value: 
+      objectReference: {fileID: 3574012537170133078, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
     - target: {fileID: 5275002466969330777, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.807936
@@ -10433,7 +10546,12 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.9629783
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 101850190020420126, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
+    - {fileID: 1157847891135670127, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
+    - {fileID: 1216181908248566023, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
+    - {fileID: 5238991647928741166, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
+    - {fileID: 7568938064586229910, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5275002466969330777, guid: b37ef197d4ecff9468ba129d5cff8313, type: 3}
@@ -11573,6 +11691,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1421901867532916589, guid: 1b273002be2800144a1f108af170c182, type: 3}
+      propertyPath: pauseScreen
+      value: 
+      objectReference: {fileID: 1693828602}
+    - target: {fileID: 1421901867532916589, guid: 1b273002be2800144a1f108af170c182, type: 3}
+      propertyPath: pauseControl
+      value: 
+      objectReference: {fileID: -5017003922594455022, guid: e47cf4d2be3bfa84aab498667c8aec7d, type: 3}
+    - target: {fileID: 1421901867532916589, guid: 1b273002be2800144a1f108af170c182, type: 3}
+      propertyPath: restartButton
+      value: 
+      objectReference: {fileID: 1285886677}
     - target: {fileID: 2269201020368567337, guid: 1b273002be2800144a1f108af170c182, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -16486,7 +16616,13 @@ PrefabInstance:
       propertyPath: m_PivotOffset.z
       value: 0.18
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3749097908436627770, guid: dd14b6b99d75e384eb6b418c95fe59b9, type: 3}
+    - {fileID: 7431241739444155804, guid: dd14b6b99d75e384eb6b418c95fe59b9, type: 3}
+    - {fileID: 1482346520424158581, guid: dd14b6b99d75e384eb6b418c95fe59b9, type: 3}
+    - {fileID: 7067338908259956590, guid: dd14b6b99d75e384eb6b418c95fe59b9, type: 3}
+    - {fileID: 2701913622584292427, guid: dd14b6b99d75e384eb6b418c95fe59b9, type: 3}
+    - {fileID: 7837275690669022122, guid: dd14b6b99d75e384eb6b418c95fe59b9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7478763164584348375, guid: dd14b6b99d75e384eb6b418c95fe59b9, type: 3}
@@ -20421,6 +20557,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7193852389232299599, guid: 6ebf311eb0d1f3841b3669ae40f4f40a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b8b6eba9085f22e4d9e7bfb993508a75, type: 3}
     - target: {fileID: 8920048675870482655, guid: 6ebf311eb0d1f3841b3669ae40f4f40a, type: 3}
       propertyPath: m_Name
       value: CutsceneInteractTrigger
@@ -21817,6 +21957,10 @@ PrefabInstance:
     - target: {fileID: 527679705533013433, guid: eb36984cf2d848d4ba7d987104f64005, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 654014710475054172, guid: eb36984cf2d848d4ba7d987104f64005, type: 3}
+      propertyPath: intensityInside
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 681339254130414446, guid: eb36984cf2d848d4ba7d987104f64005, type: 3}
       propertyPath: m_Layer
@@ -25148,7 +25292,7 @@ PrefabInstance:
       objectReference: {fileID: 1056723970}
     - target: {fileID: 4934503071060024025, guid: 35904ade97b987e4bab52956dbe0081e, type: 3}
       propertyPath: initialLevelState
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5595479126413132115, guid: 35904ade97b987e4bab52956dbe0081e, type: 3}
       propertyPath: <GameUI>k__BackingField
@@ -25304,3 +25448,4 @@ SceneRoots:
   - {fileID: 1257557258}
   - {fileID: 1254985241}
   - {fileID: 274336869}
+  - {fileID: 336560377}

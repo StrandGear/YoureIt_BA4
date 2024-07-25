@@ -38,11 +38,11 @@ public class InteractableObject : MonoBehaviour
             //clearing text if we have Image
             interactionCanvasElement.GetComponentInChildren<TMP_Text>().text = "";
         }
-        else
+/*        else
         {
             if (interactionCanvasElement.GetComponentInChildren<Image>().gameObject != null)
                 interactionCanvasElement.GetComponentInChildren<Image>().gameObject.SetActive(false);
-        }
+        }*/
         interactionCanvasElement.SetActive(false);
 
         StopInteraction();
