@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InteractableKey : InteractableObject
 {
-
     public override void Interact()
     {
         base.Interact();
@@ -13,11 +12,12 @@ public class InteractableKey : InteractableObject
 
         PlayerInventory.Instance.AddKey();
 
-        Destroy(gameObject, 0.5f); 
+        StopInteraction();
     }
 
     public override void StopInteraction()
     {
         base.StopInteraction();
+        Destroy(gameObject, 0.5f);
     }
 }
