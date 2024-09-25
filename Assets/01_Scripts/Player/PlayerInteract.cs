@@ -5,7 +5,7 @@ public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private InputActionReference interactionButton;
 
-    private InteractableObject currentInteractable;
+    [SerializeField]  private InteractableObject currentInteractable;
 
     private bool interactionActive = false;
 
