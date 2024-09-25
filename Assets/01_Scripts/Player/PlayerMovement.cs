@@ -86,7 +86,8 @@ public class PlayerMovement : MonoBehaviour
         playerFootsteps.start();
 
         // Initialize speed variables
-        targetSpeed = speedBoostOn == true ? playerSpeed * 5f : playerSpeed;
+        targetSpeed =  playerSpeed;
+        playerSpeed = speedBoostOn == true ? playerSpeed * 5f : playerSpeed;
         currentSpeed = 0f;
         accelerationTimer = 0f;
     }
