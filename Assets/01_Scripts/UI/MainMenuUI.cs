@@ -12,6 +12,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button restartButton;
+    [SerializeField] private Button reloadButton;
     [SerializeField] private InputActionReference pauseControl;
     [SerializeField] private GameObject pauseScreen;
 
@@ -20,10 +21,8 @@ public class MainMenuUI : MonoBehaviour
 
     private void Awake()
     {
-        //print("Awake called");
         playButton.onClick.AddListener((() =>
         {
-            //SceneManager.LoadScene(1);
             if (firstTimeGameStarted)
             {
                 firstTimeGameStarted = false;
@@ -45,25 +44,23 @@ public class MainMenuUI : MonoBehaviour
                     Time.timeScale = 1f;
                     SceneManager.LoadScene(0);
                 }));
+
+        reloadButton.onClick.AddListener(RespawnPlayer);
     }
 
     private void Start()
     {
-        //print("Start called");
     }
 
     private void Update()
     {
-        //print("Update called");
         CheckPauseInput();
     }
 
     public void CheckPauseInput()
     {
-        //print("CheckPauseInput called");
         if (pauseControl.action.triggered)
         {
-            //print("Pause Menu triggered");
             TogglePauseMenu();
         }
     }
@@ -94,6 +91,11 @@ public class MainMenuUI : MonoBehaviour
         isPaused = false;
         pauseScreen.SetActive(false);
         Time.timeScale = 1f;
+    }
+    public void RespawnPlayer()
+    {
+        PlayerRespawn.instance.RespawnPlayerOtsideTriggerEvents();
+        ResumeGame();
     }
 
     private void OnEnable()

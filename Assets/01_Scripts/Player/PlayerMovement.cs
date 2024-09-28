@@ -63,8 +63,6 @@ public class PlayerMovement : MonoBehaviour
     private float currentSpeed;
     private float accelerationTimer;
 
-    [Header("DEBUG")]
-    [SerializeField] private bool speedBoostOn = false;
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -87,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Initialize speed variables
         targetSpeed =  playerSpeed;
-        playerSpeed = speedBoostOn == true ? playerSpeed * 5f : playerSpeed;
         currentSpeed = 0f;
         accelerationTimer = 0f;
     }

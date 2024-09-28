@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerRespawn : MonoBehaviour
 {
+    // Singleton instance
+    public static PlayerRespawn instance { get; private set; }
+
     [SerializeField] private CharacterController playerController; 
     [SerializeField] private Transform respawnPoint = null;
     public GameObject deathScreen = null;
@@ -20,6 +23,18 @@ public class PlayerRespawn : MonoBehaviour
     private static float xPos; //always keeping y pos the same
     private static float yPos; //always keeping y pos the same
     private static float zPos; //always keeping z pos the same
+
+    private void Awake()
+    {
+        // Implement the Singleton pattern
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);  // Destroy duplicate
+            return;
+        }
+
+        instance = this;
+    }
 
     private void Start()
     {
