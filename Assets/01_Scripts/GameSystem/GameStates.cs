@@ -80,7 +80,6 @@ public class GameStates : MonoBehaviour
 
     public void SetGameState(GameState state)
     {
-        print("Setting state- " + state);
         if (state == GameState.Playmode)
         {
             if (gameState != state)
@@ -125,11 +124,16 @@ public class GameStates : MonoBehaviour
 
     private void PlaymodeGameStateOn()
     {
+        Time.timeScale = 1;
+
         //enable player if it wasnt 
         player.gameObject.GetComponent<CharacterController>().enabled = true;
 
         //enable player mesh renderer 
         player.Find("0 Iris").gameObject.SetActive(true);
+
+        AudioManager.instance.InitializeAmbience();
+        AudioManager.instance.InitializeMusic();
 
         //enable enemy if there is one
         if (Enemy != null)
@@ -189,6 +193,9 @@ public class GameStates : MonoBehaviour
 
         //disable all UI 
         UIManager.Instance.SetAllGameUIActive(false);
+
+        AudioManager.instance.StopAmbience();
+        AudioManager.instance.StopMusic();
         //prolly time scale = 0
         //set active camera
     }
