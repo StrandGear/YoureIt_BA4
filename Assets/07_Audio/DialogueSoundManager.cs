@@ -71,4 +71,9 @@ public class DialogueSoundManager : Singleton
     {
         PlayDialogueSequence(sequenceIndex);
     }
+
+    public void StopAllDialogues()
+    {
+
+    }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,69 +5,59 @@ public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private InputActionReference interactionButton;
 
-    private InteractableObject currentInteractable;
+    [SerializeField]  private InteractableObject currentInteractable;
 
-    private bool interactionButtonIsPressed = false;
-
-    private int interactionButtonPressedTimes = 0;
+    private bool interactionActive = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (interactionButton.action.IsPressed() && currentInteractable != null && !interactionButtonIsPressed)
+        if (interactionButton.action.WasPressedThisFrame() && currentInteractable != null)
         {
-            if (interactionButtonPressedTimes == 1)
+            if (interactionActive)
             {
-                interactionButtonIsPressed = true;
-                currentInteractable.Interact();
-            }
-             else if (interactionButtonPressedTimes == 2)
-            {
-                interactionButtonIsPressed = true;
-
-                interactionButtonPressedTimes = 0;
-
                 currentInteractable.StopInteraction();
+                interactionActive = false;
             }
-        }
-
-        if (interactionButton.action.WasPressedThisFrame())
-        {
-            interactionButtonPressedTimes++;
-
-            interactionButtonIsPressed = false;
+            else
+            {
+                currentInteractable.Interact();
+                interactionActive = true;
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<InteractableObject>() != null || other.GetComponentInChildren<InteractableObject>() != null)
+        InteractableObject interactable = other.GetComponent<InteractableObject>() ?? other.GetComponentInChildren<InteractableObject>();
+        if (interactable != null)
         {
-            currentInteractable = other.GetComponent<InteractableObject>();
-
+            currentInteractable = interactable;
             currentInteractable.CanInteract(true);
-            
         }
     }
 
-/*    private void OnTriggerStay(Collider other)
-    {
-        if (other.GetComponent<InteractableObject>() != null || other.GetComponentInChildren<InteractableObject>() != null)
-        {
-            currentInteractable = other.GetComponent<InteractableObject>();
-
-            currentInteractable.CanInteract(true);
-
-        }
-    }*/
-
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<InteractableObject>() != null || other.GetComponentInChildren<InteractableObject>() != null)
+        InteractableObject interactable = other.GetComponent<InteractableObject>() ?? other.GetComponentInChildren<InteractableObject>();
+        if (interactable != null && interactable == currentInteractable)
         {
             currentInteractable.CanInteract(false);
-
+            if (interactionActive)
+            {
+                currentInteractable.StopInteraction();
+                interactionActive = false;
+            }
             currentInteractable = null;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        InteractableObject interactable = other.GetComponent<InteractableObject>() ?? other.GetComponentInChildren<InteractableObject>();
+        if (interactable != null && interactable == currentInteractable)
+        {
+            currentInteractable.CanInteract(true);
         }
     }
 }

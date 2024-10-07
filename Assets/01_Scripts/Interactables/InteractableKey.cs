@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class InteractableKey : InteractableObject
 {
-
     public override void Interact()
     {
+        print("Interact with key");
+
         base.Interact();
 
         AudioManager.instance.PlayOneShot(FMODEvents.instance.Keys, gameObject.transform.position);
 
         PlayerInventory.Instance.AddKey();
 
-        Destroy(gameObject, 0.5f); 
-    }
-
-    public override void StopInteraction()
-    {
-        base.StopInteraction();
+        Destroy(gameObject, 0.5f);
     }
 }
