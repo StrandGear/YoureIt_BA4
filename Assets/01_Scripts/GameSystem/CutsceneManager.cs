@@ -51,11 +51,7 @@ public class CutsceneManager : Singleton
         if (director != null)
         {
             director.Play();
-            print(director.duration);
-            if (director.duration > 0)
-                yield return new WaitForSeconds((float)director.duration);
-            else
-                yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds((float)director.duration);
         }
 
         // Deactivate the cutscene object

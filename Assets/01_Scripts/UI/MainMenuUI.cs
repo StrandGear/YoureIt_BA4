@@ -45,7 +45,7 @@ public class MainMenuUI : MonoBehaviour
                     SceneManager.LoadScene(0);
                 }));
 
-        reloadButton.onClick.AddListener(RespawnPlayer);
+        reloadButton?.onClick.AddListener(RespawnPlayer);
     }
 
     private void Start()

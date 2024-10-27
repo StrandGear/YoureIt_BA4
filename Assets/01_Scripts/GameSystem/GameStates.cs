@@ -5,11 +5,11 @@ using UnityEngine;
 //Defining changes when trigger difeerent game mechanics
 public class GameStates : MonoBehaviour
 {
-    public GameState gameState;
+    GameState gameState;
 
     bool gameStartedFirstTime = true;
 
-    public bool DisablePlayerInCutscene = false;
+    public bool DisablePlayerInCutscene = true;
 
     public GameState initialLevelState;
 
@@ -50,23 +50,22 @@ public class GameStates : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
+
+        
     }
 
-        private void Start()
+    private void Start()
     {
         if (player == null)
             player = FindFirstObjectByType<CharacterController>().gameObject.transform;
 
-        
-            SetGameState(initialLevelState);
-        //else
-           // SetGameState(GameState.Playmode);
+        SetGameState(initialLevelState);
     }
 
     private void Update()
@@ -80,45 +79,47 @@ public class GameStates : MonoBehaviour
 
     public void SetGameState(GameState state)
     {
-        if (state == GameState.Playmode)
+        switch (state)
         {
-            if (gameState != state)
-            {
-                gameState = state;
-                PlaymodeGameStateOn();
-            }
-            else
-                return;
-        }
-        else if (state == GameState.Puzzlemode)
-        {
-            if (gameState != state)
-            {
-                gameState = state;
-                PuzzleGameStateOn();
-            }
-            else
-                return;
-        }
-        else if (state == GameState.Cutscenemode)
-        {
-            if (gameState != state)
-            {
-                gameState = state;
-                CutsceneModeOn();
-            }
-            else
-                return;
-        }
-        else if (state == GameState.IngameUIMenumode)
-        {
-            if (gameState != state)
-            {
-                gameState = state;
-                IngameUIMenumode();
-            }
-            else
-                return;
+            case GameState.Playmode:
+                if (gameState != state)
+                {
+                    gameState = state;
+                    PlaymodeGameStateOn();
+                }
+                break;
+
+            case GameState.Puzzlemode:
+                if (gameState != state)
+                {
+                    gameState = state;
+                    PuzzleGameStateOn();
+                }
+                break;
+
+            case GameState.Cutscenemode:
+                if (gameState != state)
+                {
+                    gameState = state;
+                    CutsceneModeOn();
+                }
+                break;
+
+            case GameState.IngameUIMenumode:
+                if (gameState != state)
+                {
+                    gameState = state;
+                    IngameUIMenumode();
+                }
+                break;
+
+            default:
+                if (gameState != state)
+                {
+                    gameState = state;
+                    PlaymodeGameStateOn();
+                }
+                break;
         }
     }
 
@@ -130,7 +131,8 @@ public class GameStates : MonoBehaviour
         player.gameObject.GetComponent<CharacterController>().enabled = true;
 
         //enable player mesh renderer 
-        player.Find("0 Iris").gameObject.SetActive(true);
+        //player.Find("0 Iris").gameObject.SetActive(true);
+        player.gameObject.SetActive(true);
 
         AudioManager.instance.InitializeAmbience();
         AudioManager.instance.InitializeMusic();
@@ -140,8 +142,6 @@ public class GameStates : MonoBehaviour
         {
             Enemy.SetActive(true);
         }
-
-        print("PlaymodeGameStateOn");
         //resetting layers in PlayerScan
 
         //disable cursor
@@ -158,6 +158,8 @@ public class GameStates : MonoBehaviour
 
     private void PuzzleGameStateOn()
     {
+        //return if no objects to scan are available 
+
         print("PuzzleGameStateOn");
         //enable player if it wasnt 
         player.gameObject.GetComponent<CharacterController>().enabled = true;
@@ -182,10 +184,17 @@ public class GameStates : MonoBehaviour
         //disable cursor
         Cursor.lockState = CursorLockMode.Locked;
 
-        //stop character controller 
-        player.gameObject.GetComponent<CharacterController>().enabled = false;
         if (DisablePlayerInCutscene)
-            player.Find("0 Iris").gameObject.SetActive(false);
+        {
+            print("Disabling character  ");
+            //player.Find("0 Iris").gameObject?.SetActive(false);
+
+            player.gameObject.SetActive(false);
+        }
+
+        //stop character controller 
+        if (player.gameObject.GetComponent<CharacterController>() != null)
+            player.gameObject.GetComponent<CharacterController>().enabled = false;
 
         //disable Enemy object
         if (Enemy != null)

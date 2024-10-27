@@ -43,7 +43,7 @@ public class PlayerInventory : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (instance != this)
         {
