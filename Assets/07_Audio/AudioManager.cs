@@ -21,6 +21,8 @@ public class AudioManager : MonoBehaviour
     // Use EventReference struct instead of EventRef attribute
     public EventReference uiPaperUnfoldingEvent;
 
+    float initPitch;
+
     private void Awake()
     {
         if (instance != null)
@@ -36,11 +38,12 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-       //SceneManager.activeSceneChanged += ChangedActiveScene;
+        musicEventInstance.getPitch(out initPitch);
+        //SceneManager.activeSceneChanged += ChangedActiveScene;
 
         // Only initialize if not already playing to avoid duplicates
-/*        if (!isAmbiencePlaying) InitializeAmbience();
-        if (!isMusicPlaying) InitializeMusic();*/
+        /*        if (!isAmbiencePlaying) InitializeAmbience();
+                if (!isMusicPlaying) InitializeMusic();*/
     }
 
     private void Update()
@@ -118,11 +121,62 @@ public class AudioManager : MonoBehaviour
             isMusicPlaying = false;
         }
     }
-
-/*    private void ChangedActiveScene(Scene current, Scene next)
+    public void PauseAmbience()
     {
-        print("CHANGING SCENE");
-        StopAmbience();
-        StopMusic();
-    }*/
+        if (isAmbiencePlaying)
+        {
+            ambienceEventInstance.setPaused(true);
+
+            isAmbiencePlaying = false;
+        }
+    }
+    public void PauseMusic()
+    {
+        if (isMusicPlaying)
+        {
+            musicEventInstance.setPaused(true);
+
+            isMusicPlaying = false;
+        }
+    }
+    public void UnpauseAmbience()
+    {
+        if (isAmbiencePlaying)
+        {
+            ambienceEventInstance.setPaused(false);
+
+            isAmbiencePlaying = true;
+        }
+    }
+    public void UnpauseMusic()
+    {
+        if (isMusicPlaying)
+        {
+            musicEventInstance.setPaused(false);
+
+            isMusicPlaying = true;
+        }
+    }
+
+    public void LowerMusicVolume()
+    {
+        if (isAmbiencePlaying)
+        {
+            float pitchMultiplier = 0.1f;
+            musicEventInstance.setPitch(initPitch * pitchMultiplier);
+        }
+    }
+    public void IncreaseMusicVolume()
+    {
+        if (isAmbiencePlaying)
+        {
+            musicEventInstance.setPitch(initPitch);
+        }
+    }
+    /*    private void ChangedActiveScene(Scene current, Scene next)
+        {
+            print("CHANGING SCENE");
+            StopAmbience();
+            StopMusic();
+        }*/
 }

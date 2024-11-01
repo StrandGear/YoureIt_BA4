@@ -63,6 +63,11 @@ public class PlayerRespawn : MonoBehaviour
             print("enemy hit");
             if (deathScreen != null)
             {
+                //music events
+                AudioManager.instance.PauseAmbience();
+                AudioManager.instance.LowerMusicVolume();
+                AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.playerDeath);
+
                 deathScreen.SetActive(true);
             }
             
@@ -92,8 +97,7 @@ public class PlayerRespawn : MonoBehaviour
 
     private IEnumerator RespawnPlayer()
     {
-        
-        yield return new WaitForSecondsRealtime(2); 
+        yield return new WaitForSecondsRealtime(3.5f); 
 
         playerController.enabled = false; 
         playerController.transform.position = respawnPoint.position;
@@ -105,7 +109,12 @@ public class PlayerRespawn : MonoBehaviour
         {
             deathScreen.SetActive(false);
         }
+
         UnpauseGame();
+        
+        AudioManager.instance.UnpauseAmbience();
+        AudioManager.instance.IncreaseMusicVolume();
+
         StopCoroutine(RespawnPlayer());
     }
 

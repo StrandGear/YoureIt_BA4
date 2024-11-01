@@ -369,8 +369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94667440265b80148b68dae20cfcf9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DisablePlayerInCutscene: 1
   initialLevelState: 3
   player: {fileID: 0}
+  Enemy: {fileID: 0}
 --- !u!1 &9023248085794740159
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +589,10 @@ PrefabInstance:
       value: event:/Ambience/Ambient 1
       objectReference: {fileID: 0}
     - target: {fileID: 5598398126484013400, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
+      propertyPath: <playerDeath>k__BackingField.Path
+      value: event:/UI/Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 5598398126484013400, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
       propertyPath: <ambience>k__BackingField.Guid.Data1
       value: -1002705903
       objectReference: {fileID: 0}
@@ -605,6 +611,22 @@ PrefabInstance:
     - target: {fileID: 5598398126484013400, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
       propertyPath: <playerFootsteps>k__BackingField.Path
       value: event:/Footsteps/Footsteps 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5598398126484013400, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
+      propertyPath: <playerDeath>k__BackingField.Guid.Data1
+      value: -904660612
+      objectReference: {fileID: 0}
+    - target: {fileID: 5598398126484013400, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
+      propertyPath: <playerDeath>k__BackingField.Guid.Data2
+      value: 1104471248
+      objectReference: {fileID: 0}
+    - target: {fileID: 5598398126484013400, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
+      propertyPath: <playerDeath>k__BackingField.Guid.Data3
+      value: 1712685214
+      objectReference: {fileID: 0}
+    - target: {fileID: 5598398126484013400, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
+      propertyPath: <playerDeath>k__BackingField.Guid.Data4
+      value: 1455677364
       objectReference: {fileID: 0}
     - target: {fileID: 8692799625194379736, guid: b24f8c202fa7c73439da0cf0af961d5c, type: 3}
       propertyPath: m_Name
