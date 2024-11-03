@@ -62,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
     private float targetSpeed;
     private float currentSpeed;
     private float accelerationTimer;
+    
+    
 
     private void Start()
     {
@@ -277,24 +279,28 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(localMove + playerVelocity * Time.deltaTime);
     }
 
-    private void HandleCrouching(InputAction.CallbackContext context)
+    private void HandleCrouchToggle(InputAction.CallbackContext context)
     {
-        isCrouching = true;
-        controller.height = crouchHeight;
-        controller.center = crouchCenter;
-        controller.radius = crouchRadius;
-        animControl.SetBool("Crouch", true);
-        animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f;
-    }
+        isCrouching = !isCrouching;
 
-    private void HandleStanding(InputAction.CallbackContext context)
-    {
-        isCrouching = false;
-        controller.center = originalCenter;
-        controller.height = originalHeight;
-        controller.radius = originalRadius;
-        animControl.SetBool("Crouch", false);
-        animControl.speed = 1f;
+        if (isCrouching)
+        {
+            // Enable crouching
+            controller.height = crouchHeight;
+            controller.center = crouchCenter;
+            controller.radius = crouchRadius;
+            animControl.SetBool("Crouch", true);
+            animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f;
+        }
+        else
+        {
+            // Disable crouching
+            controller.center = originalCenter;
+            controller.height = originalHeight;
+            controller.radius = originalRadius;
+            animControl.SetBool("Crouch", false);
+            animControl.speed = 1f;
+        }
     }
 
     private void CameraRotation()
@@ -366,8 +372,7 @@ public class PlayerMovement : MonoBehaviour
         lookControl.action.Enable();
         crouchControl.action.Enable();
 
-        crouchControl.action.performed += HandleCrouching;
-        crouchControl.action.canceled += HandleStanding;
+        crouchControl.action.performed += HandleCrouchToggle;
     }
 
     private void OnDisable()
@@ -380,8 +385,7 @@ public class PlayerMovement : MonoBehaviour
         lookControl.action.Disable();
         crouchControl.action.Disable();
 
-        crouchControl.action.performed -= HandleCrouching;
-        crouchControl.action.canceled -= HandleStanding;
+        crouchControl.action.performed -= HandleCrouchToggle;
     }
 
     private void UpdateSound()
