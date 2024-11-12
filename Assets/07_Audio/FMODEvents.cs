@@ -14,6 +14,7 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Player SFX")]
     [field: SerializeField] public EventReference playerFootsteps { get; set; }
+    [field: SerializeField] public EventReference playerDeath { get; set; }
 
     [field: Header("Eye SFX")]
 

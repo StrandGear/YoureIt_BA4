@@ -81,10 +81,10 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
         playerFootsteps.start();
 
-        //Saving initial Z value 
+        
         initialZPosition = transform.position.z;
 
-        //Initialize speed variables
+        
         targetSpeed = playerSpeed;
         currentSpeed = 0f;
         accelerationTimer = 0f;
@@ -127,14 +127,18 @@ public class PlayerMovementSecondLevel : MonoBehaviour
 
     private void UpdateGroundedStatus()
     {
-        var ray = new Ray(transform.position, Vector3.down);
-        groundedPlayer = Physics.Raycast(ray, 0.1f, groundLayer);
+        var ray = new Ray(transform.position + new Vector3(0f, 0.1f, 0f), Vector3.down);
+        
+        groundedPlayer = Physics.Raycast(ray, 0.2f, groundLayer);
+    
+        
+        Debug.DrawRay(ray.origin, ray.direction * 0.2f, groundedPlayer ? Color.green : Color.red);
     }
 
     private void HandleMovement()
     {
         Vector2 movement = movementControl.action.ReadValue<Vector2>();
-        
+
         if (movement.sqrMagnitude < .001f)
         {
             currentSpeed = 0f;
@@ -146,15 +150,15 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         Vector3 forward = cameraMainTransform.forward;
         Vector3 right = cameraMainTransform.right;
 
-        // Normalize vectors to ensure consistent movement speed in all directions
+        
         forward.y = 0;
         right.y = 0;
         forward.Normalize();
         right.Normalize();
 
-        // Calculate final movement vector
-        Vector3 desiredMoveDirection = forward * move.z + right * move.x;
         
+        Vector3 desiredMoveDirection = forward * move.z + right * move.x;
+
         if (isCrouching)
         {
             currentSpeed = crouchSpeed;
@@ -175,6 +179,11 @@ public class PlayerMovementSecondLevel : MonoBehaviour
             accelerationTimer = 0f;
         }
 
+        
+        if (IsNearLadder() && !isClimbing && movement.y > 0)
+        {
+            StartClimbing();
+        }
 
         if (isClimbing)
         {
@@ -185,12 +194,11 @@ public class PlayerMovementSecondLevel : MonoBehaviour
             HandleWalkingAndJumping(desiredMoveDirection, currentSpeed);
         }
 
-        // Calculate forwards and sideways speeds
+        
         float forwardSpeed = Vector3.Dot(desiredMoveDirection.normalized, forward);
         float sidewaysSpeed = Vector3.Dot(desiredMoveDirection.normalized, right);
 
-        // Update animator parameters
-        //animControl.SetFloat("ForwardsSpeed", forwardSpeed);
+        
         animControl.SetFloat("SidewaysSpeed", sidewaysSpeed);
 
         UpdateClimbingTimer();
@@ -202,35 +210,70 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         controller.Move(move * Time.deltaTime * currentSpeed);
         Debug.Log("Climbing");
 
-        float ladderGrabDistance = 1f;
+        float ladderGrabDistance = 0.3f;
         Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
 
+        // Check if the player is still near the ladder
         if (!Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance) ||
             !raycastHit.transform.CompareTag("Ladder") || (groundedPlayer && !isStartingToClimb))
         {
-            isClimbing = false;
-            animControl.SetBool("Climbing", false);
+            StopClimbing();
         }
+    }
+    
+    private void StartClimbing()
+    {
+        isClimbing = true;
+        animControl.SetBool("Climbing", true);
+        groundedPlayer = true;
+        isStartingToClimb = true;
+        climbingTimer = 2f;
+        playerVelocity.y = 0f;
+
+        
+        playerVelocity.y = 2f; 
+    }
+    
+    private void StopClimbing()
+    {
+        isClimbing = false;
+        animControl.SetBool("Climbing", false);
+        playerVelocity.y = 0f;
+    }
+    
+    private bool IsNearLadder()
+    {
+        Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
+        float ladderGrabDistance = 0.3f;
+
+        // Check if there's a ladder in front of the player using a raycast
+        if (Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance))
+        {
+            if (raycastHit.transform.CompareTag("Ladder"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void HandleWalkingAndJumping(Vector3 move, float currentSpeed)
     {
-        /*if (jumpControl.action.triggered && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            Debug.Log("Player Jumped");
-        }*/
-        Vector3 currentPosition = transform.position;
-        currentPosition.z = initialZPosition;
-        transform.position = currentPosition;
-
+        
         if (groundedPlayer && playerVelocity.y <= 0)
         {
             playerVelocity.y = 0f;
         }
         else
         {
+            
             playerVelocity.y += gravityValue * Time.deltaTime;
+        
+            // Clamp maximum fall speed
+            if (playerVelocity.y < -12f) 
+            {
+                playerVelocity.y = -12f;
+            }
         }
 
         if (move != Vector3.zero && !isClimbing)
@@ -292,7 +335,7 @@ public class PlayerMovementSecondLevel : MonoBehaviour
         if (climbControl.action.triggered && !isClimbing)
         {
             Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
-            float ladderGrabDistance = 1f;
+            float ladderGrabDistance = 0.3f;
 
             if (Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance))
             {

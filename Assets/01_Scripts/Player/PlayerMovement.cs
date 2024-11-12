@@ -62,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
     private float targetSpeed;
     private float currentSpeed;
     private float accelerationTimer;
+    
+    
 
     private void Start()
     {
@@ -83,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         playerFootsteps.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
         playerFootsteps.start();
 
-        // Initialize speed variables
+        
         targetSpeed =  playerSpeed;
         currentSpeed = 0f;
         accelerationTimer = 0f;
@@ -96,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         HandleClimbingTransition();
         UpdateSound(); // Call UpdateSound in Update
         
-        // Adjust animation speed based on climbing and movement state
+        
         if (isClimbing)
         {
             Vector2 movement = movementControl.action.ReadValue<Vector2>();
@@ -132,79 +134,120 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        Vector2 movement = movementControl.action.ReadValue<Vector2>();
+    Vector2 movement = movementControl.action.ReadValue<Vector2>();
 
-        // Calculate the movement direction relative to the camera
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
-        Vector3 forward = cameraMainTransform.forward;
-        Vector3 right = cameraMainTransform.right;
+    
+    Vector3 move = new Vector3(movement.x, 0, movement.y);
+    Vector3 forward = cameraMainTransform.forward;
+    Vector3 right = cameraMainTransform.right;
 
-        // Normalize vectors to ensure consistent movement speed in all directions
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
+    
+    forward.y = 0;
+    right.y = 0;
+    forward.Normalize();
+    right.Normalize();
 
-        // Calculate final movement vector
-        Vector3 desiredMoveDirection = forward * move.z + right * move.x;
+    
+    Vector3 desiredMoveDirection = forward * move.z + right * move.x;
 
-        // Determine target speed based on input and state
-        targetSpeed = (movement != Vector2.zero) ? playerSpeed : 0f;
-        if (isCrouching)
+    
+    targetSpeed = (movement != Vector2.zero) ? playerSpeed : 0f;
+    if (isCrouching)
+    {
+        targetSpeed = (movement != Vector2.zero) ? crouchSpeed : 0f;
+    }
+    if (speedBoostControl.action.IsPressed() && !isCrouching)
+    {
+        targetSpeed *= speedBoostMultiplier;
+    }
+
+    
+    if (currentSpeed < targetSpeed)
+    {
+        accelerationTimer += Time.deltaTime;
+        float curveValue = accelerationCurve.Evaluate(accelerationTimer);
+        currentSpeed = Mathf.Lerp(0, targetSpeed, curveValue);
+    }
+    else
+    {
+        accelerationTimer = 0f;
+    }
+
+    
+    if (IsNearLadder() && !isClimbing)
+    {
+        StartClimbing();
+    }
+
+    
+    if (isClimbing)
+    {
+        HandleClimbing(movement, currentSpeed);
+    }
+    else
+    {
+        HandleWalkingAndJumping(desiredMoveDirection, currentSpeed);
+    }
+
+    
+    float forwardSpeed = Vector3.Dot(desiredMoveDirection.normalized, forward);
+    float sidewaysSpeed = Vector3.Dot(desiredMoveDirection.normalized, right);
+
+    
+    animControl.SetFloat("ForwardsSpeed", forwardSpeed);
+    animControl.SetFloat("SidewaysSpeed", sidewaysSpeed);
+
+    UpdateClimbingTimer();
+    }
+    
+    private bool IsNearLadder()
+    {
+        Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
+        float ladderGrabDistance = 0.3f;
+
+        // Check if there's a ladder in front of the player using a raycast
+        if (Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance))
         {
-            targetSpeed = (movement != Vector2.zero) ? crouchSpeed : 0f;
+            if (raycastHit.transform.CompareTag("Ladder"))
+            {
+                return true;
+            }
         }
-        if (speedBoostControl.action.IsPressed() && !isCrouching)
-        {
-            targetSpeed *= speedBoostMultiplier;
-        }
-
-        // Smoothly transition to the target speed using the animation curve
-        if (currentSpeed < targetSpeed)
-        {
-            accelerationTimer += Time.deltaTime;
-            float curveValue = accelerationCurve.Evaluate(accelerationTimer);
-            currentSpeed = Mathf.Lerp(0, targetSpeed, curveValue);
-        }
-        else
-        {
-            accelerationTimer = 0f;
-        }
-
-        if (isClimbing)
-        {
-            HandleClimbing(movement, currentSpeed);
-        }
-        else
-        {
-            HandleWalkingAndJumping(desiredMoveDirection, currentSpeed);
-        }
-
-        // Calculate forwards and sideways speeds
-        float forwardSpeed = Vector3.Dot(desiredMoveDirection.normalized, forward);
-        float sidewaysSpeed = Vector3.Dot(desiredMoveDirection.normalized, right);
-
-        // Update animator parameters
-        animControl.SetFloat("ForwardsSpeed", forwardSpeed);
-        animControl.SetFloat("SidewaysSpeed", sidewaysSpeed);
-
-        UpdateClimbingTimer();
+        return false;
+    }
+    
+    private void StartClimbing()
+    {
+        isClimbing = true;
+        animControl.SetBool("Climbing", true);
+        groundedPlayer = true;
+        isStartingToClimb = true;
+        climbingTimer = 2f;
+        playerVelocity.y = 0f;
     }
 
     private void HandleClimbing(Vector2 movement, float currentSpeed)
     {
         Vector3 move = new Vector3(0, movement.y, 0);
         controller.Move(move * Time.deltaTime * currentSpeed);
-        Debug.Log("Climbing");
 
-        float ladderGrabDistance = 1f;
+        
+        float ladderTopThreshold = GetLadderTopPosition(); 
+
+        
+        if (transform.position.y >= ladderTopThreshold)
+        {
+            StopClimbing();
+            return;
+        }
+
+        float ladderGrabDistance = 0.3f;
         Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
 
-        if (!Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance) ||
-            !raycastHit.transform.CompareTag("Ladder") || (groundedPlayer && !isStartingToClimb))
+        if (!Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance) || 
+            !raycastHit.transform.CompareTag("Ladder"))
         {
-            isClimbing = false;
-            animControl.SetBool("Climbing", false);
+            StopClimbing(); 
         }
     }
 
@@ -236,24 +279,28 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(localMove + playerVelocity * Time.deltaTime);
     }
 
-    private void HandleCrouching(InputAction.CallbackContext context)
+    private void HandleCrouchToggle(InputAction.CallbackContext context)
     {
-        isCrouching = true;
-        controller.height = crouchHeight;
-        controller.center = crouchCenter;
-        controller.radius = crouchRadius;
-        animControl.SetBool("Crouch", true);
-        animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f;
-    }
+        isCrouching = !isCrouching;
 
-    private void HandleStanding(InputAction.CallbackContext context)
-    {
-        isCrouching = false;
-        controller.center = originalCenter;
-        controller.height = originalHeight;
-        controller.radius = originalRadius;
-        animControl.SetBool("Crouch", false);
-        animControl.speed = 1f;
+        if (isCrouching)
+        {
+            // Enable crouching
+            controller.height = crouchHeight;
+            controller.center = crouchCenter;
+            controller.radius = crouchRadius;
+            animControl.SetBool("Crouch", true);
+            animControl.speed = movementControl.action.ReadValue<Vector2>() != Vector2.zero ? 1f : 0f;
+        }
+        else
+        {
+            // Disable crouching
+            controller.center = originalCenter;
+            controller.height = originalHeight;
+            controller.radius = originalRadius;
+            animControl.SetBool("Crouch", false);
+            animControl.speed = 1f;
+        }
     }
 
     private void CameraRotation()
@@ -285,7 +332,7 @@ public class PlayerMovement : MonoBehaviour
         if (climbControl.action.triggered && !isClimbing)
         {
             Vector3 raycastStart = transform.position + Vector3.up * 0.1f;
-            float ladderGrabDistance = 1f;
+            float ladderGrabDistance = 0.3f;
 
             if (Physics.Raycast(raycastStart, transform.forward, out RaycastHit raycastHit, ladderGrabDistance))
             {
@@ -301,6 +348,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    
+    private void StopClimbing()
+    {
+        isClimbing = false;
+        animControl.SetBool("Climbing", false);
+        playerVelocity.y = 0f;
+    }
+    
+    private float GetLadderTopPosition()
+    {
+        
+        return 2.0f; 
+    }
 
     private void OnEnable()
     {
@@ -312,8 +372,7 @@ public class PlayerMovement : MonoBehaviour
         lookControl.action.Enable();
         crouchControl.action.Enable();
 
-        crouchControl.action.performed += HandleCrouching;
-        crouchControl.action.canceled += HandleStanding;
+        crouchControl.action.performed += HandleCrouchToggle;
     }
 
     private void OnDisable()
@@ -326,8 +385,7 @@ public class PlayerMovement : MonoBehaviour
         lookControl.action.Disable();
         crouchControl.action.Disable();
 
-        crouchControl.action.performed -= HandleCrouching;
-        crouchControl.action.canceled -= HandleStanding;
+        crouchControl.action.performed -= HandleCrouchToggle;
     }
 
     private void UpdateSound()

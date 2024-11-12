@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ResetLayering : MonoBehaviour
 {
+    public bool setObjectsAsUsed = false;
+
     private void Awake()
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -15,6 +17,10 @@ public class ResetLayering : MonoBehaviour
         {
             LayerManager.Instance.ClearLayerList();
             GameStates.Instance.SetGameState(GameState.Playmode);
+
+            if (setObjectsAsUsed)
+                LayerObjectsVisibilityRadius.Instance.SetAllVisibleObjectsAsUsed();
+
             /*            if (Singleton.GetInstance<PlayerScan>().IsScanning)
                         {
                             LayerManager.Instance.ClearLayerList();
