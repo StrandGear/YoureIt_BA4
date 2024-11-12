@@ -59,16 +59,15 @@ public class GameStates : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
+        if (muteMusicOnFirstLevel)
+        {
+            AudioManager.instance.stopSound = true;
+        }
     }
 
     private void Start()
     {
-        if (muteMusicOnFirstLevel)
-        {
-            AudioManager.instance.StopMusic();
-            AudioManager.instance.StopAmbience();
-        }
+
         AudioManager.instance.stopSound = false;
         if (player == null)
             player = FindFirstObjectByType<CharacterController>().gameObject.transform;
@@ -135,6 +134,8 @@ public class GameStates : MonoBehaviour
     {
         Time.timeScale = 1;
 
+        AudioManager.instance.stopSound = false;
+
         //enable player if it wasnt 
         player.gameObject.GetComponent<CharacterController>().enabled = true;
 
@@ -188,6 +189,8 @@ public class GameStates : MonoBehaviour
 
     private void CutsceneModeOn()
     {
+        AudioManager.instance.stopSound = true;
+
         print("CutsceneModeOn");
         //disable cursor
         Cursor.lockState = CursorLockMode.Locked;

@@ -42,11 +42,18 @@ public class AudioManager : MonoBehaviour
             if (player == null)
                 player = FindObjectOfType<CharacterController>().gameObject;
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        stopSound = true;
     }
 
     private void Start()
     {
         musicEventInstance.getPitch(out initPitch);
+        stopSound = false;
         //SceneManager.activeSceneChanged += ChangedActiveScene;
 
         // Only initialize if not already playing to avoid duplicates
@@ -115,14 +122,14 @@ public class AudioManager : MonoBehaviour
     {
         if (isAmbiencePlaying)
         {
-            ambienceEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            ambienceEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             ambienceEventInstance.release();
             isAmbiencePlaying = false;
         }
     }
     public void StopMusic()
     {
-        musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        musicEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         musicEventInstance.release(); //clearing instance
         isMusicPlaying = false;
     }
