@@ -9,9 +9,17 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
 
     public List<LayerObject> VisibleObjects { get => visibleObjects; }
 
-/*    [SerializeField] private GameObject visibleCamera = null;
+    /*    [SerializeField] private GameObject visibleCamera = null;
 
-    public GameObject VisibleCamera { get => visibleCamera; }*/
+        public GameObject VisibleCamera { get => visibleCamera; }*/
+    public static LayerObjectsVisibilityRadius Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -51,5 +59,13 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
                 visibleCamera = null;
             }
         }*/
+    }
+
+    public void SetAllVisibleObjectsAsUsed()
+    {
+        foreach (LayerObject elem in visibleObjects)
+        {
+            elem.IsUsed = true;
+        }
     }
 }

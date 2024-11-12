@@ -47,7 +47,7 @@ public class PlayerScan : MonoBehaviour
                 ScanArea();
                 GameStates.Instance.SetGameState(GameState.Puzzlemode);
             }
-            else if (scanningButtonPressed >= 2) // not scanning
+            else if (scanningButtonPressed >= 2 || layerObjectsVisibilityRadius.VisibleObjects.Count <= 0) // not scanning
             {
                 StopScanning(true);
                 GameStates.Instance.SetGameState(GameState.Playmode);
