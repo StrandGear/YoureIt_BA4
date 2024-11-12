@@ -4,8 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueSoundManager : Singleton
+public class DialogueSoundManager : MonoBehaviour
 {
+    public static DialogueSoundManager Instance;
+
     public List<EventReference> dialogueSequences;
 
     private Queue<EventReference> dialogueQueue = new Queue<EventReference>();
@@ -13,15 +15,22 @@ public class DialogueSoundManager : Singleton
     private bool isPlaying = false;
 
     private int currentDialogueIndex = 0;
-
-/*    private void Start()
+    private void Awake()
     {
-        // Enqueue all dialogue sequences
-        foreach (var dialogue in dialogueSequences)
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+    }
+
+    /*    private void Start()
         {
-            dialogueQueue.Enqueue(dialogue);
-        }
-    }*/
+            // Enqueue all dialogue sequences
+            foreach (var dialogue in dialogueSequences)
+            {
+                dialogueQueue.Enqueue(dialogue);
+            }
+        }*/
 
     public void PlayDialogueSequence(int index)
     {

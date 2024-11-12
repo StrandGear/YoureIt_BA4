@@ -67,5 +67,6 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
         {
             elem.IsUsed = true;
         }
+        visibleObjects.Clear();
     }
 }

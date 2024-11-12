@@ -9,6 +9,8 @@ public class GameStates : MonoBehaviour
 
     bool gameStartedFirstTime = true;
 
+    public bool muteMusicOnFirstLevel = false; //should be true only in the first lvl
+
     public bool DisablePlayerInCutscene = true;
 
     public GameState initialLevelState;
@@ -62,6 +64,12 @@ public class GameStates : MonoBehaviour
 
     private void Start()
     {
+        if (muteMusicOnFirstLevel)
+        {
+            AudioManager.instance.StopMusic();
+            AudioManager.instance.StopAmbience();
+        }
+        AudioManager.instance.stopSound = false;
         if (player == null)
             player = FindFirstObjectByType<CharacterController>().gameObject.transform;
 

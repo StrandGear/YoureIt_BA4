@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
+    //debug for the last level
+    public bool dontNeedPlayerController = false;
+
     public bool stopSound= false;
 
     private EventInstance ambienceEventInstance;
@@ -32,8 +35,13 @@ public class AudioManager : MonoBehaviour
         instance = this;
         //DontDestroyOnLoad(gameObject);
 
-        if (player == null)
-            player = FindObjectOfType<CharacterController>().gameObject;
+        if (dontNeedPlayerController)
+            return;
+        else
+        {
+            if (player == null)
+                player = FindObjectOfType<CharacterController>().gameObject;
+        }
     }
 
     private void Start()
@@ -114,12 +122,9 @@ public class AudioManager : MonoBehaviour
     }
     public void StopMusic()
     {
-        if (isMusicPlaying)
-        {
-            musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-            musicEventInstance.release(); //clearing instance
-            isMusicPlaying = false;
-        }
+        musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        musicEventInstance.release(); //clearing instance
+        isMusicPlaying = false;
     }
     public void PauseAmbience()
     {

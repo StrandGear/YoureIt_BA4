@@ -18,7 +18,7 @@ public class TriggerNextDialogue : MonoBehaviour
         {
             if (other.GetComponent<CharacterController>() != null)
             {
-                Singleton.GetInstance<DialogueSoundManager>().PlayNextDialogueSequence();
+                DialogueSoundManager.Instance.PlayNextDialogueSequence();
                 isTriggered = true;
             }
         }

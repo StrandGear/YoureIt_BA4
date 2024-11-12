@@ -43,7 +43,7 @@ public class Checkpoint : MonoBehaviour
             playerRotation = other.transform.rotation;
 
             CheckpointManager.instance.AddCheckpoint(this);
-            
+            /*
             if (enemyAttack != null)
             {
                 enemyAttack.PlayerExited(); // Call PlayerExited to stop the attack animation
@@ -51,10 +51,10 @@ public class Checkpoint : MonoBehaviour
             else
             {
                 Debug.Log("EnemyAttack reference is not assigned in Checkpoint script.");
-            }
+            }*/
         }
         
-        if (other.CompareTag("Player"))
+       /* if (other.CompareTag("Player"))
         {
             if (enemyAttack != null)
             {
@@ -64,7 +64,7 @@ public class Checkpoint : MonoBehaviour
             {
                 Debug.Log("EnemyAttack reference is not assigned in Checkpoint script.");
             }
-        }
+        }*/
     }
 
     public Transform CheckpointPosition

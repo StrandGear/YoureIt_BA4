@@ -22,6 +22,9 @@ public class LoadScene : MonoBehaviour
     private void LoadLevel()
     {
         Cursor.lockState = CursorLockMode.Confined;
+        AudioManager.instance.StopAmbience();
+        AudioManager.instance.StopMusic();
+        AudioManager.instance.stopSound = true;
         SceneManager.LoadScene(levelToLoad);
     }
 }
