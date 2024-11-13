@@ -122,6 +122,9 @@ public class PlayerMovementSecondLevel : MonoBehaviour
 
     private void LateUpdate()
     {
+        Vector3 fixedPosition = transform.position;
+        fixedPosition.z = initialZPosition; // Set Z to your desired locked position
+        transform.position = fixedPosition;
         CameraRotation();
     }
 
