@@ -55,10 +55,11 @@ public class AudioManager : MonoBehaviour
         musicEventInstance.getPitch(out initPitch);
         stopSound = false;
         //SceneManager.activeSceneChanged += ChangedActiveScene;
-
+        print("Is music playing" + isMusicPlaying);
         // Only initialize if not already playing to avoid duplicates
-        /*        if (!isAmbiencePlaying) InitializeAmbience();
-                if (!isMusicPlaying) InitializeMusic();*/
+        if (!isAmbiencePlaying) InitializeAmbience();
+        if (!isMusicPlaying) InitializeMusic();
+        print("Is music playing" + isMusicPlaying);
     }
 
     private void Update()
@@ -129,7 +130,7 @@ public class AudioManager : MonoBehaviour
     }
     public void StopMusic()
     {
-        musicEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         musicEventInstance.release(); //clearing instance
         isMusicPlaying = false;
     }
