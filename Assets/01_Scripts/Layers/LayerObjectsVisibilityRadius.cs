@@ -49,6 +49,15 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
         if (layerObject != null)
         {
             visibleObjects.Remove(layerObject);
+            layerObject.SetShaderActive(false);
+        }
+
+        if (visibleObjects.Count <= 0)
+        {
+            PlayerScan.Instance.ResetScanningButtonPress();
+
+            if (PlayerScan.Instance.playerScannedMoreThanOnce)
+                GameStates.Instance.SetGameState(GameState.Playmode);
         }
 
         //removing camera if there is one
@@ -68,5 +77,6 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
             elem.IsUsed = true;
         }
         visibleObjects.Clear();
+        PlayerScan.Instance.ResetScanningButtonPress();
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 //Defining changes when trigger difeerent game mechanics
 public class GameStates : MonoBehaviour
 {
-    GameState gameState;
+     GameState gameState;
 
     bool gameStartedFirstTime = true;
 
-    public bool muteMusicOnFirstLevel = false; //should be true only in the first lvl
+   // public bool muteMusicOnFirstLevel = false; //should be true only in the first lvl
 
     public bool DisablePlayerInCutscene = true;
 
@@ -58,11 +58,6 @@ public class GameStates : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        if (muteMusicOnFirstLevel)
-        {
-            AudioManager.instance.stopSound = true;
-        }
     }
 
     private void Start()
@@ -91,6 +86,7 @@ public class GameStates : MonoBehaviour
             case GameState.Playmode:
                 if (gameState != state)
                 {
+                    print("Entered Playmode");
                     gameState = state;
                     PlaymodeGameStateOn();
                 }
@@ -133,7 +129,7 @@ public class GameStates : MonoBehaviour
     private void PlaymodeGameStateOn()
     {
         Time.timeScale = 1;
-
+        print("Entered Playmode 2 ");
         AudioManager.instance.stopSound = false;
 
         //enable player if it wasnt 

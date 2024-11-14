@@ -13,9 +13,23 @@ public class PlayerScan : MonoBehaviour
 
     private int scanningButtonPressed = 0;
 
+    public bool playerScannedMoreThanOnce = false;
+
     [SerializeField] private InputActionReference scanControl;
 
     [SerializeField] private LayerObjectsVisibilityRadius layerObjectsVisibilityRadius;
+
+    public static PlayerScan Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+
+        playerScannedMoreThanOnce = false;
+    }
 
     private void OnEnable()
     {
@@ -57,18 +71,19 @@ public class PlayerScan : MonoBehaviour
         if (scanningButtonPressed < 0 || scanningButtonPressed > 2)
             scanningButtonPressed = 0;
 
-        if (layerObjectsVisibilityRadius.VisibleObjects.Count == 0) //get out of Puzzle mode when no olayerobjects nearby
+/*        if (layerObjectsVisibilityRadius.VisibleObjects.Count == 0) //get out of Puzzle mode when no olayerobjects nearby
         {
+            print("STOP SCANNIN, NO VISIBLE OBJECTS");
             NoObjectsToScan = true;
             //GameStates.Instance.SetGameState(GameState.Playmode);
-            StopScanning(false);
-            
-        }
+            StopScanning();
+        }*/
     }
 
     private void ScanArea()
     {
         isScanning = true;
+        playerScannedMoreThanOnce = true;
 
         foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
         {
@@ -82,6 +97,8 @@ public class PlayerScan : MonoBehaviour
 
     public void StopScanning(bool resetButtonPress = true)
     {
+        print("2 STOP SCANNIN, NO VISIBLE OBJECTS 2");
+
         if (resetButtonPress)
             scanningButtonPressed = 0;
 
@@ -94,7 +111,20 @@ public class PlayerScan : MonoBehaviour
 
         LayerManager.Instance.ClearLayerList();
 
-/*        if (GameStates.Instance.GetCurrentGameState() != GameState.Playmode)
-            GameStates.Instance.SetGameState(GameState.Playmode);*/
+        /*        if (GameStates.Instance.GetCurrentGameState() != GameState.Playmode)
+                    GameStates.Instance.SetGameState(GameState.Playmode);*/
+    }
+
+    public void ResetScanningButtonPress()
+    {
+        foreach (LayerObject elem in layerObjectsVisibilityRadius.VisibleObjects)
+        {
+            elem.SetShaderActive(false);
+        }
+
+        LayerManager.Instance.ClearLayerList();
+
+        scanningButtonPressed = 0;
+        isScanning = false;
     }
 }
