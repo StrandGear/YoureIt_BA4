@@ -28,8 +28,10 @@ public class Checkpoint : MonoBehaviour
     {
         if(other.GetComponent<CharacterController>() != null )
         {
-            if(ResetLayers)
-                LayerManager.Instance.SetAllObjectsAsUsed();
+            if (ResetLayers)
+            { LayerManager.Instance.SetAllObjectsAsUsed();
+                LayerObjectsVisibilityRadius.Instance.SetAllVisibleObjectsAsUsed();
+            }
 
             LayerManager.Instance.ClearLayerList();
 
