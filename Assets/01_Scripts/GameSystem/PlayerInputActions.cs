@@ -116,6 +116,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SOS_AddKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""af859bab-944e-488f-9067-f4b3636afb68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -393,6 +402,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SOS_Respawn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6047406-554d-4859-abc3-74ef0d0aa465"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SOS_AddKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -411,6 +431,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_SOS_Respawn = m_Player.FindAction("SOS_Respawn", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Climb = m_Player.FindAction("Climb", throwIfNotFound: true);
+        m_Player_SOS_AddKey = m_Player.FindAction("SOS_AddKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -482,6 +503,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SOS_Respawn;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Climb;
+    private readonly InputAction m_Player_SOS_AddKey;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -496,6 +518,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @SOS_Respawn => m_Wrapper.m_Player_SOS_Respawn;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Climb => m_Wrapper.m_Player_Climb;
+        public InputAction @SOS_AddKey => m_Wrapper.m_Player_SOS_AddKey;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -535,6 +558,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Climb.started += instance.OnClimb;
             @Climb.performed += instance.OnClimb;
             @Climb.canceled += instance.OnClimb;
+            @SOS_AddKey.started += instance.OnSOS_AddKey;
+            @SOS_AddKey.performed += instance.OnSOS_AddKey;
+            @SOS_AddKey.canceled += instance.OnSOS_AddKey;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -569,6 +595,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Climb.started -= instance.OnClimb;
             @Climb.performed -= instance.OnClimb;
             @Climb.canceled -= instance.OnClimb;
+            @SOS_AddKey.started -= instance.OnSOS_AddKey;
+            @SOS_AddKey.performed -= instance.OnSOS_AddKey;
+            @SOS_AddKey.canceled -= instance.OnSOS_AddKey;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -598,5 +627,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSOS_Respawn(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnClimb(InputAction.CallbackContext context);
+        void OnSOS_AddKey(InputAction.CallbackContext context);
     }
 }

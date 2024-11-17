@@ -6,16 +6,19 @@ using UnityEngine.InputSystem;
 public class SOS_RespawnPlayerOnKeyPressed : MonoBehaviour
 {
     [SerializeField] private InputActionReference respawnKey;
+    [SerializeField] private InputActionReference addLockerKey;
     public PlayerRespawn playerRespawn;
 
     private void OnEnable()
     {
         respawnKey.action.Enable();
+        addLockerKey.action.Enable();
     }
 
     private void OnDisable()
     {
         respawnKey.action.Disable();
+        addLockerKey.action.Disable();
     }
 
     // Update is called once per frame
@@ -25,6 +28,11 @@ public class SOS_RespawnPlayerOnKeyPressed : MonoBehaviour
         {
             print("Respawn pressed");
             playerRespawn.RespawnPlayerOtsideTriggerEvents();
+        }
+        if (addLockerKey.action.WasPressedThisFrame())
+        {
+            print("Add key");
+            PlayerInventory.Instance.AddKey();
         }
     }
 }

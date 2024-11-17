@@ -86,7 +86,6 @@ public class GameStates : MonoBehaviour
             case GameState.Playmode:
                 if (gameState != state)
                 {
-                    print("Entered Playmode");
                     gameState = state;
                     PlaymodeGameStateOn();
                 }
@@ -129,7 +128,7 @@ public class GameStates : MonoBehaviour
     private void PlaymodeGameStateOn()
     {
         Time.timeScale = 1;
-        print("Entered Playmode 2 ");
+
         AudioManager.instance.stopSound = false;
 
         //enable player if it wasnt 
@@ -187,7 +186,6 @@ public class GameStates : MonoBehaviour
     {
         AudioManager.instance.stopSound = true;
 
-        print("CutsceneModeOn");
         //disable cursor
         Cursor.lockState = CursorLockMode.Locked;
 
