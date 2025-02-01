@@ -25,22 +25,35 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
     {
         //getting all layer objects
         other.gameObject.TryGetComponent(out LayerObject layerObject);
-        if (layerObject != null && !layerObject.IsUsed)
+        if (layerObject != null && !layerObject.IsUsed && !layerObject.IsRegionalPuzzle)
         {
+            if (layerObject.IsRegionalPuzzle)
+                return;
+
             visibleObjects.Add(layerObject);
+        }
+
+        other.gameObject.TryGetComponent(out RegionalPuzzle regionalPuzzle);
+
+        if (regionalPuzzle != null && regionalPuzzle.interactive)
+        {   
+            foreach (LayerObject elem in regionalPuzzle.LayerObjects)
+            {
+                visibleObjects.Add(elem);
+            }
         }
 
         //getting camera if there is one
 
 
         // Check for CinemachineVirtualCamera
-/*        if (other.TryGetComponent(out CinemachineVirtualCamera camera))
-        {
-            if (camera != null)
-            {
-                visibleCamera = camera.gameObject;
-            }
-        }*/
+        /*        if (other.TryGetComponent(out CinemachineVirtualCamera camera))
+                {
+                    if (camera != null)
+                    {
+                        visibleCamera = camera.gameObject;
+                    }
+                }*/
     }
 
     private void OnTriggerExit(Collider other)
@@ -52,6 +65,15 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
             layerObject.SetShaderActive(false);
         }
 
+        other.gameObject.TryGetComponent(out RegionalPuzzle regionalPuzzle);
+        if (regionalPuzzle != null)
+        {
+            foreach (LayerObject elem in regionalPuzzle.LayerObjects)
+                elem.SetShaderActive(false);
+
+            visibleObjects.Clear();
+        }
+
         if (visibleObjects.Count <= 0)
         {
             PlayerScan.Instance.ResetScanningButtonPress();
@@ -60,14 +82,19 @@ public class LayerObjectsVisibilityRadius : MonoBehaviour //getting specific obj
                 GameStates.Instance.SetGameState(GameState.Playmode);
         }
 
-        //removing camera if there is one
-/*        if (other.TryGetComponent(out CinemachineVirtualCamera camera))
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        other.gameObject.TryGetComponent(out RegionalPuzzle regionalPuzzle);
+
+        if (regionalPuzzle != null && regionalPuzzle.interactive)
         {
-            if (camera != null)
+            foreach (LayerObject elem in regionalPuzzle.LayerObjects)
             {
-                visibleCamera = null;
+                visibleObjects.Add(elem);
             }
-        }*/
+        }
     }
 
     public void SetAllVisibleObjectsAsUsed()

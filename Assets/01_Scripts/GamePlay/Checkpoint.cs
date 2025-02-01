@@ -8,6 +8,7 @@ public class Checkpoint : MonoBehaviour
     public EnemyAttack enemyAttack;
 
     public bool ResetLayers = true;
+    public bool ClearUiList = true;
 
     private Quaternion playerRotation;
     //private Transform checkpointPosition;
@@ -33,7 +34,8 @@ public class Checkpoint : MonoBehaviour
                 LayerObjectsVisibilityRadius.Instance.SetAllVisibleObjectsAsUsed();
             }
 
-            LayerManager.Instance.ClearLayerList();
+            if (ClearUiList)
+                LayerManager.Instance.ClearLayerList();
 
             //Singleton.GetInstance<PlayerScan>().StopScanning();
             //GameStates.Instance.SetGameState(GameState.Playmode);

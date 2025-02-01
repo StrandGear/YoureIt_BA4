@@ -14,6 +14,8 @@ public class LayerObject : MonoBehaviour, ILayerObject
     public bool IsUsed { get => isUsed; set => isUsed = value; }
     public int ID { get; private set; }
 
+    public bool IsRegionalPuzzle = false;
+
     //public Vector3 StartPosition { get; set; }
     public Vector3 CurrentFixedPosition { get; set; }
 
