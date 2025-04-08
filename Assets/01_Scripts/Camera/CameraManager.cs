@@ -51,6 +51,18 @@ public class CameraManager : Singleton
 
         if (currentCam == null)
             currentCam = MainPlayingCam;
+
+        // Vector3(-40.0723801,0.766317248,32.2937775)
+        // Vector3(354.550995,209.906494,-2.14412282e-07) scale
+        //Vector3(-0.31, -155.84, 0)
+
+    }
+
+    private void Start()
+    {
+
+        MainPlayingCam.transform.position = new Vector3(-39.416935f, 0.603665471f, 32.3886452f);
+        MainPlayingCam.transform.rotation = Quaternion.Euler(-4.07f, -146.11f, 0f);
     }
 
     public void SwitchCamera(GameObject newCam)
