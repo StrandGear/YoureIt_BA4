@@ -58,12 +58,12 @@ public class CameraManager : Singleton
 
     }
 
-    private void Start()
+/*    private void Start()
     {
 
         MainPlayingCam.transform.position = new Vector3(-39.416935f, 0.603665471f, 32.3886452f);
         MainPlayingCam.transform.rotation = Quaternion.Euler(-4.07f, -146.11f, 0f);
-    }
+    }*/
 
     public void SwitchCamera(GameObject newCam)
     {

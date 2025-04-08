@@ -24,15 +24,28 @@ public class SOS_RespawnPlayerOnKeyPressed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (respawnKey.action.WasPressedThisFrame())
+        if (respawnKey == null)
+            return;
+
+        else
         {
-            print("Respawn pressed");
-            playerRespawn.RespawnPlayerOtsideTriggerEvents();
+            if (respawnKey.action.WasPressedThisFrame())
+            {
+                print("Respawn pressed");
+                playerRespawn?.RespawnPlayerOtsideTriggerEvents();
+            }
         }
-        if (addLockerKey.action.WasPressedThisFrame())
+
+
+        if (addLockerKey == null)
+            return;
+        else
         {
-            print("Add key");
-            PlayerInventory.Instance.AddKey();
+                if (addLockerKey.action.WasPressedThisFrame())
+                {
+                    print("Add key");
+                    PlayerInventory.Instance.AddKey();
+                }
         }
     }
 }

@@ -21,6 +21,9 @@ public class PlayerScan : MonoBehaviour
 
     public static PlayerScan Instance;
 
+    public bool eyePulsateAnimOn = false;
+    [SerializeField] Animator eyeAnimator;
+
     private void Awake()
     {
         if (Instance == null)
@@ -48,6 +51,18 @@ public class PlayerScan : MonoBehaviour
 
     private void Update()
     {
+        if (eyePulsateAnimOn && eyeAnimator != null)
+        {
+            if (layerObjectsVisibilityRadius.VisibleObjects.Count > 0)
+            {
+                eyeAnimator.SetBool("StartPulsating", true);
+            }
+            else
+            {
+                eyeAnimator.SetBool("StartPulsating", false);
+            }
+        }
+
         if (scanControl.action.WasPressedThisFrame())
         {
             scanningButtonPressed++;
@@ -110,6 +125,8 @@ public class PlayerScan : MonoBehaviour
         }
 
         LayerManager.Instance.ClearLayerList();
+
+        eyeAnimator.SetBool("StartPulsating", false);
 
         /*        if (GameStates.Instance.GetCurrentGameState() != GameState.Playmode)
                     GameStates.Instance.SetGameState(GameState.Playmode);*/
