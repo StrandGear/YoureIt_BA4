@@ -86,8 +86,12 @@ public class GameStates : MonoBehaviour
             case GameState.Playmode:
                 if (gameState != state)
                 {
+                    if (gameState == GameState.Cutscenemode)
+                        PlaymodeGameStateOn(false);
+                    else
+                        PlaymodeGameStateOn();
                     gameState = state;
-                    PlaymodeGameStateOn();
+                    
                 }
                 break;
 
@@ -125,7 +129,7 @@ public class GameStates : MonoBehaviour
         }
     }
 
-    private void PlaymodeGameStateOn()
+    private void PlaymodeGameStateOn(bool playUIanim = true)
     {
         Time.timeScale = 1;
 
@@ -155,7 +159,7 @@ public class GameStates : MonoBehaviour
         UIManager.Instance.SetAllGameUIActive(true);
 
         //turning on layer UI 
-        UIManager.Instance.CloseLayerUI();
+        UIManager.Instance.CloseLayerUI(playUIanim);
 
         Singleton.GetInstance<CameraManager>().SwitchCamera(Singleton.GetInstance<CameraManager>().MainPlayingCam); //switching to main camera view
     }

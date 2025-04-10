@@ -66,6 +66,7 @@ public class UIManager : MonoBehaviour
             timePassed_f += Time.deltaTime;
             if (timePassed_f >= timer_f)
             {
+                print("folding anim2");
                 timePassed_f = 0f;
                 GameUI.SetActive(true);
                 startTimer_f = false;
@@ -79,6 +80,7 @@ public class UIManager : MonoBehaviour
             timePassed_u += Time.deltaTime;
             if (timePassed_u >= timer_u)
             {
+                print("unfolding anim");
                 timePassed_u = 0f;
                 LayerUI.SetActive(true);
                 startTimer_u = false;
@@ -98,13 +100,19 @@ public class UIManager : MonoBehaviour
         print("OPen layer ui");
     }
 
-    public void CloseLayerUI()
+    public void CloseLayerUI(bool playUIanimation = true)
     {
+/*        print("Layer UI is active "+LayerUI.gameObject.activeInHierarchy);
+        if (!LayerUI.activeInHierarchy)
+            return;*/
+
+        print("folding anim");
         LayerUI.SetActive(false);
         // Trigger folding animation
-        LayerUI_AnimatorFolding.SetTrigger("StartAnim");
-        
-        startTimer_f = true;
+        if(playUIanimation)
+            LayerUI_AnimatorFolding.SetTrigger("StartAnim");
+
+        startTimer_f = playUIanimation;
     }
 
     public void SetAllGameUIActive(bool active)
