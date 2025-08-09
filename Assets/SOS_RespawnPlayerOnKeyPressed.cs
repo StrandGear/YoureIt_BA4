@@ -32,7 +32,7 @@ public class SOS_RespawnPlayerOnKeyPressed : MonoBehaviour
             if (respawnKey.action.WasPressedThisFrame())
             {
                 print("Respawn pressed");
-                playerRespawn?.RespawnPlayerOtsideTriggerEvents();
+                playerRespawn?.RespawnPlayerAndShowDeathScreen();
             }
         }
 

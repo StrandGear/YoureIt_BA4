@@ -150,7 +150,9 @@ public class GameStates : MonoBehaviour
         {
             Enemy.SetActive(true);
         }
+
         //resetting layers in PlayerScan
+        PlayerScan.Instance.StopScanning();
 
         //disable cursor
         Cursor.lockState = CursorLockMode.Locked;

@@ -78,7 +78,8 @@ public class PlayerScan : MonoBehaviour
             }
             else if (scanningButtonPressed >= 2 || layerObjectsVisibilityRadius.VisibleObjects.Count <= 0) // not scanning
             {
-                StopScanning(true);
+                print($"scanningBtnPressed {scanningButtonPressed}; visible objects {layerObjectsVisibilityRadius.VisibleObjects.Count}");
+                //StopScanning(true);
                 GameStates.Instance.SetGameState(GameState.Playmode);
             }
         }
@@ -112,7 +113,7 @@ public class PlayerScan : MonoBehaviour
 
     public void StopScanning(bool resetButtonPress = true)
     {
-        print("2 STOP SCANNIN, NO VISIBLE OBJECTS 2");
+        print("StopScanning method");
 
         if (resetButtonPress)
             scanningButtonPressed = 0;

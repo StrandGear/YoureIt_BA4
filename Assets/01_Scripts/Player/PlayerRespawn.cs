@@ -55,35 +55,29 @@ public class PlayerRespawn : MonoBehaviour
         AssignNewRespawnPosition();
 
     }
+    private void Update()
+    {
+        if (gameObject.transform.position.y <= -8)
+            RespawnPlayerAndShowDeathScreen();
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Hole"))
         {
-            print("enemy hit");
-            if (deathScreen != null)
-            {
-                //music events
-                AudioManager.instance.PauseAmbience();
-                AudioManager.instance.LowerMusicVolume();
-                AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.playerDeath);
-
-                deathScreen.SetActive(true);
-            }
-            
-            AssignNewRespawnPosition();
-
-            PauseGame();
-
-            //RespawnPlayer();
-            StartCoroutine(RespawnPlayer());
+            RespawnPlayerAndShowDeathScreen();
         }
     }
 
-    public void RespawnPlayerOtsideTriggerEvents()
+    public void RespawnPlayerAndShowDeathScreen()
     {
         if (deathScreen != null)
         {
+            AudioManager.instance.PauseAmbience();
+            AudioManager.instance.LowerMusicVolume();
+            AudioManager.instance.PlayOneShotAtPlayerPosition(FMODEvents.instance.playerDeath);
+
             deathScreen.SetActive(true);
         }
 

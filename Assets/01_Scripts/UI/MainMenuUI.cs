@@ -94,7 +94,7 @@ public class MainMenuUI : MonoBehaviour
     }
     public void RespawnPlayer()
     {
-        PlayerRespawn.instance.RespawnPlayerOtsideTriggerEvents();
+        PlayerRespawn.instance.RespawnPlayerAndShowDeathScreen();
         ResumeGame();
     }
 
